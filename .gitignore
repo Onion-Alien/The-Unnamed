@@ -58,3 +58,9 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Game/Library/ArtifactDB
+Game/Library/CurrentLayout-default.dwlt
+Game/Library/SceneVisibilityState.asset
+Game/Library/SourceAssetDB
+Game/Library/StateCache/SceneView/d1/d1fe7bc1e2c3209502e1c0d2ba130e51.json
+Game/Logs/shadercompiler-UnityShaderCompiler.exe0.log
