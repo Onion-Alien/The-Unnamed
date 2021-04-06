@@ -14,7 +14,14 @@ public class ShowFPS : MonoBehaviour
         float timelapse = Time.smoothDeltaTime;
         timer = timer <= 0 ? refresh : timer -= timelapse;
 
-        if (timer <= 0) avgFramerate = (int)(1f / timelapse);
-        m_Text.text = "FPS: " + avgFramerate.ToString();
+        if (PauseMenuManager.isPaused == false)
+        {
+            if (timer <= 0) avgFramerate = (int)(1f / timelapse);
+            m_Text.text = "FPS: " + avgFramerate.ToString();
+        }
+        else
+        {
+            m_Text.text = "FPS: Paused";
+        }
     }
 }
