@@ -15,14 +15,43 @@ public class PlayerCombat : MonoBehaviour
         {
             Attack1();
         }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Attack2();
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Attack3();
+        }
     }
     
+    //turn this into a case or something
     void Attack1()
     {
         animator.SetTrigger("Attack1");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("test");
+        }
+    }
+    void Attack2()
+    {
+        animator.SetTrigger("Attack2");
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("test");
+        }
+    }
+    void Attack3()
+    {
+        animator.SetTrigger("Attack3");
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("test");
         }
