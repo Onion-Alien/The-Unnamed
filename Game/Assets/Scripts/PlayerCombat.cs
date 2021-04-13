@@ -5,10 +5,15 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     public Transform attackPoint;
-    public float attackRange = 0.5f;
-    public LayerMask enemyLayers;
 
     public Animator animator;
+    public LayerMask enemyLayers;
+
+    public int DMG_atk1 = 20;
+    public int DMG_atk2 = 30;
+    public int DMG_atk3 = 40;
+    public float attackRange = 0.5f;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
@@ -33,7 +38,7 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
-            Debug.Log("test");
+            enemy.GetComponent<Enemy1>().TakeDamage(DMG_atk1);
         }
     }
     void Attack2()
@@ -43,7 +48,7 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("test");
+            enemy.GetComponent<Enemy1>().TakeDamage(DMG_atk2);
         }
     }
     void Attack3()
@@ -53,7 +58,7 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("test");
+            enemy.GetComponent<Enemy1>().TakeDamage(DMG_atk3);
         }
     }
 
