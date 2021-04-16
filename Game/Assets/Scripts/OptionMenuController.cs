@@ -15,20 +15,22 @@ public class OptionMenuController : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("PlayerPrefs.GetInt(fullscreen) = " + PlayerPrefs.GetInt("fullscreen"));
         resolution = -2;
         if (PlayerPrefs.GetInt("fullscreen") == 1)
         {
             fullscreenActive = true;
-            fullscreenToggle.isOn = !fullscreenToggle.isOn;
         }
         else if (PlayerPrefs.GetInt("fullscreen") == 2)
         {
             fullscreenActive = false;
+            fullscreenToggle.isOn = !fullscreenToggle.isOn;
         }
         else
         {
             fullscreenActive = true;
-            fullscreenToggle.isOn = !fullscreenToggle.isOn;
+            PlayerPrefs.SetInt("fullscreen", 1);
+
         }
         fsTogglePressed = false;
     }
@@ -72,13 +74,11 @@ public class OptionMenuController : MonoBehaviour
                 {
                     Screen.SetResolution(1920, 1080, !Screen.fullScreen);
                     togglefullscreenActive();
-                    PlayerPrefs.SetInt("fullscreen", 2);
                 }
                 else if (!fullscreenActive && fsTogglePressed)
                 {
                     Screen.SetResolution(1920, 1080, !Screen.fullScreen);
                     togglefullscreenActive();
-                    PlayerPrefs.SetInt("fullscreen", 1);
                 }
                 toggleFullscreen();
             }
@@ -106,10 +106,12 @@ public class OptionMenuController : MonoBehaviour
         if (!fullscreenActive)
         {
             fullscreenActive = true;
+            PlayerPrefs.SetInt("fullscreen", 1);
         }
         else
         {
             fullscreenActive = false;
+            PlayerPrefs.SetInt("fullscreen", 2);
         }
     }
 
