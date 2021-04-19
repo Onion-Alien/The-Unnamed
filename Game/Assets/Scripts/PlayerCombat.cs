@@ -14,19 +14,28 @@ public class PlayerCombat : MonoBehaviour
     public int DMG_heavy = 40;
     public float attackRange = 0.5f;
 
+    public float attackRate = 0.5f;
+    float nextAttackTime = 0f;
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Time.time >= nextAttackTime)
         {
-            Light();
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            Medium();
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            Heavy();
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                Light();
+                nextAttackTime = Time.time + 0.5f / attackRate;
+            }
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                Medium();
+                nextAttackTime = Time.time + 0.5f / attackRate;
+            }
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                Heavy();
+                nextAttackTime = Time.time + 0.5f / attackRate;
+            }
         }
     }
     
