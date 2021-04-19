@@ -9,56 +9,56 @@ public class PlayerCombat : MonoBehaviour
     public Animator animator;
     public LayerMask enemyLayers;
 
-    public int DMG_atk1 = 20;
-    public int DMG_atk2 = 30;
-    public int DMG_atk3 = 40;
+    public int DMG_light = 20;
+    public int DMG_medium = 30;
+    public int DMG_heavy = 40;
     public float attackRange = 0.5f;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            Attack1();
+            Light();
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            Attack2();
+            Medium();
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
-            Attack3();
+            Heavy();
         }
     }
     
     //turn this into a case or something
-    void Attack1()
+    void Light()
     {
-        animator.SetTrigger("Attack1");
+        animator.SetTrigger("ATK_Light");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy1>().TakeDamage(DMG_atk1);
+            enemy.GetComponent<Enemy1>().TakeDamage(DMG_light);
         }
     }
-    void Attack2()
+    void Medium()
     {
-        animator.SetTrigger("Attack2");
+        animator.SetTrigger("ATK_Medium");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy1>().TakeDamage(DMG_atk2);
+            enemy.GetComponent<Enemy1>().TakeDamage(DMG_medium);
         }
     }
-    void Attack3()
+    void Heavy()
     {
-        animator.SetTrigger("Attack3");
+        animator.SetTrigger("ATK_Heavy");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy1>().TakeDamage(DMG_atk3);
+            enemy.GetComponent<Enemy1>().TakeDamage(DMG_heavy);
         }
     }
 
