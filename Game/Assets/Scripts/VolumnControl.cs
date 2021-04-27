@@ -1,21 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class VolumnControl : MonoBehaviour
 {
-    private AudioSource audio;
-    private float volume = 1f;
-    // Start is called before the first frame update
-    
-    // Update is called once per frame
-    void Update()
+    public AudioMixer mixer;
+    public void SetLevel(float sliderValue)
     {
-        audio.volume = volume;
-    }
-
-    public void Set(float vol)
-    {
-        volume = vol;
+        mixer.SetFloat("MusicVol", Mathf.Log10(sliderValue) * 20);
     }
 }
