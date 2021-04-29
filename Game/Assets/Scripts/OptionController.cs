@@ -42,8 +42,6 @@ public class OptionController : MonoBehaviour
         buildResArray();
         updateDropDown();
 
-        Debug.Log("PlayerPrefs.GetInt(fullscreen) = " + PlayerPrefs.GetInt("fullscreen"));
-
         if (PlayerPrefs.GetInt("fullscreen") == 1)
         {
             fullscreenActive = true;
@@ -59,14 +57,10 @@ public class OptionController : MonoBehaviour
 
         }
 
-        Debug.Log("fullscreen active = "+ fullscreenActive);
-
         if (fullscreenToggle.isOn)
         {
-            Debug.Log("fullscreen toggle is on!");
             if (fullscreenActive == false)
             {
-                Debug.Log("Fullscreen toggle is on and playerprefs = 2 ! = windows mode");
                 fullscreenToggle.isOn = !fullscreenToggle.isOn;
             }
         }
@@ -76,7 +70,6 @@ public class OptionController : MonoBehaviour
     //Gets dropdown selection index, assigns appropriate values to dimensions array
     public void getResolution()
     {
-        Debug.Log(dropdown.value);
         resolution = dropdown.value;
         resoSelected = true;
         dimensions[0] = actualHeights[resolution];
