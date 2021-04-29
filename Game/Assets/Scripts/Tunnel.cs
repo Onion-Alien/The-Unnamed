@@ -21,7 +21,7 @@ public class Tunnel : MonoBehaviour
         }
         else
         {
-            collision.GetComponent<Renderer>().material.color = stock;
+            player.GetComponent<Renderer>().material.color = stock;
         }
     }
 }
