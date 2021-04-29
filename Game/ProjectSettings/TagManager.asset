@@ -3,10 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Start
-  - Stop
-  - Movable
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -18,7 +15,7 @@ TagManager:
   - 
   - Ground
   - Walls
-  - Movable
+  - 
   - 
   - 
   - 
@@ -50,9 +47,9 @@ TagManager:
   - name: Platforms
     uniqueID: 3029356641
     locked: 0
-  - name: UI
-    uniqueID: 413841657
-    locked: 0
   - name: Player
     uniqueID: 2200550901
+    locked: 0
+  - name: UI
+    uniqueID: 413841657
     locked: 0
