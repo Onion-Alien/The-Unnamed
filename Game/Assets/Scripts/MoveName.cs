@@ -9,28 +9,50 @@ public class MoveName : MonoBehaviour
     public Text nametag;
     public Vector3 offset;
 
+    public float nameToggle;
+
     private void Start()
+    {
+        nameToggle = 0;
+        getName();
+    }
+
+    void Update()
+    {
+        //Toggle name on/off
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            toggleName();
+        }
+        //Move poisition of name above head
+        float xPos = objectToFollow.position.x;
+        float yPos = objectToFollow.position.y + 1.85f + offset.y + nameToggle;
+        float zPos = objectToFollow.position.z + offset.z;
+
+        Vector3 newPos = new Vector3(xPos, yPos, zPos);
+
+        nametag.transform.position = newPos;
+
+    }
+
+    public void toggleName()
+    {
+        if (nameToggle == 0)
+        {
+            nameToggle = 20;
+        }
+        else
+        {
+            nameToggle = 0;
+        }
+    }
+
+    //Get name string from SaveManager object
+    public void getName()
     {
         if (SaveManager.instance.getName() != null)
         {
             nametag.text = SaveManager.instance.getName();
         }
-    }
-
-    void Update()
-    {
-
-        //Move poisition of name above head
-        float xPos = objectToFollow.position.x + offset.x;
-        float yPos = (objectToFollow.position.y + 1.9f) + offset.y;
-
-        Vector3 newPos = new Vector3(xPos, yPos, 0);
-
-        transform.position = newPos;
-    }
-
-    public void setName()
-    {
-
     }
 }

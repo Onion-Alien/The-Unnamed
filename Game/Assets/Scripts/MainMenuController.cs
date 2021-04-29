@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour
 {
     public GameObject characterCreation;
-    public GameObject optionMenu;
     public GameObject selectionImage;
     public GameObject mainMenu;
     private bool hoverTrue = false;
@@ -17,10 +16,7 @@ public class MainMenuController : MonoBehaviour
     {
         state = 0;
         characterCreation.SetActive(false);
-        optionMenu.SetActive(false);
-        characterCreation.SetActive(false);
     }
-
 
     //Update used to scan for any input from keyboard in terms of menu control
 
@@ -28,12 +24,12 @@ public class MainMenuController : MonoBehaviour
     {
         if (!hoverTrue)
         {
-            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) && state != 3)
+            if (Input.GetKeyDown(KeyCode.S) && state < 3 || Input.GetKeyDown(KeyCode.DownArrow) && state < 3)
             {
                 selectionImage.transform.Translate(new Vector3(0, -highlightMoveAmount, 0));
                 state++;
             }
-            else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.DownArrow) && state != 0)
+            else if (Input.GetKeyDown(KeyCode.W) && state > 0 || Input.GetKeyDown(KeyCode.UpArrow) && state > 0)
             {
                 selectionImage.transform.Translate(new Vector3(0, highlightMoveAmount, 0));
                 state--;
@@ -71,15 +67,13 @@ public class MainMenuController : MonoBehaviour
         }
         else if (n == 2)
         {
-            mainMenu.SetActive(false);
-            optionMenu.SetActive(true);
+            OptionController.instance.enableCanvas(mainMenu);
         }
         else if (n == 3)
         {
             Application.Quit();
         }
     }
-
 
     //Changes the location of the menu highlight bar thing, has 3 cases for each button..
     void highLightMove(int moveTo)
@@ -195,6 +189,5 @@ public class MainMenuController : MonoBehaviour
     public void closeOptionMenu()
     {
         mainMenu.SetActive(true);
-        optionMenu.SetActive(false);
     }
 }

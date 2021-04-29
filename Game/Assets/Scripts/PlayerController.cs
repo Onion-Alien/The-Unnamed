@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask whatIsGround;
 
+    public Canvas playerCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -135,6 +137,7 @@ public class PlayerController : MonoBehaviour
     {
         isFacingRight = !isFacingRight;
         transform.Rotate(0.0f, 180.0f, 0.0f);
+        playerCanvas.transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
     private void OnDrawGizmos()

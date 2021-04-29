@@ -12,6 +12,7 @@ public class SaveManager : MonoBehaviour
 
     public static SaveManager instance {get; private set; }
 
+    //Object has DontDestroyOnload so it can be used by all scenes
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -23,6 +24,7 @@ public class SaveManager : MonoBehaviour
         Load();
     }
 
+    //Load strings from txt file playerInfo.dat if it exists
     public void Load()
     {
         if (File.Exists(Application.persistentDataPath + "/playerInfo.dat")){
@@ -35,6 +37,7 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    //Save the game, converts string data to binary to be more efficient
     public void Save()
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -49,6 +52,7 @@ public class SaveManager : MonoBehaviour
 
     [Serializable]
     
+    //inner class to represent save file data
     class PlayerData_Storage
     {
         public string playerName;
