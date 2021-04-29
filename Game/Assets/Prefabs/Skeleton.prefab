@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 1065683506}
   - component: {fileID: 1065683505}
   m_Layer: 5
-  m_Name: Health bar
+  m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a259b536bd5d87543bb9906a5a81a63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  slider: {fileID: 1065683506}
 --- !u!1 &974820350860026045
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,8 +395,8 @@ GameObject:
   - component: {fileID: 5281794002693645260}
   - component: {fileID: 5281794002693645261}
   - component: {fileID: 5281794002693645262}
-  - component: {fileID: 4303912579149733399}
   - component: {fileID: 5281794002693645235}
+  - component: {fileID: 1764381710}
   m_Layer: 6
   m_Name: Skeleton
   m_TagString: Enemy
@@ -512,20 +512,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4303912579149733399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5281794002693645234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1296887146ebf9347a269872123e3965, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 5281794002693645261}
-  maxHealth: 100
 --- !u!61 &5281794002693645235
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -552,3 +538,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.961853, y: 1.4310435}
   m_EdgeRadius: 0
+--- !u!114 &1764381710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5281794002693645234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef3d1d9db6364067b029dbd620c66b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5281794002693645261}
+  maxHealth: 100
+  healthBar: {fileID: 1065683505}

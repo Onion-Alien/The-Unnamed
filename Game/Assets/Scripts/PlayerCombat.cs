@@ -8,7 +8,7 @@ public class PlayerCombat : MonoBehaviour
 
     public Animator animator;
     public LayerMask enemyLayers;
-
+    public EnemyHit hit;
     public int DMG_light = 20;
     public int DMG_medium = 30;
     public int DMG_heavy = 40;
@@ -47,7 +47,7 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy1>().TakeDamage(DMG_light);
+            enemy.GetComponent<EnemyHit>().TakeDamage(DMG_light);
         }
     }
 
@@ -58,7 +58,7 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy1>().TakeDamage(DMG_medium);
+            enemy.GetComponent<EnemyHit>().TakeDamage(DMG_medium);
         }
     }
 
@@ -69,7 +69,7 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy1>().TakeDamage(DMG_heavy);
+            enemy.GetComponent<EnemyHit>().TakeDamage(DMG_heavy);
         }
     }
 
