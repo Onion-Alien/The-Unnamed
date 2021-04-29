@@ -10,13 +10,32 @@ public class EnemyHit : MonoBehaviour
     public int maxHealth = 100;
     int currentHealth;
     public HealthBar healthBar;
+    private Rigidbody2D rb;
 
     void Start()
     {
         currentHealth = maxHealth;
+        rb = GetComponent<Rigidbody2D>();
         healthBar.SetMaxHealth(maxHealth);
     }
 
+    private void Update()
+    {
+        CheckIdle();
+    }
+
+    // checks if enemy is idle
+    void CheckIdle()
+    {
+        if (rb.velocity.x > 0.01f || rb.velocity.x < -0.01f)
+        {
+            animator.SetBool("isIdle", false);
+        }
+        else
+        {
+            animator.SetBool("isIdle", true);
+        }
+    }
 
     public void TakeDamage(int damage)
     {
@@ -28,8 +47,7 @@ public class EnemyHit : MonoBehaviour
         if (currentHealth > 0)
             {
 
-                GetComponent<Animator>().Play(gameObject.name + "_Hit", 0, 0f);
-            animator.SetBool("isIdle", true);
+            animator.SetTrigger("isHit");
 
             }
       
@@ -45,6 +63,8 @@ public class EnemyHit : MonoBehaviour
     //Set the trigger to playing the death animation to true and destroy the object 2 seconds after the Goblin is dead
     void Die()
     {
+        animator.SetBool("isIdle", true);
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetBool("isDead", true);
 
         Destroy(gameObject, 2);
