@@ -1167,7 +1167,7 @@ MonoBehaviour:
   m_YDamping: 1
   m_ZDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.825
+  m_ScreenY: 0.654
   m_CameraDistance: 10
   m_DeadZoneWidth: 0.219
   m_DeadZoneHeight: 0.1
@@ -1794,7 +1794,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.332816, y: 0.17570257, z: -9.974976}
+  m_LocalPosition: {x: -15.332816, y: -1.2196575, z: -9.974976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 455877689}
@@ -5517,7 +5517,7 @@ MonoBehaviour:
   groundCheckRadius: 0.3
   amountOfJumps: 2
   maxHealth: 100
-  currentHealth: 0
+  currentHealth: 100
   healthBar: {fileID: 1038989771}
   groundCheck: {fileID: 1162672877}
   whatIsGround:
@@ -6588,7 +6588,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817086123}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.332816, y: 0.17570257, z: -9.974976}
+  m_LocalPosition: {x: -15.332816, y: -1.2196575, z: -9.974976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 361576654}

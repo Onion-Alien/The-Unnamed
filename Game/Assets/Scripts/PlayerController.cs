@@ -57,11 +57,13 @@ public class PlayerController : MonoBehaviour
         CheckSurroundings();
     } 
 
+    //Checks if the player is grounded
     private void CheckSurroundings()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
 
+    //Checks if the player hasn't jumped and is on the ground to be able to jump.
     private void CheckIfCanJump()
     {
         if(isGrounded && rb.velocity.y <= 0)
@@ -78,6 +80,8 @@ public class PlayerController : MonoBehaviour
             canJump = true;
         }
     }
+
+    //Checks which direction the player is facing, swaps the sprite depending on the direction
     private void CheckMovementDirection()
     {
         if(isFacingRight && movementInputDirection < 0)
@@ -99,6 +103,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Sets the current animation state depending on the state of the player
     private void UpdateAnimations()
     {
         anim.SetBool("isWalking", isWalking);
@@ -106,6 +111,7 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("yVelocity", rb.velocity.y);
     }
 
+    //Checks users input
     private void CheckInput()
     {
         movementInputDirection = Input.GetAxisRaw("Horizontal");
@@ -116,6 +122,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Enables the player to jump
     private void Jump()
     {
         if (canJump)
@@ -126,17 +133,20 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    // Adds movement to the sprite
     private void ApplyMovement()
     {
         rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
     }
 
+    // Method to flip the direction of the player
     private void Flip()
     {
         isFacingRight = !isFacingRight;
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
+    //shows the groundcheck radius
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
