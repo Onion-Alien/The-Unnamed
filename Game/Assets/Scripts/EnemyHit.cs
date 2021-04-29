@@ -41,7 +41,7 @@ public class EnemyHit : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
-        // play the hit animation if the Goblin is hit
+        // play the hit animation if the enemy is hit
 
 
         if (currentHealth > 0)
@@ -60,7 +60,7 @@ public class EnemyHit : MonoBehaviour
         }
     }
 
-    //Set the trigger to playing the death animation to true and destroy the object 2 seconds after the Goblin is dead
+    //Set the trigger to playing the death animation to true and destroy the object 1 second after the Goblin is dead
     void Die()
     {
         animator.SetBool("isIdle", true);
