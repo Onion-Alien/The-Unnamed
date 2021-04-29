@@ -66,7 +66,7 @@ public class EnemyHit : MonoBehaviour
         animator.SetBool("isIdle", true);
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetBool("isDead", true);
-        GetComponent<Animator>().Play(gameObject.name + "_Dead", 0, 0f);
+
         Destroy(gameObject, 2);
         //this.enabled = false;
     }
