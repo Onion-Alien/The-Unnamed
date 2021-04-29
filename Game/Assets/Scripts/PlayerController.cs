@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private bool isWalking;
     private bool isGrounded;
     private bool canJump;
+    private bool isDead = false;
 
     private Rigidbody2D rb;
     private Animator anim; 
@@ -44,17 +45,23 @@ public class PlayerController : MonoBehaviour
     {
         if (!PauseMenuManager.isPaused)
         {
-            CheckInput();
-            CheckMovementDirection();
-            UpdateAnimations();
-            CheckIfCanJump();
+            if (!isDead)
+            {
+                CheckInput();
+                CheckMovementDirection();
+                CheckIfCanJump();
+                UpdateAnimations();
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        ApplyMovement();
-        CheckSurroundings();
+        if (!isDead)
+        {
+            ApplyMovement();
+            CheckSurroundings();
+        }
     } 
 
     private void CheckSurroundings()
@@ -104,6 +111,8 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isWalking", isWalking);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelocity", rb.velocity.y);
+        anim.SetBool("isDead", isDead);
+
     }
 
     private void CheckInput()
@@ -140,5 +149,31 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+        if (!isDead)
+        { 
+            anim.SetTrigger("isHit");
+        }
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        isDead = true;
+        anim.SetBool("isWalking", false);
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        anim.SetBool("isDead", true);
+
+        GameObject.Destroy(gameObject, 2f);
+        //handle death events here
     }
 }
