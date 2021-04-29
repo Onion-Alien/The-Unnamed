@@ -5,17 +5,24 @@ using UnityEngine;
 public class Tunnel : MonoBehaviour
 {
     private Color stock;
+    private GameObject player;
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        stock = player.GetComponent<Renderer>().material.color;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        stock = collision.GetComponent<Renderer>().material.color;
-        collision.GetComponent<Renderer>().material.color = Color.gray;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        collision.GetComponent<Renderer>().material.color = stock;
+        if (player.GetComponent<Renderer>().material.color == stock)
+        {
+            player.GetComponent<Renderer>().material.color = Color.gray;
+        }
+        else
+        {
+            collision.GetComponent<Renderer>().material.color = stock;
+        }
     }
 }
     

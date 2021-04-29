@@ -8,6 +8,7 @@ public class PlayerCombat : MonoBehaviour
 
     public Animator animator;
     public LayerMask enemyLayers;
+    public LayerMask movableLayers;
 
     public int DMG_light = 20;
     public int DMG_medium = 30;
@@ -65,11 +66,31 @@ public class PlayerCombat : MonoBehaviour
     void Heavy()
     {
         animator.SetTrigger("ATK_Heavy");
+        StartCoroutine(Damage(DMG_heavy));
+        StartCoroutine("moveObject");
+    }
+    
+    private IEnumerator moveObject()
+    {
+        Collider2D[] hitMovables = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, movableLayers);
 
+        yield return new WaitForSeconds(0.1f);
+
+        foreach (Collider2D movable in hitMovables)
+        {
+            movable.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000000f);
+        }
+    }
+
+    private IEnumerator Damage(int dmg)
+    {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        yield return new WaitForSeconds(0.1f);
+
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyDeathScript>().TakeDamage(DMG_heavy);
+            enemy.GetComponent<EnemyDeathScript>().TakeDamage(dmg);
         }
     }
 
