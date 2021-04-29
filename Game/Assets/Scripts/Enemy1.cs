@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDeathScript : MonoBehaviour
+public class Enemy1 : MonoBehaviour
 {
     public Animator animator;
     
