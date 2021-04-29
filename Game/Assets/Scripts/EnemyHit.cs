@@ -67,7 +67,7 @@ public class EnemyHit : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetBool("isDead", true);
 
-        Destroy(gameObject, 2);
+        Destroy(gameObject, 1);
         //this.enabled = false;
     }
 }

@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask whatIsGround;
 
+    public GameOverScreen gameOverScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -173,6 +174,6 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isDead", true);
 
         GameObject.Destroy(gameObject, 2f);
-        //handle death events here
+        gameOverScreen.Setup();
     }
 }
