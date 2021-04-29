@@ -4,28 +4,30 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour
 {
-    private GameObject player;
-
-    private void Awake()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
+    private Coroutine dmg;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        InvokeRepeating("Damage", 0f, 1f);
+        dmg = StartCoroutine(Damage(collision));
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        CancelInvoke();
+        StopCoroutine(dmg);
     }
 
-    private void Damage()
+    private IEnumerator Damage(Collider2D col)
     {
-        if (player)
+        while (true)
         {
-            player.GetComponent<PlayerController>().TakeDamage(10);
+            if (col != null)
+            {
+                if (col.CompareTag("Player"))
+                {
+                    col.GetComponent<PlayerController>().TakeDamage(10, true);
+                }
+            }
+            yield return new WaitForSeconds(1f);
         }
     }
 }

@@ -10,9 +10,11 @@ public class PlayerController : MonoBehaviour
 
     private bool isFacingRight = true;
     private bool isWalking;
-    private bool isGrounded;
+    public bool isGrounded;
     private bool canJump;
-    private bool isDead = false;
+    public bool isDead = false;
+    public bool isFrozen = false;
+    public bool isBlocking = false;
 
     private Rigidbody2D rb;
     private Animator anim; 
@@ -31,16 +33,17 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask whatIsGround;
 
-    // Start is called before the first frame update
+    private PlayerCombat playerCombat;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMax(maxHealth);
         amountOfJumpsLeft = amountOfJumps;
+        playerCombat = GetComponent<PlayerCombat>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!PauseMenuManager.isPaused)
@@ -111,8 +114,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isWalking", isWalking);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelocity", rb.velocity.y);
-        anim.SetBool("isDead", isDead);
-
+        anim.SetBool("isBlocking", isBlocking);
     }
 
     private void CheckInput()
@@ -122,6 +124,22 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartCoroutine(playerCombat.UseStamina(20f));
+            isBlocking = true;
+            rb.constraints = RigidbodyConstraints2D.FreezePosition;
+            isFrozen = true;
+            
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            isBlocking = false;
+            rb.constraints = RigidbodyConstraints2D.None;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            isFrozen = false;
         }
     }
 
@@ -142,8 +160,11 @@ public class PlayerController : MonoBehaviour
 
     private void Flip()
     {
-        isFacingRight = !isFacingRight;
-        transform.Rotate(0.0f, 180.0f, 0.0f);
+        if (!isFrozen)
+        {
+            isFacingRight = !isFacingRight;
+            transform.Rotate(0.0f, 180.0f, 0.0f);
+        }
     }
 
     private void OnDrawGizmos()
@@ -151,19 +172,42 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool ignoreBlock)
     {
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
         if (!isDead)
         { 
-            anim.SetTrigger("isHit");
+            if (isBlocking && !ignoreBlock)
+            {
+                anim.SetTrigger("isBlock");
+                currentHealth -= (int)(damage * 0.25);
+            }
+            else
+            {
+                anim.SetTrigger("isHit");
+                currentHealth -= damage;
+            }   
         }
-
+        healthBar.Set(currentHealth);
         if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    public void Freeze()
+    {
+        StartCoroutine("freezeTime");
+    }
+
+    private IEnumerator freezeTime()
+    {
+        isFrozen = true;
+        rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        yield return new WaitForSeconds(0.5f);
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        isFrozen = false;
+
     }
 
     private void Die()

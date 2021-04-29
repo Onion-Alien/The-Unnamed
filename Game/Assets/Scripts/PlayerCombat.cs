@@ -18,28 +18,86 @@ public class PlayerCombat : MonoBehaviour
     public float attackRate = 0.5f;
     float nextAttackTime = 0f;
 
+    public float stamina = 100f;
+    public float maxStamina = 100f;
+    private float StaminaRegenTimer = 1f;
+    private const float StaminaDecreasePerFrame = 1f;
+    private const float StaminaIncreasePerFrame = 35;
+    private const float StaminaTimeToRegen = 1f;
+    public HealthBar stamBar;
+
+
+    private PlayerController pc;
+
+    private void Awake()
+    {
+        pc = GetComponent<PlayerController>();
+
+    }
+
+    private void Start()
+    {
+        stamBar.SetMax(Mathf.RoundToInt(maxStamina));
+    }
+
     void Update()
     {
-        if (Time.time >= nextAttackTime)
+        if (!pc.isDead)
         {
-            if (Input.GetKeyDown(KeyCode.L))
+            InputCheck();
+            StaminaUpdate();
+        }
+    }
+
+    private void StaminaUpdate()
+    {
+        if (stamina < maxStamina)
+        {
+            if (StaminaRegenTimer >= StaminaTimeToRegen)
             {
-                Light();
-                nextAttackTime = Time.time + 0.5f / attackRate;
+                stamina = Mathf.Clamp(stamina + (StaminaIncreasePerFrame * Time.deltaTime), 0.0f, maxStamina);
+                stamBar.Set(Mathf.RoundToInt(stamina));
             }
-            if (Input.GetKeyDown(KeyCode.I))
+            else
             {
-                Medium();
-                nextAttackTime = Time.time + 0.5f / attackRate;
-            }
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                Heavy();
-                nextAttackTime = Time.time + 0.5f / attackRate;
+                StaminaRegenTimer += Time.deltaTime;
             }
         }
     }
-    
+
+    private void InputCheck()
+    {
+        if (Time.time >= nextAttackTime)
+        {
+            if (pc.isGrounded)
+            {
+                if (Input.GetKeyDown(KeyCode.L) && stamina >= 10f)
+                {
+                    Light();
+                    nextAttackTime = Time.time + 0.5f / attackRate;
+                }
+                if (Input.GetKeyDown(KeyCode.I) && stamina >= 20f)
+                {
+                    Medium();
+                    nextAttackTime = Time.time + 0.5f / attackRate;
+                }
+                if (Input.GetKeyDown(KeyCode.J) && stamina >= 40f)
+                {
+                    Heavy();
+                    nextAttackTime = Time.time + 0.5f / attackRate;
+                }
+            }
+        }
+    }
+
+    public IEnumerator UseStamina(float stamCost)
+    {
+        yield return new WaitForSeconds(0.2f);
+        stamina -= stamCost;
+        stamBar.Set(Mathf.RoundToInt(stamina));
+        StaminaRegenTimer = 0.0f;
+    }
+
     //turn this into a case or something
     void Light()
     {
@@ -50,6 +108,8 @@ public class PlayerCombat : MonoBehaviour
         {
             enemy.GetComponent<EnemyDeathScript>().TakeDamage(DMG_light);
         }
+        StartCoroutine(UseStamina(40f));
+        pc.Freeze();
     }
 
     void Medium()
@@ -61,6 +121,8 @@ public class PlayerCombat : MonoBehaviour
         {
             enemy.GetComponent<EnemyDeathScript>().TakeDamage(DMG_medium);
         }
+        StartCoroutine(UseStamina(40f));
+        pc.Freeze();
     }
 
     void Heavy()
@@ -68,6 +130,8 @@ public class PlayerCombat : MonoBehaviour
         animator.SetTrigger("ATK_Heavy");
         StartCoroutine(Damage(DMG_heavy));
         StartCoroutine("moveObject");
+        StartCoroutine(UseStamina(40f));
+        pc.Freeze();
     }
     
     private IEnumerator moveObject()
@@ -78,7 +142,12 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Collider2D movable in hitMovables)
         {
+            movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
             movable.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000000f);
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ATK_Medium"))
+            {
+
+            }
         }
     }
 
