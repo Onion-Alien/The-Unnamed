@@ -46,7 +46,7 @@ public class EnemyHit : MonoBehaviour
     void Die()
     {
         animator.SetBool("isDead", true);
-
+        GetComponent<Animator>().Play(gameObject.name + "_Dead", 0, 0f);
         Destroy(gameObject, 2);
         //this.enabled = false;
     }

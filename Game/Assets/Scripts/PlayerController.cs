@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float movementInputDirection;
-
+    public GameOverScreen gameOverScreen;
     private int amountOfJumpsLeft;
 
     private bool isFacingRight = true;
@@ -173,6 +173,6 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isDead", true);
 
         GameObject.Destroy(gameObject, 2f);
-        //handle death events here
+        gameOverScreen.Setup();
     }
 }
