@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a259b536bd5d87543bb9906a5a81a63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  slider: {fileID: 8955118687087865887}
 --- !u!1 &4532175325102848989
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,6 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 264380495}
   maxHealth: 100
+  healthBar: {fileID: 8894456748455871346}
 --- !u!61 &-707551845163768895
 BoxCollider2D:
   m_ObjectHideFlags: 0
