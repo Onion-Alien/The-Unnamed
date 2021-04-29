@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{ 
+{
     private float movementInputDirection;
 
     private int amountOfJumpsLeft;
@@ -12,9 +12,10 @@ public class PlayerController : MonoBehaviour
     private bool isWalking;
     private bool isGrounded;
     private bool canJump;
+    private bool isDead = false;
 
     private Rigidbody2D rb;
-    private Animator anim; 
+    private Animator anim;
 
     public float movementSpeed = 10.0f;
     public float jumpForce = 16.0f;
@@ -44,18 +45,24 @@ public class PlayerController : MonoBehaviour
     {
         if (!PauseMenuManager.isPaused)
         {
-            CheckInput();
-            CheckMovementDirection();
-            UpdateAnimations();
-            CheckIfCanJump();
+            if (!isDead)
+            {
+                CheckInput();
+                CheckMovementDirection();
+                CheckIfCanJump();
+                UpdateAnimations();
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        ApplyMovement();
-        CheckSurroundings();
-    } 
+        if (!isDead)
+        {
+            ApplyMovement();
+            CheckSurroundings();
+        }
+    }
 
     private void CheckSurroundings()
     {
@@ -64,12 +71,12 @@ public class PlayerController : MonoBehaviour
 
     private void CheckIfCanJump()
     {
-        if(isGrounded && rb.velocity.y <= 0)
+        if (isGrounded && rb.velocity.y <= 0)
         {
             amountOfJumpsLeft = amountOfJumps;
         }
-        
-        if(amountOfJumpsLeft <= 0)
+
+        if (amountOfJumpsLeft <= 0)
         {
             canJump = false;
         }
@@ -80,11 +87,11 @@ public class PlayerController : MonoBehaviour
     }
     private void CheckMovementDirection()
     {
-        if(isFacingRight && movementInputDirection < 0)
+        if (isFacingRight && movementInputDirection < 0)
         {
             Flip();
         }
-        else if(!isFacingRight && movementInputDirection > 0)
+        else if (!isFacingRight && movementInputDirection > 0)
         {
             Flip();
         }
@@ -104,6 +111,8 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isWalking", isWalking);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelocity", rb.velocity.y);
+        anim.SetBool("isDead", isDead);
+
     }
 
     private void CheckInput()
@@ -140,5 +149,31 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+        if (!isDead)
+        {
+            anim.SetTrigger("isHit");
+        }
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        isDead = true;
+        anim.SetBool("isWalking", false);
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        anim.SetBool("isDead", true);
+
+        GameObject.Destroy(gameObject, 2f);
+        //handle death events here
     }
 }
