@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This script will be used to play the hit animation
+ * once the enemy is hit by the player
+ */
+
 public class EnemyHit : MonoBehaviour
 {
 
@@ -50,9 +55,7 @@ public class EnemyHit : MonoBehaviour
             animator.SetTrigger("isHit");
 
             }
-      
-        //Set the animation to Idle
-        
+
         //Play the dead animation if the current health equals to or less than 0
         if (currentHealth <= 0)
         {
@@ -68,6 +71,5 @@ public class EnemyHit : MonoBehaviour
         animator.SetBool("isDead", true);
 
         Destroy(gameObject, 1);
-        //this.enabled = false;
     }
 }

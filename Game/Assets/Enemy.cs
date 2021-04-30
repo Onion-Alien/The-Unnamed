@@ -3,12 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This script is used to ensure that the
+ * enemy always faces the player
+ */
+
 public class Enemy : MonoBehaviour
 {
 	public Transform player;
 
-	public bool isFlipped = false;
+	public bool isFlipped = true;
 
+	//Make the enemy face different direction according to player pos
 	public void LookAtPlayer()
 	{
 		Vector3 flipped = transform.localScale;

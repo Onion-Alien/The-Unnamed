@@ -25,8 +25,8 @@ public class MoveName : MonoBehaviour
             toggleName();
         }
         //Move poisition of name above head
-        float xPos = objectToFollow.position.x + offset.x + 1.6f;
-        float yPos = objectToFollow.position.y + (offset.y  + 1.75f) + nameToggle;
+        float xPos = objectToFollow.position.x + offset.x;
+        float yPos = objectToFollow.position.y + (offset.y  + 1.80f) + nameToggle;
         float zPos = objectToFollow.position.z + offset.z;
 
         Vector3 newPos = new Vector3(xPos, yPos, zPos);

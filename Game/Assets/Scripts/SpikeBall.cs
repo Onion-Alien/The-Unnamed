@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Spike ball prop, deals damage on contact with player, used in Spike Ball Spawner script
+ */
+
 public class SpikeBall : MonoBehaviour
 {
     void Start()

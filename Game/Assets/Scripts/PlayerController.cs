@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * This script controls the player controller
+ */
+
 public class PlayerController : MonoBehaviour
 { 
     private float movementInputDirection;
@@ -31,10 +35,8 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public LayerMask whatIsGround;
     private PlayerCombat playerCombat;
-    //public Canvas playerCanvas;
     public GameOverScreen gameOverScreen;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -66,12 +68,13 @@ public class PlayerController : MonoBehaviour
             CheckSurroundings();
         }
     } 
-
+    //checks if player is on the ground
     private void CheckSurroundings()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
-
+    
+    //checks if player can jump and if they have any more jumps left
     private void CheckIfCanJump()
     {
         if(isGrounded && rb.velocity.y <= 0)
@@ -116,7 +119,7 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("yVelocity", rb.velocity.y);
         anim.SetBool("isBlocking", isBlocking);
     }
-
+    //handles controller inputs for functions other than movement
     private void CheckInput()
     {
         movementInputDirection = Input.GetAxisRaw("Horizontal");
@@ -164,7 +167,6 @@ public class PlayerController : MonoBehaviour
         {
             isFacingRight = !isFacingRight;
             transform.Rotate(0.0f, 180.0f, 0.0f);
-            //playerCanvas.transform.Rotate(0.0f, 180.0f, 0.0f);
         }
     }
 
@@ -194,7 +196,7 @@ public class PlayerController : MonoBehaviour
             Die();
         }
     }
-
+    //Freezes the player, used for after attacks so you can't move and spam attacks
     public void Freeze()
     {
         StartCoroutine("freezeTime");
@@ -219,7 +221,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isDead", true);
 
         GameObject.Destroy(gameObject, 2f);
-        //gameOverScreen.Setup();
+        gameOverScreen.Setup();
         //handle death events here
     }
 }

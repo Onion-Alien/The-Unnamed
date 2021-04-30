@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * This script contains all the functions for player combat
+ */
+
 public class PlayerCombat : MonoBehaviour
 {
     public Transform attackPoint;
@@ -32,12 +36,11 @@ public class PlayerCombat : MonoBehaviour
     private void Awake()
     {
         pc = GetComponent<PlayerController>();
-
     }
 
     private void Start()
     {
-      //  stamBar.SetMax(Mathf.RoundToInt(maxStamina));
+        stamBar.SetMax(Mathf.RoundToInt(maxStamina));
     }
 
     void Update()
@@ -48,23 +51,23 @@ public class PlayerCombat : MonoBehaviour
             StaminaUpdate();
         }
     }
-
+    //calculates current stamina and how long until stamina can regen based on time
     private void StaminaUpdate()
     {
         if (stamina < maxStamina)
         {
             if (StaminaRegenTimer >= StaminaTimeToRegen)
             {
-                stamina = Mathf.Clamp(stamina + (StaminaIncreasePerFrame * Time.deltaTime), 0.0f, maxStamina);
-                stamBar.Set(Mathf.RoundToInt(stamina));
+                stamina = Mathf.Clamp(stamina + (StaminaIncreasePerFrame * Time.deltaTime), 0.0f, maxStamina); //sets stamina based on delta time
+                stamBar.Set(Mathf.RoundToInt(stamina)); //rounds to int because hp bar needs floats
             }
             else
             {
-                StaminaRegenTimer += Time.deltaTime;
+                StaminaRegenTimer += Time.deltaTime; //
             }
         }
     }
-
+    //handles input
     private void InputCheck()
     {
         if (Time.time >= nextAttackTime)
@@ -98,7 +101,7 @@ public class PlayerCombat : MonoBehaviour
         StaminaRegenTimer = 0.0f;
     }
 
-    //turn this into a case or something
+    //player light attack
     void Light()
     {
         animator.SetTrigger("ATK_Light");
@@ -106,12 +109,12 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyDeathScript>().TakeDamage(DMG_light);
+            enemy.GetComponent<EnemyHit>().TakeDamage(DMG_light);
         }
         StartCoroutine(UseStamina(40f));
         pc.Freeze();
     }
-
+    //player medium attack
     void Medium()
     {
         animator.SetTrigger("ATK_Medium");
@@ -119,12 +122,12 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyDeathScript>().TakeDamage(DMG_medium);
+            enemy.GetComponent<EnemyHit>().TakeDamage(DMG_medium);
         }
         StartCoroutine(UseStamina(40f));
         pc.Freeze();
     }
-
+    //player heavy attack which also is enabled to move certain objects
     void Heavy()
     {
         animator.SetTrigger("ATK_Heavy");
@@ -133,7 +136,7 @@ public class PlayerCombat : MonoBehaviour
         StartCoroutine(UseStamina(40f));
         pc.Freeze();
     }
-    
+    //allows the player to move certain objects with a heavy attack
     private IEnumerator moveObject()
     {
         Collider2D[] hitMovables = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, movableLayers);
@@ -144,10 +147,6 @@ public class PlayerCombat : MonoBehaviour
         {
             movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
             movable.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000000f);
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("ATK_Medium"))
-            {
-
-            }
         }
     }
 
@@ -159,7 +158,7 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyDeathScript>().TakeDamage(dmg);
+            enemy.GetComponent<EnemyHit>().TakeDamage(dmg);
         }
     }
 

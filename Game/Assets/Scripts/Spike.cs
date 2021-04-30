@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Spike prop, deals damage on contact with player
+ */
+
 public class Spike : MonoBehaviour
 {
     private Coroutine dmg;
