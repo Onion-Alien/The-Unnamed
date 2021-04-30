@@ -8,6 +8,7 @@ public class PlayerCombat : MonoBehaviour
 
     public Animator animator;
     public LayerMask enemyLayers;
+    public LayerMask movableLayers;
 
     public int DMG_light = 20;
     public int DMG_medium = 30;
@@ -105,7 +106,7 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy1>().TakeDamage(DMG_light);
+            enemy.GetComponent<EnemyDeathScript>().TakeDamage(DMG_light);
         }
         StartCoroutine(UseStamina(40f));
         pc.Freeze();
@@ -118,7 +119,7 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy1>().TakeDamage(DMG_medium);
+            enemy.GetComponent<EnemyDeathScript>().TakeDamage(DMG_medium);
         }
         StartCoroutine(UseStamina(40f));
         pc.Freeze();
@@ -129,8 +130,11 @@ public class PlayerCombat : MonoBehaviour
         animator.SetTrigger("ATK_Heavy");
         StartCoroutine(Damage(DMG_heavy));
         StartCoroutine("moveObject");
+<<<<<<< HEAD
         StartCoroutine(UseStamina(40f));
         pc.Freeze();
+=======
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
     }
     
     private IEnumerator moveObject()
@@ -141,21 +145,28 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Collider2D movable in hitMovables)
         {
+<<<<<<< HEAD
             movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
             movable.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000000f);
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("ATK_Medium"))
             {
 
             }
+=======
+            movable.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000000f);
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
         }
     }
 
     private IEnumerator Damage(int dmg)
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        yield return new WaitForSeconds(0.1f);
+
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy1>().TakeDamage(DMG_heavy);
+            enemy.GetComponent<EnemyDeathScript>().TakeDamage(dmg);
         }
     }
 

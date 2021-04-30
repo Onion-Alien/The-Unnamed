@@ -12,9 +12,13 @@ public class PlayerController : MonoBehaviour
     private bool isWalking;
     public bool isGrounded;
     private bool canJump;
+<<<<<<< HEAD
     public bool isDead = false;
     public bool isFrozen = false;
     public bool isBlocking = false;
+=======
+    private bool isDead = false;
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
 
     private Rigidbody2D rb;
     private Animator anim; 
@@ -47,17 +51,23 @@ public class PlayerController : MonoBehaviour
     {
         if (!PauseMenuManager.isPaused)
         {
-            CheckInput();
-            CheckMovementDirection();
-            UpdateAnimations();
-            CheckIfCanJump();
+            if (!isDead)
+            {
+                CheckInput();
+                CheckMovementDirection();
+                CheckIfCanJump();
+                UpdateAnimations();
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        ApplyMovement();
-        CheckSurroundings();
+        if (!isDead)
+        {
+            ApplyMovement();
+            CheckSurroundings();
+        }
     } 
 
     private void CheckSurroundings()
@@ -107,7 +117,12 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isWalking", isWalking);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelocity", rb.velocity.y);
+<<<<<<< HEAD
         anim.SetBool("isBlocking", isBlocking);
+=======
+        anim.SetBool("isDead", isDead);
+
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
     }
 
     private void CheckInput()
@@ -166,6 +181,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 
+<<<<<<< HEAD
     public void TakeDamage(int damage, bool ignoreBlock)
     {
         if (!isDead)
@@ -182,12 +198,24 @@ public class PlayerController : MonoBehaviour
             }   
         }
         healthBar.Set(currentHealth);
+=======
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+        if (!isDead)
+        { 
+            anim.SetTrigger("isHit");
+        }
+
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
         if (currentHealth <= 0)
         {
             Die();
         }
     }
 
+<<<<<<< HEAD
     public void Freeze()
     {
         StartCoroutine("freezeTime");
@@ -204,6 +232,8 @@ public class PlayerController : MonoBehaviour
 
     }
 
+=======
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
     private void Die()
     {
         isDead = true;

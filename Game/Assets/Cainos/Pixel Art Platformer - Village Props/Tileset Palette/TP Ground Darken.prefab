@@ -5328,7 +5328,11 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+<<<<<<< HEAD
 --- !u!114 &5389558432219558778
+=======
+--- !u!114 &2505271147232290086
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

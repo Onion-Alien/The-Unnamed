@@ -141,6 +141,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+<<<<<<< HEAD
 --- !u!1102 &-2985611849558863411
 AnimatorState:
   serializedVersion: 6
@@ -169,6 +170,8 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+=======
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
 --- !u!1102 &-2606766071913904081
 AnimatorState:
   serializedVersion: 6
@@ -218,6 +221,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+<<<<<<< HEAD
 --- !u!1101 &-1357983435866568434
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -293,6 +297,8 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+=======
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
 --- !u!1102 &-872784535423177333
 AnimatorState:
   serializedVersion: 6
@@ -386,60 +392,69 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: yVelocity
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isGrounded
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ATK_Light
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ATK_Medium
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ATK_Heavy
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Attack2
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Attack3
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
+<<<<<<< HEAD
     m_Controller: {fileID: 0}
+=======
+    m_Controller: {fileID: 9100000}
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
   - m_Name: isDead
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
+<<<<<<< HEAD
     m_Controller: {fileID: 0}
+=======
+    m_Controller: {fileID: 9100000}
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
   - m_Name: isHit
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
+<<<<<<< HEAD
     m_Controller: {fileID: 0}
   - m_Name: isBlocking
     m_Type: 4
@@ -453,6 +468,9 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+=======
+    m_Controller: {fileID: 9100000}
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -878,12 +896,15 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -872784535423177333}
     m_Position: {x: -220, y: -120, z: 0}
+<<<<<<< HEAD
   - serializedVersion: 1
     m_State: {fileID: -2985611849558863411}
     m_Position: {x: -50, y: -320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7791802751396262650}
     m_Position: {x: -250, y: -220, z: 0}
+=======
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 1101725151441657000}
@@ -891,7 +912,10 @@ AnimatorStateMachine:
   - {fileID: 535112566099120357}
   - {fileID: -164105556848966548}
   - {fileID: -3443654870452873513}
+<<<<<<< HEAD
   - {fileID: -5906401755117710594}
+=======
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
@@ -1027,6 +1051,7 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+<<<<<<< HEAD
 --- !u!1102 &7791802751396262650
 AnimatorState:
   serializedVersion: 6
@@ -1054,6 +1079,8 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+=======
+>>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
 --- !u!1101 &8760536930891812435
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
