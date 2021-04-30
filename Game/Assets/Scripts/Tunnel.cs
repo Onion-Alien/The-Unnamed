@@ -21,11 +21,7 @@ public class Tunnel : MonoBehaviour
         }
         else
         {
-<<<<<<< HEAD
             player.GetComponent<Renderer>().material.color = stock;
-=======
-            collision.GetComponent<Renderer>().material.color = stock;
->>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
         }
     }
 }

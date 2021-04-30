@@ -130,11 +130,8 @@ public class PlayerCombat : MonoBehaviour
         animator.SetTrigger("ATK_Heavy");
         StartCoroutine(Damage(DMG_heavy));
         StartCoroutine("moveObject");
-<<<<<<< HEAD
         StartCoroutine(UseStamina(40f));
         pc.Freeze();
-=======
->>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
     }
     
     private IEnumerator moveObject()
@@ -145,16 +142,12 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Collider2D movable in hitMovables)
         {
-<<<<<<< HEAD
             movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
             movable.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000000f);
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("ATK_Medium"))
             {
 
             }
-=======
-            movable.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000000f);
->>>>>>> parent of 94ec4bd (Merge pull request #11 from phetrommer/Putheara)
         }
     }
 

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 48e314bb7bfa1de4a9f6b5b01cff4c02
   - enabled: 1
+    path: Assets/Scenes/Liam WIP.unity
+    guid: 90135512d76de4f45aade6fa104ef79d
+  - enabled: 0
     path: Assets/Scenes/Main.unity
     guid: f65145fee5e456c4da7e147b38af38ed
   m_configObjects: {}
