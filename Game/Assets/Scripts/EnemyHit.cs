@@ -16,7 +16,7 @@ public class EnemyHit : MonoBehaviour
     {
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMax(maxHealth);
     }
 
     private void Update()
@@ -40,7 +40,7 @@ public class EnemyHit : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        healthBar.Set(currentHealth);
         // play the hit animation if the enemy is hit
 
 

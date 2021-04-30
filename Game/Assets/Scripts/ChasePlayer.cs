@@ -59,6 +59,6 @@ public class ChasePlayer : MonoBehaviour
     {
         animator.SetTrigger("attack");
 
-        player.GetComponent<PlayerController>().TakeDamage(dmg);
+        player.GetComponent<PlayerController>().TakeDamage(dmg, true);
     }
 }
