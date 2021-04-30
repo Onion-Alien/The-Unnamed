@@ -28,13 +28,12 @@ public class PlayerController : MonoBehaviour
     public int currentHealth;
 
     public HealthBar healthBar;
-
     public Transform groundCheck;
-
     public LayerMask whatIsGround;
-
     private PlayerCombat playerCombat;
+    public Canvas playerCanvas;
 
+    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -48,23 +47,17 @@ public class PlayerController : MonoBehaviour
     {
         if (!PauseMenuManager.isPaused)
         {
-            if (!isDead)
-            {
-                CheckInput();
-                CheckMovementDirection();
-                CheckIfCanJump();
-                UpdateAnimations();
-            }
+            CheckInput();
+            CheckMovementDirection();
+            UpdateAnimations();
+            CheckIfCanJump();
         }
     }
 
     private void FixedUpdate()
     {
-        if (!isDead)
-        {
-            ApplyMovement();
-            CheckSurroundings();
-        }
+        ApplyMovement();
+        CheckSurroundings();
     } 
 
     private void CheckSurroundings()
@@ -164,6 +157,7 @@ public class PlayerController : MonoBehaviour
         {
             isFacingRight = !isFacingRight;
             transform.Rotate(0.0f, 180.0f, 0.0f);
+            playerCanvas.transform.Rotate(0.0f, 180.0f, 0.0f);
         }
     }
 

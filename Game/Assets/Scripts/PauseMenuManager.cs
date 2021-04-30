@@ -6,33 +6,36 @@ using UnityEngine.UI;
 public class PauseMenuManager : MonoBehaviour
 {
     public GameObject pauseMenu;
-    public GameObject optionMenu;
     public static bool isPaused;
-    private static bool optionOpen;
+    public bool optionOpen = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         pauseMenu.SetActive(false);
-        optionMenu.SetActive(false);
     }
 
-    // Update is called once per frame
+    //Controls for pausing the game, checks if options menu is current open, if so does not unpause
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+
+        if (!OptionController.instance.isActiveAndEnabled)
         {
-            if (isPaused && !optionOpen)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                ResumeGame();
-            }
-            else if(!isPaused)
-            {
-                PauseGame();
+                if (isPaused && !optionOpen)
+                {
+                    ResumeGame();
+                }
+                else if (!isPaused)
+                {
+                    PauseGame();
+                }
             }
         }
     }
 
+
+    //Pauses the game, freezes time, sets isPaused to true for other methods
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
@@ -40,6 +43,8 @@ public class PauseMenuManager : MonoBehaviour
         isPaused = true;
     }
 
+
+    //resumes game
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
@@ -47,23 +52,17 @@ public class PauseMenuManager : MonoBehaviour
         isPaused = false;
     }
 
+    //Uses the immortal object OptionController to access the options menu
     public void OptionMenu()
     {
-        optionMenu.SetActive(true);
-        pauseMenu.SetActive(false);
-        optionOpen = true;
+        OptionController.instance.enableCanvas(pauseMenu);
     }
 
-    public void CloseOptionMenu()
-    {
-        optionMenu.SetActive(false);
-        pauseMenu.SetActive(true);
-        optionOpen = false;
-    }
-
+    //Exit game
     public void QuitGame()
     {
         //Note only works on built project, not with editor
+        SaveManager.instance.Save();
         Application.Quit();
     }
 }
