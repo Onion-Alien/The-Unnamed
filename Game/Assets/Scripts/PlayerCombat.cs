@@ -37,7 +37,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Start()
     {
-        stamBar.SetMax(Mathf.RoundToInt(maxStamina));
+      //  stamBar.SetMax(Mathf.RoundToInt(maxStamina));
     }
 
     void Update()

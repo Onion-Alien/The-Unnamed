@@ -27,13 +27,15 @@ public class SaveManager : MonoBehaviour
     //Load strings from txt file playerInfo.dat if it exists
     public void Load()
     {
-        if (File.Exists(Application.persistentDataPath + "/playerInfo.dat")){
+
+        if (checkSaveExist()) { 
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
             PlayerData_Storage data = (PlayerData_Storage)bf.Deserialize(file);
 
             playerName = data.playerName;
             currentLevel = data.currentLevel;
+            file.Close();
         }
     }
 
