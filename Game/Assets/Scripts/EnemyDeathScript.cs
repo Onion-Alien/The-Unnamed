@@ -14,13 +14,13 @@ public class EnemyDeathScript : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMax(maxHealth);
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        healthBar.Set(currentHealth);
 
         if (currentHealth <= 0)
         {

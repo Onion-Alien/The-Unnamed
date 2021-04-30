@@ -29,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819368951268241235}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -62.1, y: 64.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -106,8 +106,8 @@ MonoBehaviour:
   isDead: 0
   isFrozen: 0
   isBlocking: 0
-  movementSpeed: 8
-  jumpForce: 16
+  movementSpeed: 6
+  jumpForce: 13
   groundCheckRadius: 0.2
   amountOfJumps: 2
   maxHealth: 100
@@ -117,7 +117,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  playerCanvas: {fileID: 0}
+  playerCanvas: {fileID: 6248858314417693899}
 --- !u!50 &6248858313129877691
 Rigidbody2D:
   serializedVersion: 4
