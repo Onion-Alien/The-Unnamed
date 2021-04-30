@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     public GameOverScreen gameOverScreen;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();

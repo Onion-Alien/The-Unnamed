@@ -8,12 +8,12 @@ public class EnemyAttack : MonoBehaviour
     public LayerMask PlayerLayers;
     public Transform attackPoint;
     public float attackRange = 0.5f;
-    public int dmg = 10;
+    public int dmg = 2;
 
     public float attackRate = 0.5f;
 
 
-    void Heavy()
+    public void Heavy()
     {
         animator.SetTrigger("attack");
 

@@ -32,6 +32,7 @@ public class EnemyWalk : StateMachineBehaviour
         if(Vector2.Distance(player.position,rb.position) <= attackRange)
         {
             animator.SetTrigger("attack");
+            animator.GetComponent<EnemyAttack>().Heavy();
         }
     }
 
