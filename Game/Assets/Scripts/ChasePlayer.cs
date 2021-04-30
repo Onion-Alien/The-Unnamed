@@ -11,6 +11,13 @@ public class ChasePlayer : MonoBehaviour
     private Vector2 movement;
     public Animator animator;
 
+    public LayerMask PlayerLayers;
+    public Transform attackPoint;
+    public int dmg = 2;
+
+    public float attackRate = 0.5f;
+    float nextAttackTime = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,17 +36,29 @@ public class ChasePlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
-        moveEnemy(movement);
-        if (Vector2.Distance(player.position, rb.position) <= attackRange)
+        if (Time.time >= nextAttackTime)
         {
-            animator.SetTrigger("attack");
-            animator.GetComponent<EnemyAttack>().Heavy();
+            if (Vector2.Distance(player.position, rb.position) <= attackRange)
+            {
+                Heavy();
+                nextAttackTime = Time.time + 0.5f / attackRate;
+            }
+        }
+        else
+        {
+            moveEnemy(movement);
         }
     }
     void moveEnemy(Vector2 direction)
     {
         
         rb.MovePosition((Vector2)transform.position + (direction * speed * Time.deltaTime));
+    }
+
+    public void Heavy()
+    {
+        animator.SetTrigger("attack");
+
+        player.GetComponent<PlayerController>().TakeDamage(dmg);
     }
 }

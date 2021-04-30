@@ -4,47 +4,40 @@ using UnityEngine;
 
 public class EnemyWalk : StateMachineBehaviour
 {
-    Transform player;
-    Rigidbody2D rb;
-    public float speed = 2.5f;
-    public float attackRange = 3f;
-   
-    
-    //Set the enemy to walk towards the player 
+	public float speed = 2.5f;
+	public float attackRange = 3f;
+
+	Transform player;
+	Rigidbody2D rb;
+	Enemy enemy;
+
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        animator.GetComponent<Rigidbody2D>();
-        
-    }
+		player = GameObject.FindGameObjectWithTag("Player").transform;
+		rb = animator.GetComponent<Rigidbody2D>();
+		enemy = animator.GetComponent<Enemy>();
 
+	}
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        //To ensure the player always faces the player
-        animator.GetComponent<EnemyFlip>().LookAtPlayer();
-        //Find the target position to move to with a set speed
-        Vector2 target = new Vector2(player.position.x, rb.position.y);
-        Vector2 newPosition = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
-        rb.MovePosition(newPosition);
+	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	{
+		enemy.LookAtPlayer();
 
-        if(Vector2.Distance(player.position,rb.position) <= attackRange)
-        {
-            animator.SetTrigger("attack");
-            animator.GetComponent<EnemyAttack>().Heavy();
-        }
-    }
+		Vector2 target = new Vector2(player.position.x, rb.position.y);
+		Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
+		rb.MovePosition(newPos);
 
-    //OnStateMove is called right after Animator.OnAnimatorMove()
-    override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        //    // Implement code that processes and affects root motion
-    }
+		if (Vector2.Distance(player.position, rb.position) <= attackRange)
+		{
+			animator.SetTrigger("attack");
+		}
+	}
 
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        animator.ResetTrigger("attack");
-    }
+	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	{
+		animator.ResetTrigger("attack");
+	}
 }

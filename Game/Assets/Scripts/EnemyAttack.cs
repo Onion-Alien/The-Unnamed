@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public Animator animator;
-    public LayerMask PlayerLayers;
-    public Transform attackPoint;
-    public float attackRange = 0.5f;
-    public int dmg = 2;
 
-    public float attackRate = 0.5f;
+	public int attackDamage = 20;
+	public int enragedAttackDamage = 40;
+
+	public float attackRange = 1f;
+	public LayerMask attackMask;
+	public Transform attackPoint;
+
+	public void Attack()
+	{
+
+		Collider2D colInfo = Physics2D.OverlapCircle(attackPoint.position, attackRange, attackMask);
+		if (colInfo != null)
+		{
+			colInfo.GetComponent<PlayerController>().TakeDamage(attackDamage);
+		}
+	}
 
 
-    public void Heavy()
-    {
-        animator.SetTrigger("attack");
-
-        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, PlayerLayers);
-        foreach (Collider2D player in hitPlayer)
-        {
-            player.GetComponent<PlayerController>().TakeDamage(dmg);
-        }
-    }
 }
