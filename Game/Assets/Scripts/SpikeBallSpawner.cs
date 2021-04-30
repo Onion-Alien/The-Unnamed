@@ -12,6 +12,8 @@ public class SpikeBallSpawner : MonoBehaviour
     public float waitTime = 1f;
     public int spawnCount = 1;
     private bool hasRun = false;
+    public bool ballsExpire;
+    public bool isRepeating;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,13 +26,16 @@ public class SpikeBallSpawner : MonoBehaviour
 
     private IEnumerator spawnBalls(float waitTime)
     {
-        for (int k = 0; k < spawnCount; k++)
+        do
         {
-            if (waitTime > 0f)
+            for (int k = 0; k < spawnCount; k++)
             {
-                Instantiate(enemy, new Vector2(transform.parent.position.x, transform.parent.position.y), Quaternion.identity);
+                if (waitTime > 0f)
+                {
+                    Instantiate(enemy, new Vector2(transform.parent.position.x, transform.parent.position.y), Quaternion.identity, transform);
+                }
+                yield return new WaitForSeconds(waitTime);
             }
-            yield return new WaitForSeconds(waitTime);
-        }
+        } while (isRepeating);
     }
 }

@@ -8,9 +8,17 @@ using UnityEngine;
 
 public class SpikeBall : MonoBehaviour
 {
-    void Start()
+
+    SpikeBallSpawner sbs;
+    public bool expire;
+
+    //why does this give a null ref exception??????????????
+    void Awake()
     {
-        StartCoroutine("remove");
+        if (transform.parent.GetComponent<SpikeBallSpawner>().ballsExpire)
+        {
+            StartCoroutine("remove");
+        }
     }
 
     private IEnumerator remove()
