@@ -218,6 +218,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isDead", true);
 
         GameObject.Destroy(gameObject, 2f);
+        gameOverScreen.Setup();
         //handle death events here
     }
 }
