@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public LayerMask whatIsGround;
     private PlayerCombat playerCombat;
-    public Canvas playerCanvas;
+    //public Canvas playerCanvas;
     public GameOverScreen gameOverScreen;
 
     // Start is called before the first frame update
@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
         {
             isFacingRight = !isFacingRight;
             transform.Rotate(0.0f, 180.0f, 0.0f);
-            playerCanvas.transform.Rotate(0.0f, 180.0f, 0.0f);
+            //playerCanvas.transform.Rotate(0.0f, 180.0f, 0.0f);
         }
     }
 
