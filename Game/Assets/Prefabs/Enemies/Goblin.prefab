@@ -205,7 +205,7 @@ MonoBehaviour:
   attackMask:
     serializedVersion: 2
     m_Bits: 1
-  attackPoint: {fileID: 0}
+  attackPoint: {fileID: 6966669326813519334}
 --- !u!114 &58258481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2853018899296680758}
   maxHealth: 100
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 7667556770308611106}
 --- !u!114 &58258482
 MonoBehaviour:
   m_ObjectHideFlags: 0
