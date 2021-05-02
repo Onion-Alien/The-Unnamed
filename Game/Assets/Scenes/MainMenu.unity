@@ -1231,7 +1231,7 @@ MonoBehaviour:
   fullscreenToggle: {fileID: 1344215931}
   dropdown: {fileID: 1745006756}
   optionCanvas: {fileID: 580986423}
-  accessCanvas: {fileID: 0}
+  accessCanvas: {fileID: 1698921850}
 --- !u!1 &583162389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2163,6 +2163,80 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c387a1584d4993245af3dcf6dcb86b73, type: 3}
+--- !u!1001 &1110108195
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1497254949695167620, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497254949695167620, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.184351
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497254949695167620, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.6167729
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497254949695167620, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497254949695167620, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497254949695167620, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497254949695167620, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497254949695167620, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497254949695167620, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497254949695167620, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497254949695167620, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497254949695167621, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
+        type: 3}
+      propertyPath: m_Name
+      value: Audio Source 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497254949695167675, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c, type: 3}
 --- !u!1 &1171938110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2530,7 +2604,7 @@ PrefabInstance:
     - target: {fileID: 7442580679995935532, guid: 30314d13ac9893a42b5da1e87f47b5c6,
         type: 3}
       propertyPath: m_MinValue
-      value: 0
+      value: 0.0001
       objectReference: {fileID: 0}
     - target: {fileID: 7442580679995935532, guid: 30314d13ac9893a42b5da1e87f47b5c6,
         type: 3}
@@ -3539,6 +3613,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687356532}
   m_CullTransparentMesh: 1
+--- !u!1 &1698921850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5403688773957250896, guid: 49b849931ce6a16468d4da673e19fb8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5403688772868117012}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1745006754
 GameObject:
   m_ObjectHideFlags: 0
