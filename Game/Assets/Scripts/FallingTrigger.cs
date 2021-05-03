@@ -7,9 +7,13 @@ public class FallingTrigger : MonoBehaviour
     private bool hasRun = false;
     Rigidbody2D rb;
     private Vector2 pos;
+    private float fallDelay;
+    private float replaceDelay;
 
     private void Awake()
     {
+        fallDelay = GetComponentInParent<FallingCrate>().fallDelay;
+        replaceDelay = GetComponentInParent<FallingCrate>().replaceDelay;
         rb = GetComponentInParent<Rigidbody2D>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,7 +28,7 @@ public class FallingTrigger : MonoBehaviour
 
     private IEnumerator Fall()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(fallDelay);
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         rb.AddForce(transform.up * -2);
@@ -33,7 +37,7 @@ public class FallingTrigger : MonoBehaviour
 
     private IEnumerator Replacement(Rigidbody2D rb)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(replaceDelay);
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         rb.position = pos;
         hasRun = false;

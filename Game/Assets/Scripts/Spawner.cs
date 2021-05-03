@@ -52,6 +52,10 @@ public class Spawner : MonoBehaviour
                             g.AddComponent<Spike>();
                         }
                     }
+                    if (ignoreGround)
+                    {
+                        g.layer = 11;
+                    }
                 }
                 yield return new WaitForSeconds(waitTime);
             }

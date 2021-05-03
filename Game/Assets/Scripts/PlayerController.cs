@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     public HealthBar healthBar;
     public Transform groundCheck;
-    public LayerMask whatIsGround;
+    private LayerMask whatIsGround;
     private PlayerCombat playerCombat;
     public GameOverScreen gameOverScreen;
 
@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
         healthBar.SetMax(maxHealth);
         amountOfJumpsLeft = amountOfJumps;
         playerCombat = GetComponent<PlayerCombat>();
+        whatIsGround = LayerMask.GetMask("Ground", "ignoreGround");
     }
 
     void Update()
@@ -71,7 +72,7 @@ public class PlayerController : MonoBehaviour
     //checks if player is on the ground
     private void CheckSurroundings()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround); 
     }
     
     //checks if player can jump and if they have any more jumps left
@@ -211,7 +212,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator freezeTime()
     {
         isFrozen = true;
-        rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
         yield return new WaitForSeconds(0.5f);
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;

@@ -23,25 +23,32 @@ public class EnemyStateMachine : StateMachineBehaviour
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
+		float yDistance = player.position.y - rb.position.y;
+		float xDistance = player.position.x - rb.position.x;
 
 		if (Vector2.Distance(player.position, rb.position) <= enemyAttack.attackRange)
 		{
 			animator.SetTrigger("attack");
 		}
-        if (Vector2.Distance(player.position, rb.position) <= 8)
+		// only tracks player if within x and y range
+		if (xDistance < 8 && xDistance > -8)
         {
-			enemy.LookAt(player);
-			Vector2 target = new Vector2(player.position.x, rb.position.y);
-			Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
-			rb.MovePosition(newPos);
+			if (yDistance < 3 && yDistance > -3)
+            {
+				enemy.LookAt(player);
+				Vector2 target = new Vector2(player.position.x, rb.position.y);
+				Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
+				rb.MovePosition(newPos);
+            }
 		}
-		// semi broken
-        else if (rb.position != enemy.spawnPos)
-        {
-			enemy.LookAt(enemy.returnpoint);
-			Vector2 newPos = Vector2.MoveTowards(rb.position, enemy.spawnPos, speed * Time.fixedDeltaTime);
-			rb.MovePosition(newPos);
-        }
+
+		//// semi broken
+  //      else if (rb.position != enemy.spawnPos)
+  //      {
+		//	enemy.LookAt(enemy.returnpoint);
+		//	Vector2 newPos = Vector2.MoveTowards(rb.position, enemy.spawnPos, speed * Time.fixedDeltaTime);
+		//	rb.MovePosition(newPos);
+  //      }
 
 	}
 

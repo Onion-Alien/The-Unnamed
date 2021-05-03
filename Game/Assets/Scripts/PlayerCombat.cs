@@ -125,20 +125,16 @@ public class PlayerCombat : MonoBehaviour
         {
             enemy.GetComponent<EnemyHit>().TakeDamage(DMG_light);
         }
-        StartCoroutine(UseStamina(40f));
+        StartCoroutine(UseStamina(20f));
         pc.Freeze();
     }
     //player medium attack
     void Medium()
     {
         animator.SetTrigger("ATK_Medium");
-
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            enemy.GetComponent<EnemyHit>().TakeDamage(DMG_medium);
-        }
-        StartCoroutine(UseStamina(40f));
+        StartCoroutine(Damage(DMG_medium));
+        StartCoroutine(moveObject("ATK_Medium"));
+        StartCoroutine(UseStamina(30f));
         pc.Freeze();
     }
     //player heavy attack which also is enabled to move certain objects
@@ -146,12 +142,12 @@ public class PlayerCombat : MonoBehaviour
     {
         animator.SetTrigger("ATK_Heavy");
         StartCoroutine(Damage(DMG_heavy));
-        StartCoroutine("moveObject");
-        StartCoroutine(UseStamina(40f));
         pc.Freeze();
+        StartCoroutine(moveObject("ATK_Heavy"));
+        StartCoroutine(UseStamina(40f));
     }
     //allows the player to move certain objects with a heavy attack
-    private IEnumerator moveObject()
+    private IEnumerator moveObject(string attack)
     {
         Collider2D[] hitMovables = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, movableLayers);
 
@@ -159,14 +155,29 @@ public class PlayerCombat : MonoBehaviour
         {
             StartCoroutine(SetStamina(40f));
         }
-
         yield return new WaitForSeconds(0.1f);
-
-        foreach (Collider2D movable in hitMovables)
+        switch(attack)
         {
-            movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
-            movable.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000000f);
+            case "ATK_Heavy":
+                {
+                    foreach (Collider2D movable in hitMovables)
+                    {
+                        movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
+                        movable.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000000f);
+                    }
+                    break;
+                }
+            case "ATK_Medium":
+                {
+                    foreach (Collider2D movable in hitMovables)
+                    {
+                        movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
+                        movable.GetComponent<Rigidbody2D>().AddForce(transform.right *- 1000000f);
+                    }
+                    break;
+                }
         }
+
     }
 
     private IEnumerator Damage(int dmg)
