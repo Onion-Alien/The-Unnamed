@@ -227,8 +227,13 @@ public class PlayerController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         anim.SetBool("isDead", true);
 
-        GameObject.Destroy(gameObject, 2f);
-        gameOverScreen.Setup();
-        //handle death events here
+        gameObject.SetActive(false);
+        //needs a continue/restart btn
+        //gameOverScreen.Setup();
+        //currentHealth = 100;
+        //healthBar.Set(currentHealth);
+        //rb.constraints = RigidbodyConstraints2D.None;
+        //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        //gameObject.SetActive(true);
     }
 }

@@ -9,6 +9,7 @@ TagManager:
   - Movable
   - Enemy
   - Ground
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

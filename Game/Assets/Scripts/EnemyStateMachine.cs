@@ -31,7 +31,7 @@ public class EnemyStateMachine : StateMachineBehaviour
 			animator.SetTrigger("attack");
 		}
 		// only tracks player if within x and y range
-		if (xDistance < 8 && xDistance > -8)
+		if (xDistance < 10 && xDistance > -10)
         {
 			if (yDistance < 3 && yDistance > -3)
             {

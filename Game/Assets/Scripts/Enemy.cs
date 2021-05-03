@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
 	private void Start()
     {
 		returnpoint = gameObject.transform.Find("Return Point");
-		spawnPos = new Vector2(returnpoint.position.x, returnpoint.position.y);
+		//spawnPos = new Vector2(returnpoint.position.x, returnpoint.position.y);
 	}
     //Make the enemy face different direction according to player pos
     public void LookAt(Transform pos)
