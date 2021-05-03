@@ -67,6 +67,12 @@ public class PlayerCombat : MonoBehaviour
             }
         }
     }
+
+    private void Interact()
+    {
+
+    }
+
     //handles input
     private void InputCheck()
     {
@@ -97,6 +103,14 @@ public class PlayerCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         stamina -= stamCost;
+        stamBar.Set(Mathf.RoundToInt(stamina));
+        StaminaRegenTimer = 0.0f;
+    }
+
+    public IEnumerator SetStamina(float stam)
+    {
+        yield return new WaitForSeconds(0.2f);
+        stamina += stam;
         stamBar.Set(Mathf.RoundToInt(stamina));
         StaminaRegenTimer = 0.0f;
     }
@@ -140,6 +154,11 @@ public class PlayerCombat : MonoBehaviour
     private IEnumerator moveObject()
     {
         Collider2D[] hitMovables = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, movableLayers);
+
+        if (hitMovables.Length != 0)
+        {
+            StartCoroutine(SetStamina(40f));
+        }
 
         yield return new WaitForSeconds(0.1f);
 
