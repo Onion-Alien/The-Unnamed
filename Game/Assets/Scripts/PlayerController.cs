@@ -128,22 +128,24 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (isGrounded)
         {
-            StartCoroutine(playerCombat.UseStamina(20f));
-            isBlocking = true;
-            rb.constraints = RigidbodyConstraints2D.FreezePosition;
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            isFrozen = true;
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                StartCoroutine(playerCombat.UseStamina(20f));
+                isBlocking = true;
+                rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                isFrozen = true;
             
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isBlocking = false;
-            rb.constraints = RigidbodyConstraints2D.None;
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            isFrozen = false;
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                isBlocking = false;
+                rb.constraints = RigidbodyConstraints2D.None;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                isFrozen = false;
+            }
         }
     }
 
