@@ -60,6 +60,7 @@ public class EnemyHit : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+            
         }
     }
 
@@ -69,7 +70,7 @@ public class EnemyHit : MonoBehaviour
         animator.SetBool("isIdle", true);
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetBool("isDead", true);
-
+        GoldCount.gc.addGold(50) ;
         Destroy(gameObject, 1);
     }
 }
