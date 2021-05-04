@@ -16,10 +16,9 @@ public class PauseMenuManager : MonoBehaviour
 
     //Controls for pausing the game, checks if options menu is current open, if so does not unpause
     void Update()
-    {
-
-        if (!OptionController.instance.isActiveAndEnabled)
-        {
+    { 
+        //if (!OptionController.instance.isActiveAndEnabled)
+        //{
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (isPaused && !optionOpen)
@@ -31,7 +30,7 @@ public class PauseMenuManager : MonoBehaviour
                     PauseGame();
                 }
             }
-        }
+        //}
     }
 
 

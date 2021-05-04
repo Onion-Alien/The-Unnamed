@@ -15,6 +15,7 @@ public class SaveManager : MonoBehaviour
     //Object has DontDestroyOnload so it can be used by all scenes
     private void Awake()
     {
+        playerName = "temp";
         if (instance != null && instance != this)
             Destroy(gameObject);
         else
