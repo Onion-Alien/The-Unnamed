@@ -128,21 +128,24 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (isGrounded)
         {
-            StartCoroutine(playerCombat.UseStamina(20f));
-            isBlocking = true;
-            rb.constraints = RigidbodyConstraints2D.FreezePosition;
-            isFrozen = true;
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                StartCoroutine(playerCombat.UseStamina(20f));
+                isBlocking = true;
+                rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                isFrozen = true;
             
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isBlocking = false;
-            rb.constraints = RigidbodyConstraints2D.None;
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            isFrozen = false;
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                isBlocking = false;
+                rb.constraints = RigidbodyConstraints2D.None;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                isFrozen = false;
+            }
         }
     }
 
@@ -158,7 +161,10 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyMovement()
     {
-        rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
+        if (!isBlocking)
+        {
+            rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
+        }
     }
 
     private void Flip()
@@ -182,7 +188,7 @@ public class PlayerController : MonoBehaviour
             if (isBlocking && !ignoreBlock)
             {
                 anim.SetTrigger("isBlock");
-                currentHealth -= (int)(damage * 0.25);
+                currentHealth -= (int)(damage * 0.1);
             }
             else
             {
