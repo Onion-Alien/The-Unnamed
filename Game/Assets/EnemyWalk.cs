@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyWalk : StateMachineBehaviour
 {
 	public float speed = 2.5f;
-	public float attackRange = 0.5f;
+	public float attackRange = 3f;
 
 	Transform player;
 	Rigidbody2D rb;

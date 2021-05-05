@@ -16428,11 +16428,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio Source 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1497254949695167675, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71da925a6d8bb45a8a9c7e5bfe01e02c, type: 3}
 --- !u!1001 &1730731185
