@@ -583,10 +583,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 8
-  attackRange: 1
+  attackRange: 2
   attackMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   attackPoint: {fileID: 626426615131047620}
 --- !u!1 &5925868251993762048
 GameObject:

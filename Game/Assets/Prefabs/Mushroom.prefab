@@ -471,7 +471,7 @@ MonoBehaviour:
   attackRange: 1
   attackMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   attackPoint: {fileID: 5013522451746135248}
 --- !u!114 &8851235787994279381
 MonoBehaviour:
