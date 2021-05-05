@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
     //checks if player can jump and if they have any more jumps left
     private void CheckIfCanJump()
     {
-        if(isGrounded && rb.velocity.y <= 0)
+        if(isGrounded && rb.velocity.y <= 1)
         {
             amountOfJumpsLeft = amountOfJumps;
         }
@@ -133,12 +133,14 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                StartCoroutine(playerCombat.UseStamina(20f));
-                isBlocking = true;
-                rb.constraints = RigidbodyConstraints2D.FreezePosition;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                isFrozen = true;
-            
+                if (playerCombat.stamina >= 20)
+                {
+                    StartCoroutine(playerCombat.UseStamina(20f));
+                    isBlocking = true;
+                    rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    isFrozen = true;
+                }
             }
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {

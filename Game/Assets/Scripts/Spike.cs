@@ -28,10 +28,16 @@ public class Spike : MonoBehaviour
             {
                 if (col.CompareTag("Player"))
                 {
-                    col.GetComponent<PlayerController>().TakeDamage(10, true);
+                    col.GetComponent<PlayerController>().TakeDamage(50, true);
                 }
             }
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    public void Launch()
+    {
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        GetComponent<Rigidbody2D>().AddForce(transform.up * 700);
     }
 }
