@@ -8,13 +8,14 @@ public class MoveName : MonoBehaviour
     public Transform objectToFollow;
     public Text nametag;
     public Vector3 offset;
+    public bool isPlayer;
 
     public float nameToggle;
 
     private void Start()
     {
         nameToggle = 0;
-        getName();
+        //getName();
     }
 
     void Update()

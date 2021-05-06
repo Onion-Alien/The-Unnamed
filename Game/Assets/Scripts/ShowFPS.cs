@@ -22,7 +22,7 @@ public class ShowFPS : MonoBehaviour
             float timelapse = Time.smoothDeltaTime;
             timer = timer <= 0 ? refresh : timer -= timelapse;
 
-            if (PauseMenuManager.isPaused == false)
+            if (PauseMenuManager.isPaused == false && ShopKeeper.shopActive == false)
             {
                 if (timer <= 0) avgFramerate = (int)(1f / timelapse);
                 m_Text.text = "FPS: " + avgFramerate.ToString();
