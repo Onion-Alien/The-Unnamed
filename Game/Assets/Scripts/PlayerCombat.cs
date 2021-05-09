@@ -159,6 +159,8 @@ public class PlayerCombat : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyHit>().TakeDamage(dmg);
+            enemy.GetComponent<Rigidbody2D>().AddForce(transform.up * Random.Range(200f, 500f));
+            enemy.GetComponent<Rigidbody2D>().AddForce(transform.right * Random.Range(200f, 500f));
         }
     }
 

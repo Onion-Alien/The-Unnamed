@@ -22,24 +22,24 @@ public class MainMenuController : MonoBehaviour
 
     void Update()
     {
-        if (!hoverTrue)
-        {
-            if (Input.GetKeyDown(KeyCode.S) && state < 3 || Input.GetKeyDown(KeyCode.DownArrow) && state < 3)
-            {
-                selectionImage.transform.Translate(new Vector3(0, -highlightMoveAmount, 0));
-                state++;
-            }
-            else if (Input.GetKeyDown(KeyCode.W) && state > 0 || Input.GetKeyDown(KeyCode.UpArrow) && state > 0)
-            {
-                selectionImage.transform.Translate(new Vector3(0, highlightMoveAmount, 0));
-                state--;
-            }
-        }
+        //if (!hoverTrue)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.S) && state < 3 || Input.GetKeyDown(KeyCode.DownArrow) && state < 3)
+        //    {
+        //        selectionImage.transform.Translate(new Vector3(0, -highlightMoveAmount, 0));
+        //        state++;
+        //    }
+        //    else if (Input.GetKeyDown(KeyCode.W) && state > 0 || Input.GetKeyDown(KeyCode.UpArrow) && state > 0)
+        //    {
+        //        selectionImage.transform.Translate(new Vector3(0, highlightMoveAmount, 0));
+        //        state--;
+        //    }
+        //}
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            itemSelected(state);
-        }
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    itemSelected(state);
+        //}
     }
 
     public void updateHoverTrue()

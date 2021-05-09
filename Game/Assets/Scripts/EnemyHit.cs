@@ -48,13 +48,10 @@ public class EnemyHit : MonoBehaviour
         healthBar.Set(currentHealth);
         // play the hit animation if the enemy is hit
 
-
         if (currentHealth > 0)
-            {
-
+        {
             animator.SetTrigger("isHit");
-
-            }
+        }
 
         //Play the dead animation if the current health equals to or less than 0
         if (currentHealth <= 0)

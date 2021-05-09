@@ -8,8 +8,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 { 
-    private float movementInputDirection;
-
     private int amountOfJumpsLeft;
 
     private bool isFacingRight = true;

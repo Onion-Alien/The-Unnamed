@@ -12,6 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Liam WIP.unity
     guid: 90135512d76de4f45aade6fa104ef79d
   - enabled: 0
-    path: Assets/Scenes/Main.unity
-    guid: f65145fee5e456c4da7e147b38af38ed
-  m_configObjects: {}
+    path: 
+    guid: 00000000000000000000000000000000
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 3498e7194e80cac44874623737c2fadd,
+      type: 2}
