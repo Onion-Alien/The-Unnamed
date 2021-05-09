@@ -11,7 +11,7 @@ public class EnemyHit : MonoBehaviour
 {
 
     public Animator animator;
-
+    public GameObject coin;
     public int maxHealth = 100;
     int currentHealth;
     public HealthBar healthBar;
@@ -67,7 +67,7 @@ public class EnemyHit : MonoBehaviour
         animator.SetBool("isIdle", true);
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetBool("isDead", true);
-        GoldCount.gc.addGold(50) ;
+        Instantiate(coin, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         Destroy(gameObject, 1);
     }
 }
