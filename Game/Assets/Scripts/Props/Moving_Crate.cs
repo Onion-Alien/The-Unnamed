@@ -55,4 +55,28 @@ public class Moving_Crate : MonoBehaviour
             collision.collider.transform.SetParent(null);
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        DrawGizmos(transform);
+    }
+
+    private void DrawGizmos(Transform trans)
+    {
+        Vector2 temp = transform.position;
+        Vector2 temp1 = temp - new Vector2(x, y);
+        Vector2 temp2 = temp1 + new Vector2(x, y) * 2;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(temp1, temp2);
+        if (y == 0)
+        {
+            Gizmos.DrawCube(temp1, new Vector3(0.2f, 2));
+            Gizmos.DrawCube(temp2, new Vector3(0.2f, 2));
+        }
+        else
+        {
+            Gizmos.DrawCube(temp1, new Vector3(2, 0.2f));
+            Gizmos.DrawCube(temp2, new Vector3(2, 0.2f));
+        }
+    }
 }

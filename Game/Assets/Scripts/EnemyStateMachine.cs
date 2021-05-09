@@ -10,6 +10,7 @@ public class EnemyStateMachine : StateMachineBehaviour
 	Rigidbody2D rb;
 	Enemy enemy;
 	EnemyAttack enemyAttack;
+	private bool isAttacking;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -29,33 +30,29 @@ public class EnemyStateMachine : StateMachineBehaviour
 		if (Vector2.Distance(player.position, rb.position) <= enemyAttack.attackRange)
 		{
 			animator.SetTrigger("attack");
+			isAttacking = true;
 		}
-		//Debug.Log(Vector2.Distance(player.position, rb.position));
+
 		// only tracks player if within x and y range
-		if (xDistance < 8 && xDistance > -8)
+		if (enemy.IsGrounded() && !isAttacking)
         {
-			if (yDistance < 3 && yDistance > -3)
-            {
-				enemy.LookAt(player);
-				Vector2 target = new Vector2(player.position.x, rb.position.y);
-				Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
-				rb.MovePosition(newPos);
-            }
-		}
-
-		//// semi broken
-  //      else if (rb.position != enemy.spawnPos)
-  //      {
-		//	enemy.LookAt(enemy.returnpoint);
-		//	Vector2 newPos = Vector2.MoveTowards(rb.position, enemy.spawnPos, speed * Time.fixedDeltaTime);
-		//	rb.MovePosition(newPos);
-  //      }
-
+			if (xDistance < 20 && xDistance > -20)
+			{
+				if (yDistance < 3 && yDistance > -3)
+				{
+					enemy.LookAt(player);
+					Vector2 target = new Vector2(player.position.x, rb.position.y);
+					Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
+					rb.MovePosition(newPos);
+				}
+			}
+        }
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		animator.ResetTrigger("attack");
+		isAttacking = false;
 	}
 }

@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 3850367584909166786}
   - component: {fileID: 3850367584909166787}
   - component: {fileID: 3850367584909166788}
-  - component: {fileID: 3002893292250335789}
+  - component: {fileID: 1457738511}
   m_Layer: 8
   m_Name: Object_Crate
   m_TagString: Untagged
@@ -237,7 +237,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3002893292250335789
+--- !u!114 &1457738511
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -249,9 +249,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a84f2d4c1d17048b320c8757782a64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 0
-  y: 2
-  speed: 2
+  x: -6
+  y: 0
+  speed: 3
   spinningPlatform: 0
 --- !u!1 &7056672201442439849
 GameObject:

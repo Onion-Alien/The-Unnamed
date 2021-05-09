@@ -14,14 +14,31 @@ public class Enemy : MonoBehaviour
 	public Vector2 spawnPos;
 	public Transform returnpoint;
 
+	public float groundCheckRadius;
+	public Transform groundCheck;
+	private LayerMask whatIsGround;
+
 	//semi broken
 	private void Start()
     {
 		returnpoint = gameObject.transform.Find("Return Point");
 		//spawnPos = new Vector2(returnpoint.position.x, returnpoint.position.y);
+		whatIsGround = LayerMask.GetMask("Ground", "ignoreGround");
+		transform.localScale = new Vector3(Random.Range(0.7f, 1f), Random.Range(0.7f, 1f), 1);
 	}
-    //Make the enemy face different direction according to player pos
-    public void LookAt(Transform pos)
+
+	public bool IsGrounded()
+	{
+		return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+	}
+
+	//Make the enemy face different direction according to player pos
+	public void LookAt(Transform pos)
 	{
 		Vector3 flipped = transform.localScale;
 		flipped.z *= -1f;
