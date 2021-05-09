@@ -19,7 +19,7 @@ public class EnemyCount : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
         count.text = "Enemies Left: " + enemies.Length.ToString();
     }
 }

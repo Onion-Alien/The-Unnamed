@@ -68,6 +68,8 @@ public class EnemyHit : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetBool("isDead", true);
         Instantiate(coin, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-        Destroy(gameObject, 1);
+        Destroy(gameObject);
+        
+        
     }
 }

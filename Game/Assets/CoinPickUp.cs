@@ -6,12 +6,12 @@ public class CoinPickUp : MonoBehaviour
 {
     public int coin;
     
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D (Collider2D other)
     {
         if(other.name == "Player")
         {
             GoldCount.gc.addGold(50);
-            Destroy(gameObject, 1);
+            Destroy(gameObject);
         }
     }
 }
