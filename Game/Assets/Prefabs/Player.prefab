@@ -654,7 +654,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -710,9 +710,6 @@ MonoBehaviour:
   currentHealth: 100
   healthBar: {fileID: 1819368949824443917}
   groundCheck: {fileID: 1819368950753400107}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
   gameOverScreen: {fileID: 5114663932115325661, guid: 413ecd2ab86d24ebca5c166bc4de951c,
     type: 3}
 --- !u!50 &1819368950613052335
@@ -734,7 +731,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 89ab5b9274f19b74c9afcba20a47a353, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &1819368950613052334
 BoxCollider2D:

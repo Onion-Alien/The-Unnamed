@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /*
  * This script controls the player controller
  */
 
 public class PlayerController : MonoBehaviour
-{ 
+{
     private int amountOfJumpsLeft;
 
     private bool isFacingRight = true;
@@ -19,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public bool isBlocking = false;
 
     private Rigidbody2D rb;
-    private Animator anim; 
+    private Animator anim;
 
     public float movementSpeed = 10.0f;
     public float jumpForce = 16.0f;
@@ -31,17 +32,21 @@ public class PlayerController : MonoBehaviour
 
     public HealthBar healthBar;
     public Transform groundCheck;
-    public LayerMask whatIsGround;
-    private PlayerCombat playerCombat;
+    private LayerMask whatIsGround;
     public GameOverScreen gameOverScreen;
+    private PlayerCombat playerCombat;
+
+    private float horizontal;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        playerCombat = GetComponent<PlayerCombat>();
         healthBar.SetMax(maxHealth);
         amountOfJumpsLeft = amountOfJumps;
-        playerCombat = GetComponent<PlayerCombat>();
+        whatIsGround = LayerMask.GetMask("Ground", "ignoreGround");
+
     }
 
     void Update()
@@ -50,37 +55,78 @@ public class PlayerController : MonoBehaviour
         {
             if (!isDead)
             {
-                CheckInput();
-                CheckMovementDirection();
+                if (!isBlocking)
+                {
+                    rb.velocity = new Vector2(horizontal * movementSpeed, rb.velocity.y);
+                }
                 CheckIfCanJump();
                 UpdateAnimations();
+                CheckMovementDirection();
             }
         }
     }
 
-    private void FixedUpdate()
+    public void Move(InputAction.CallbackContext context)
     {
-        if (!isDead)
-        {
-            ApplyMovement();
-            CheckSurroundings();
-        }
-    } 
-    //checks if player is on the ground
-    private void CheckSurroundings()
-    {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        horizontal = context.ReadValue<Vector2>().x;
     }
-    
+
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (canJump)
+        {
+            if (context.performed)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                amountOfJumpsLeft--;
+            }
+            if (context.canceled && rb.velocity.y > 0f)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            }
+        }
+    }
+
+    public void Block(InputAction.CallbackContext context)
+    {
+        if (IsGrounded())
+        {
+            if (context.performed)
+            {
+                if (playerCombat.stamina >= 20)
+                {
+                    StartCoroutine(playerCombat.UseStamina(20f));
+                    isBlocking = true;
+                    rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    isFrozen = true;
+                }
+            }
+            if (context.canceled)
+            {
+                isBlocking = false;
+                rb.constraints = RigidbodyConstraints2D.None;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                isFrozen = false;
+            }
+        }
+    }
+
+    //checks if player is on the ground
+    public bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+    }
+
     //checks if player can jump and if they have any more jumps left
     private void CheckIfCanJump()
     {
-        if(isGrounded && rb.velocity.y <= 0)
+        if (IsGrounded() && rb.velocity.y <= 1)
         {
             amountOfJumpsLeft = amountOfJumps;
         }
-        
-        if(amountOfJumpsLeft <= 0)
+
+        if (amountOfJumpsLeft <= 0)
         {
             canJump = false;
         }
@@ -91,11 +137,11 @@ public class PlayerController : MonoBehaviour
     }
     private void CheckMovementDirection()
     {
-        if(isFacingRight && movementInputDirection < 0)
+        if (isFacingRight && horizontal < 0)
         {
             Flip();
         }
-        else if(!isFacingRight && movementInputDirection > 0)
+        else if (!isFacingRight && horizontal > 0)
         {
             Flip();
         }
@@ -113,51 +159,50 @@ public class PlayerController : MonoBehaviour
     private void UpdateAnimations()
     {
         anim.SetBool("isWalking", isWalking);
-        anim.SetBool("isGrounded", isGrounded);
+        anim.SetBool("isGrounded", IsGrounded());
         anim.SetFloat("yVelocity", rb.velocity.y);
         anim.SetBool("isBlocking", isBlocking);
     }
     //handles controller inputs for functions other than movement
     private void CheckInput()
     {
-        movementInputDirection = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            Jump();
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            StartCoroutine(playerCombat.UseStamina(20f));
-            isBlocking = true;
-            rb.constraints = RigidbodyConstraints2D.FreezePosition;
-            isFrozen = true;
-            
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isBlocking = false;
-            rb.constraints = RigidbodyConstraints2D.None;
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            isFrozen = false;
-        }
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    Jump();
+        //}
+        //if (isGrounded)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.LeftShift))
+        //    {
+        //        if (playerCombat.stamina >= 20)
+        //        {
+        //            StartCoroutine(playerCombat.UseStamina(20f));
+        //            isBlocking = true;
+        //            rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        //            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        //            isFrozen = true;
+        //        }
+        //    }
+        //    if (Input.GetKeyUp(KeyCode.LeftShift))
+        //    {
+        //        isBlocking = false;
+        //        rb.constraints = RigidbodyConstraints2D.None;
+        //        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        //        isFrozen = false;
+        //    }
+        //}
     }
 
-    private void Jump()
-    {
-        if (canJump)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            amountOfJumpsLeft--;
-        }
+    //private void Jump()
+    //{
+    //    if (canJump)
+    //    {
+    //        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    //        amountOfJumpsLeft--;
+    //    }
 
-    }
-
-    private void ApplyMovement()
-    {
-        rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
-    }
+    //}
 
     private void Flip()
     {
@@ -176,17 +221,17 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage, bool ignoreBlock)
     {
         if (!isDead)
-        { 
+        {
             if (isBlocking && !ignoreBlock)
             {
                 anim.SetTrigger("isBlock");
-                currentHealth -= (int)(damage * 0.25);
+                currentHealth -= (int)(damage * 0.1);
             }
             else
             {
                 anim.SetTrigger("isHit");
                 currentHealth -= damage;
-            }   
+            }
         }
         healthBar.Set(currentHealth);
         if (currentHealth <= 0)
@@ -197,13 +242,13 @@ public class PlayerController : MonoBehaviour
     //Freezes the player, used for after attacks so you can't move and spam attacks
     public void Freeze()
     {
-        StartCoroutine("freezeTime");
+        //StartCoroutine("freezeTime");
     }
 
     private IEnumerator freezeTime()
     {
         isFrozen = true;
-        rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
         yield return new WaitForSeconds(0.5f);
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -218,8 +263,13 @@ public class PlayerController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         anim.SetBool("isDead", true);
 
-        GameObject.Destroy(gameObject, 2f);
-        gameOverScreen.Setup();
-        //handle death events here
+        gameObject.SetActive(false);
+        //needs a continue/restart btn
+        //gameOverScreen.Setup();
+        //currentHealth = 100;
+        //healthBar.Set(currentHealth);
+        //rb.constraints = RigidbodyConstraints2D.None;
+        //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        //gameObject.SetActive(true);
     }
 }

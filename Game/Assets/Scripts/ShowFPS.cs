@@ -12,10 +12,10 @@ public class ShowFPS : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            fpsToggle();
-        }
+        //if (Input.GetKeyDown(KeyCode.F1))
+        //{
+        //    fpsToggle();
+        //}
 
         if (fpsCount)
         {

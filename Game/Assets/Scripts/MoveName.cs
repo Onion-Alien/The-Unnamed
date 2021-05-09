@@ -20,10 +20,10 @@ public class MoveName : MonoBehaviour
     void Update()
     {
         //Toggle name on/off
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            toggleName();
-        }
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
+        //    toggleName();
+        //}
         //Move poisition of name above head
         float xPos = objectToFollow.position.x + offset.x;
         float yPos = objectToFollow.position.y + (offset.y  + 1.80f) + nameToggle;
