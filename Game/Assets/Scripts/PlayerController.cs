@@ -36,9 +36,11 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround;
     private PlayerCombat playerCombat;
     public GameOverScreen gameOverScreen;
+    public GameObject gameOverScreenObject;
 
     void Start()
     {
+        gameOverScreenObject.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         healthBar.SetMax(maxHealth);
@@ -123,6 +125,11 @@ public class PlayerController : MonoBehaviour
     private void CheckInput()
     {
         movementInputDirection = Input.GetAxisRaw("Horizontal");
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Die();
+        }
+
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -226,8 +233,8 @@ public class PlayerController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         anim.SetBool("isDead", true);
 
-        GameObject.Destroy(gameObject, 2f);
         gameOverScreen.Setup();
+        gameOverScreenObject.SetActive(true);
         //handle death events here
     }
 }

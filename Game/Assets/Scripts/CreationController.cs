@@ -29,7 +29,7 @@ public class CreationController : MonoBehaviour
 
     public void enterGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Bailey WIP");
     }
 
     //Creates character, saves name and current level to disc using SaveManager class which doesn't destroy upon changing scenes
@@ -40,8 +40,9 @@ public class CreationController : MonoBehaviour
         if (name.Length > 0)
         {
             userName = name;
-            SaveManager.instance.saveLevel(0);
+            SaveManager.instance.saveLevel("Bailey WIP");
             SaveManager.instance.saveName(userName);
+            SaveManager.instance.savePlayerPosition(0.0f, 0.0f);
             SaveManager.instance.Save();
             enterGame();
         }

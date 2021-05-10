@@ -8,7 +8,8 @@ using UnityEngine;
 public class SaveManager : MonoBehaviour
 {
     private string playerName;
-    private int currentLevel;
+    private string currentLevel;
+    public float x, y;
 
     public static SaveManager instance {get; private set; }
 
@@ -18,7 +19,7 @@ public class SaveManager : MonoBehaviour
         playerName = "temp";
         if (instance != null && instance != this)
             Destroy(gameObject);
-        else
+        else if(instance == null)
             instance = this;
 
         DontDestroyOnLoad(gameObject);
@@ -28,12 +29,11 @@ public class SaveManager : MonoBehaviour
     //Load strings from txt file playerInfo.dat if it exists
     public void Load()
     {
-
         if (checkSaveExist()) { 
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
             PlayerData_Storage data = (PlayerData_Storage)bf.Deserialize(file);
-
+            x = data.x; y = data.y;
             playerName = data.playerName;
             currentLevel = data.currentLevel;
             file.Close();
@@ -48,9 +48,18 @@ public class SaveManager : MonoBehaviour
         PlayerData_Storage data = new PlayerData_Storage();
         data.playerName = this.playerName;
         data.currentLevel = this.currentLevel;
-
+        data.x = x;data.y = y;
         bf.Serialize(file, data);
         file.Close();
+    }
+
+    public void checkPointSave(GameObject player)
+    {
+        Debug.Log("player x = " + player.transform.position.x + "player y = " + player.transform.position.y);
+
+        x = player.transform.position.x;
+        y = player.transform.position.y;
+        Save();
     }
 
     [Serializable]
@@ -59,7 +68,14 @@ public class SaveManager : MonoBehaviour
     class PlayerData_Storage
     {
         public string playerName;
-        public int currentLevel;
+        public string currentLevel;
+        public float x, y;
+    }
+
+    public void savePlayerPosition(float x, float y)
+    {
+        this.x = x;
+        this.y = y;
     }
 
     public void saveName(string n)
@@ -67,9 +83,9 @@ public class SaveManager : MonoBehaviour
         this.playerName = n;
     }
 
-    public void saveLevel(int n)
+    public void saveLevel(string s)
     {
-        this.currentLevel = n;
+        this.currentLevel = s;
     }
 
     public bool checkSaveExist()
@@ -81,7 +97,7 @@ public class SaveManager : MonoBehaviour
         return false;
     }
 
-    public int getCurrentLevel()
+    public string getCurrentLevel()
     {
         return currentLevel;
     }
@@ -89,5 +105,15 @@ public class SaveManager : MonoBehaviour
     public string getName()
     {
         return playerName;
+    }
+
+    public float getCharX()
+    {
+        return x;
+    }
+
+    public float getCharY()
+    {
+        return y;
     }
 }

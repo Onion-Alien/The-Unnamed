@@ -61,8 +61,8 @@ public class MainMenuController : MonoBehaviour
             if (SaveManager.instance.checkSaveExist())
             {
                 SaveManager.instance.Load();
-                int currentLevel = SaveManager.instance.getCurrentLevel();
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + (currentLevel + 1));
+                string currentLevel = SaveManager.instance.getCurrentLevel();
+                SceneManager.LoadScene(currentLevel);
             }
         }
         else if (n == 2)

@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Main.unity
     guid: f65145fee5e456c4da7e147b38af38ed
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Baiey WIP.unity
-    guid: 404219d3f3a51014b8d9e68d82426b7f
+    path: Assets/Scenes/Bailey WIP.unity
+    guid: 3dc39dd8b60100b48b4116d8012ce323
   m_configObjects: {}

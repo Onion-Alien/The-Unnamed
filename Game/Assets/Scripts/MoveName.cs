@@ -15,7 +15,7 @@ public class MoveName : MonoBehaviour
     private void Start()
     {
         nameToggle = 0;
-        //getName();
+        getName();
     }
 
     void Update()
@@ -50,9 +50,9 @@ public class MoveName : MonoBehaviour
     //Get name string from SaveManager object
     public void getName()
     {
-        //if (SaveManager.instance.getName() != "temp")
-        //{
-        //    nametag.text = SaveManager.instance.getName();
-        //}
+        if (SaveManager.instance.getName() != "temp")
+        {
+            nametag.text = SaveManager.instance.getName();
+        }
     }
 }
