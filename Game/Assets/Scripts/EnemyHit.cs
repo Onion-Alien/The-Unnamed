@@ -17,6 +17,8 @@ public class EnemyHit : MonoBehaviour
     public HealthBar healthBar;
     private Rigidbody2D rb;
 
+   
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -28,6 +30,8 @@ public class EnemyHit : MonoBehaviour
     {
         CheckIdle();
     }
+
+    
 
     // checks if enemy is idle
     void CheckIdle()
@@ -61,13 +65,17 @@ public class EnemyHit : MonoBehaviour
         }
     }
 
+    
+        
     //Set the trigger to playing the death animation to true and destroy the object 1 second after the Goblin is dead
     void Die()
     {
         animator.SetBool("isIdle", true);
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetBool("isDead", true);
+        coin.SetActive(true);
         Instantiate(coin, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        
         Destroy(gameObject);
         
         

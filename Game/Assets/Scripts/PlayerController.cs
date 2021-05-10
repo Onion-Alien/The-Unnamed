@@ -265,7 +265,7 @@ public class PlayerController : MonoBehaviour
 
         gameObject.SetActive(false);
         //needs a continue/restart btn
-        //gameOverScreen.Setup();
+        gameOverScreen.Setup();
         //currentHealth = 100;
         //healthBar.Set(currentHealth);
         //rb.constraints = RigidbodyConstraints2D.None;
