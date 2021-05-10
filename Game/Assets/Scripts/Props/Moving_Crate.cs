@@ -10,6 +10,7 @@ public class Moving_Crate : MonoBehaviour
     public int y;
     public float speed;
     public bool spinningPlatform;
+    public bool platform;
 
     private void Awake()
     {
@@ -42,7 +43,7 @@ public class Moving_Crate : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && platform)
         {
             collision.collider.transform.SetParent(transform);
         }
@@ -50,7 +51,7 @@ public class Moving_Crate : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && platform)
         {
             collision.collider.transform.SetParent(null);
         }

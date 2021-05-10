@@ -9,6 +9,7 @@ using UnityEngine;
 public class Spike : MonoBehaviour
 {
     private Coroutine dmg;
+    public int spikeDmg = 50;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,7 +29,7 @@ public class Spike : MonoBehaviour
             {
                 if (col.CompareTag("Player"))
                 {
-                    col.GetComponent<PlayerController>().TakeDamage(50, true);
+                    col.GetComponent<PlayerController>().TakeDamage(spikeDmg, true);
                 }
             }
             yield return new WaitForSeconds(1f);
