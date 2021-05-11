@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 380228380}
   - component: {fileID: 380228382}
   - component: {fileID: 380228381}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Stamina Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 690288944}
   - component: {fileID: 690288946}
   - component: {fileID: 690288945}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 728212268}
   - component: {fileID: 728212270}
   - component: {fileID: 728212269}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 1126512712}
   - component: {fileID: 1126512711}
   - component: {fileID: 1126512710}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: StaminaBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 1426910783638698729}
   - component: {fileID: 1426910783638698728}
   - component: {fileID: 1426910783638698734}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,7 +445,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Bailey
+  m_Text: 'Debug
+
+'
 --- !u!114 &1426910783638698734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,7 +473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1819368949584728011}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +488,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819368949584728010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.671, y: 0.83, z: 0}
+  m_LocalPosition: {x: 0.654, y: 0.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1819368950613052333}
@@ -503,7 +505,7 @@ GameObject:
   - component: {fileID: 1819368949824443916}
   - component: {fileID: 1819368949824443914}
   - component: {fileID: 1819368949824443917}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Health bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +612,8 @@ GameObject:
   - component: {fileID: 1819368950613052334}
   - component: {fileID: 1819368950613052331}
   - component: {fileID: 1819368950613052328}
-  m_Layer: 0
+  - component: {fileID: 980149255}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -654,7 +657,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -706,13 +709,10 @@ MonoBehaviour:
   jumpForce: 13
   groundCheckRadius: 0.25
   amountOfJumps: 2
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 300
+  currentHealth: 300
   healthBar: {fileID: 1819368949824443917}
   groundCheck: {fileID: 1819368950753400107}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
   gameOverScreen: {fileID: 5114663932115325661, guid: 413ecd2ab86d24ebca5c166bc4de951c,
     type: 3}
 --- !u!50 &1819368950613052335
@@ -749,7 +749,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.071100235, y: 0.6451149}
+  m_Offset: {x: -0.049263, y: 0.6171417}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -760,8 +760,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.43601608, y: 0.9529495}
-  m_EdgeRadius: 0.1
+  m_Size: {x: 0.12678528, y: 0.7140274}
+  m_EdgeRadius: 0.2
 --- !u!95 &1819368950613052331
 Animator:
   serializedVersion: 3
@@ -804,11 +804,138 @@ MonoBehaviour:
   DMG_light: 20
   DMG_medium: 30
   DMG_heavy: 40
-  attackRange: 0.4
-  attackRate: 2
+  attackRange: 0.8
+  attackRate: 1
   stamina: 100
   maxStamina: 100
   stamBar: {fileID: 380228381}
+--- !u!114 &980149255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819368950613052321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: c8f1012692763644eb2eb1b0d345486d,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1819368950613052330}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Move
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7ebbfbea-5a68-465f-8824-cdf2b520f26d
+    m_ActionName: Player/Move[/DualShock4GamepadHID/leftStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1819368950613052330}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0e91a9b7-d299-4a0d-8714-761ae406dcaf
+    m_ActionName: Player/Jump[/DualShock4GamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1819368950613052328}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+        m_MethodName: Light
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c144c67a-a559-4df0-818f-824cc94ddbec
+    m_ActionName: Player/Attack_Light[/DualShock4GamepadHID/buttonNorth,/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1819368950613052328}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+        m_MethodName: Medium
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 83c81ef0-5364-43b6-8ef9-be8714754de1
+    m_ActionName: Player/Attack_Medium[/DualShock4GamepadHID/buttonWest,/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1819368950613052328}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+        m_MethodName: Heavy
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2e1284a7-7878-4c90-ae68-9c30dbb095f0
+    m_ActionName: Player/Attack_Heavy[/DualShock4GamepadHID/buttonEast,/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1819368950613052330}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Block
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 368f25e5-3523-4a12-ac04-5a2398a33341
+    m_ActionName: Player/New action
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1819368950753400106
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,7 +945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1819368950753400107}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +979,7 @@ GameObject:
   - component: {fileID: 2418624408169515107}
   - component: {fileID: 2418624408169515116}
   - component: {fileID: 595774515012242247}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -964,7 +1091,7 @@ GameObject:
   - component: {fileID: 4084514714955054733}
   - component: {fileID: 4084514714955054735}
   - component: {fileID: 4084514714955054732}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1039,7 +1166,7 @@ GameObject:
   - component: {fileID: 4084514714984588433}
   - component: {fileID: 4084514714984588435}
   - component: {fileID: 4084514714984588432}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
