@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /*
  * This script contains all the functions for player combat
@@ -30,7 +31,6 @@ public class PlayerCombat : MonoBehaviour
     private const float StaminaTimeToRegen = 1f;
     public HealthBar stamBar;
 
-
     private PlayerController pc;
 
     private void Awake()
@@ -47,7 +47,6 @@ public class PlayerCombat : MonoBehaviour
     {
         if (!pc.isDead)
         {
-            InputCheck();
             StaminaUpdate();
         }
     }
@@ -63,38 +62,7 @@ public class PlayerCombat : MonoBehaviour
             }
             else
             {
-                StaminaRegenTimer += Time.deltaTime; //
-            }
-        }
-    }
-
-    private void Interact()
-    {
-
-    }
-
-    //handles input
-    private void InputCheck()
-    {
-        if (Time.time >= nextAttackTime)
-        {
-            if (pc.isGrounded)
-            {
-                if (Input.GetKeyDown(KeyCode.L) && stamina >= 10f)
-                {
-                    Light();
-                    nextAttackTime = Time.time + 0.5f / attackRate;
-                }
-                if (Input.GetKeyDown(KeyCode.I) && stamina >= 20f)
-                {
-                    Medium();
-                    nextAttackTime = Time.time + 0.5f / attackRate;
-                }
-                if (Input.GetKeyDown(KeyCode.J) && stamina >= 40f)
-                {
-                    Heavy();
-                    nextAttackTime = Time.time + 0.5f / attackRate;
-                }
+                StaminaRegenTimer += Time.deltaTime;
             }
         }
     }
@@ -116,42 +84,51 @@ public class PlayerCombat : MonoBehaviour
     }
 
     //player light attack
-    void Light()
+    public void Light(InputAction.CallbackContext context)
     {
-        animator.SetTrigger("ATK_Light");
-
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        foreach(Collider2D enemy in hitEnemies)
+        if (pc.IsGrounded() && Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
         {
-            enemy.GetComponent<EnemyHit>().TakeDamage(DMG_light);
+            animator.SetTrigger("ATK_Light");
+
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+            foreach(Collider2D enemy in hitEnemies)
+            {
+                enemy.GetComponent<EnemyHit>().TakeDamage(DMG_light);
+            }
+            StartCoroutine(UseStamina(20f));
+            pc.Freeze();
+            nextAttackTime = Time.time + 0.5f / attackRate;
         }
-        StartCoroutine(UseStamina(40f));
-        pc.Freeze();
     }
     //player medium attack
-    void Medium()
+    public void Medium(InputAction.CallbackContext context)
     {
-        animator.SetTrigger("ATK_Medium");
-
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        foreach (Collider2D enemy in hitEnemies)
+        if (pc.IsGrounded() && Time.time >= nextAttackTime && stamina >= 20 && !pc.isBlocking)
         {
-            enemy.GetComponent<EnemyHit>().TakeDamage(DMG_medium);
+            animator.SetTrigger("ATK_Medium");
+            StartCoroutine(Damage(DMG_medium));
+            StartCoroutine(moveObject("ATK_Medium"));
+            StartCoroutine(UseStamina(20f));
+            pc.Freeze();
+            nextAttackTime = Time.time + 0.5f / attackRate;
         }
-        StartCoroutine(UseStamina(40f));
-        pc.Freeze();
     }
     //player heavy attack which also is enabled to move certain objects
-    void Heavy()
+    public void Heavy(InputAction.CallbackContext context)
     {
-        animator.SetTrigger("ATK_Heavy");
-        StartCoroutine(Damage(DMG_heavy));
-        StartCoroutine("moveObject");
-        StartCoroutine(UseStamina(40f));
-        pc.Freeze();
+        if (pc.IsGrounded() && Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
+        {
+            animator.SetTrigger("ATK_Heavy");
+            StartCoroutine(Damage(DMG_heavy));
+            StartCoroutine(moveObject("ATK_Heavy"));
+            StartCoroutine(UseStamina(40f));
+            pc.Freeze();
+            nextAttackTime = Time.time + 0.5f / attackRate;
+        }
     }
+
     //allows the player to move certain objects with a heavy attack
-    private IEnumerator moveObject()
+    private IEnumerator moveObject(string attack)
     {
         Collider2D[] hitMovables = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, movableLayers);
 
@@ -159,14 +136,29 @@ public class PlayerCombat : MonoBehaviour
         {
             StartCoroutine(SetStamina(40f));
         }
-
         yield return new WaitForSeconds(0.1f);
-
-        foreach (Collider2D movable in hitMovables)
+        switch(attack)
         {
-            movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
-            movable.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000000f);
+            case "ATK_Heavy":
+            {
+                foreach (Collider2D movable in hitMovables)
+                {
+                    movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
+                    movable.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000000f);
+                }
+                break;
+            }
+            case "ATK_Medium":
+            {
+                foreach (Collider2D movable in hitMovables)
+                {
+                    movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
+                    movable.GetComponent<Rigidbody2D>().AddForce(transform.right *- 1000000f);
+                }
+                break;
+            }
         }
+
     }
 
     private IEnumerator Damage(int dmg)
@@ -178,6 +170,8 @@ public class PlayerCombat : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyHit>().TakeDamage(dmg);
+            enemy.GetComponent<Rigidbody2D>().AddForce(transform.up * Random.Range(200f, 500f));
+            enemy.GetComponent<Rigidbody2D>().AddForce(transform.right * Random.Range(200f, 500f));
         }
     }
 
