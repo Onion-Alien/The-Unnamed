@@ -28,14 +28,14 @@ public class PlayerController : MonoBehaviour
 
     public int amountOfJumps = 1;
     public int maxHealth = 100;
-    public int currentHealth;
+    public int currentHealth ;
 
     public HealthBar healthBar;
     public Transform groundCheck;
     private LayerMask whatIsGround;
     public GameOverScreen gameOverScreen;
     private PlayerCombat playerCombat;
-
+   
     private float horizontal;
 
     void Start()
@@ -58,17 +58,34 @@ public class PlayerController : MonoBehaviour
                 if (!isBlocking)
                 {
                     rb.velocity = new Vector2(horizontal * movementSpeed, rb.velocity.y);
+               
                 }
                 CheckIfCanJump();
                 UpdateAnimations();
                 CheckMovementDirection();
+               
             }
+        }
+    }
+
+    public void updateHealth(int value)
+    {
+        if((currentHealth + value ) <= maxHealth)
+        {
+            currentHealth += value;
+            healthBar.Set(currentHealth);
+        }
+        else
+        {
+            currentHealth = maxHealth;
+            healthBar.Set(maxHealth);
         }
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         horizontal = context.ReadValue<Vector2>().x;
+       
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -115,7 +132,9 @@ public class PlayerController : MonoBehaviour
     //checks if player is on the ground
     public bool IsGrounded()
     {
+    
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+
     }
 
     //checks if player can jump and if they have any more jumps left
@@ -162,6 +181,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isGrounded", IsGrounded());
         anim.SetFloat("yVelocity", rb.velocity.y);
         anim.SetBool("isBlocking", isBlocking);
+
     }
     //handles controller inputs for functions other than movement
     private void CheckInput()
@@ -258,6 +278,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        
         isDead = true;
         anim.SetBool("isWalking", false);
         rb.constraints = RigidbodyConstraints2D.FreezeAll;

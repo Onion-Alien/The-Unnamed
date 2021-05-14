@@ -25,7 +25,7 @@ public class PlayerCombat : MonoBehaviour
 
     public float stamina = 100f;
     public float maxStamina = 100f;
-    private float StaminaRegenTimer = 1f;
+    private float StaminaRegenTimer = 10f;
     private const float StaminaDecreasePerFrame = 1f;
     private const float StaminaIncreasePerFrame = 35;
     private const float StaminaTimeToRegen = 1f;
@@ -53,6 +53,7 @@ public class PlayerCombat : MonoBehaviour
     //calculates current stamina and how long until stamina can regen based on time
     private void StaminaUpdate()
     {
+        
         if (stamina < maxStamina)
         {
             if (StaminaRegenTimer >= StaminaTimeToRegen)
@@ -66,6 +67,22 @@ public class PlayerCombat : MonoBehaviour
             }
         }
     }
+
+    public void increaseStam(float value)
+    {
+        if ((stamina + value) <= maxStamina)
+        {
+            stamina += value;
+            stamBar.Set((int)stamina);
+        }
+        else
+        {
+            stamina = maxStamina;
+            stamBar.Set((int)maxStamina);
+        }
+    }
+
+    
 
     public IEnumerator UseStamina(float stamCost)
     {
@@ -130,6 +147,7 @@ public class PlayerCombat : MonoBehaviour
     //allows the player to move certain objects with a heavy attack
     private IEnumerator moveObject(string attack)
     {
+   
         Collider2D[] hitMovables = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, movableLayers);
 
         if (hitMovables.Length != 0)
