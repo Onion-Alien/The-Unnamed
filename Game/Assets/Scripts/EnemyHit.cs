@@ -16,6 +16,8 @@ public class EnemyHit : MonoBehaviour
     int currentHealth;
     public HealthBar healthBar;
     private Rigidbody2D rb;
+    public GameObject fragment1;
+    public GameObject fragment2;
 
    
 
@@ -74,6 +76,8 @@ public class EnemyHit : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetBool("isDead", true);
         coin.SetActive(true);
+        fragment1.SetActive(true);
+        fragment2.SetActive(true);
         Instantiate(coin, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         
         Destroy(gameObject);
