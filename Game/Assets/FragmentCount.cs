@@ -23,10 +23,10 @@ public class FragmentCount : MonoBehaviour
 
     void Start()
     {
-        rf1.text = "Red Fragment 1:" + redF1.ToString();
-        rf2.text = "Red Fragment 2:" + redF2.ToString();
-        gf1.text = "Green Fragment 1:" + GreenF1.ToString();
-        gf2.text = "Green Fragment 2:" + GreenF2.ToString();
+        rf1.text = "Red Fragment 1:  " + redF1.ToString();
+        rf2.text = "Red Fragment 2:  " + redF2.ToString();
+        gf1.text = "Green Fragment 1:  " + GreenF1.ToString();
+        gf2.text = "Green Fragment 2:  " + GreenF2.ToString();
     }
 
     // Update is called once per frame
