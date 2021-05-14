@@ -9,6 +9,7 @@ public class ShopKeeper : MonoBehaviour
     public GameObject player;
     public GameObject merchantText;
     public GameObject shopCanvas;
+    public Text merchantMessage;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -58,6 +59,7 @@ public class ShopKeeper : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.B))
             {
                 toggleShop();
+                ShopController.selectedButton = null;
             }
 
             if (!(player.transform.position.x < shopKeeper.transform.position.x + 2.0f && player.transform.position.x > shopKeeper.transform.position.x - 2.0f))
@@ -155,14 +157,21 @@ public class ShopKeeper : MonoBehaviour
             merchantText.SetActive(false);
             shopCanvas.SetActive(true);
             shopActive = true;
-            Time.timeScale = 0f;
         }
         else
         {
             shopCanvas.SetActive(false);
-            Time.timeScale = 1f;
             merchantText.SetActive(true);
             shopActive = false;
+            StartCoroutine(exitMessage());
         }
+    }
+
+    IEnumerator exitMessage()
+    {
+        string temp = merchantMessage.text;
+        merchantMessage.text = "Your business is appreciated, please stop by again soon.";
+        yield return new WaitForSeconds(5.0f);
+        merchantMessage.text = temp;
     }
 }

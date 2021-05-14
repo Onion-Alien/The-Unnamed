@@ -14,17 +14,17 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask enemyLayers;
     public LayerMask movableLayers;
 
-    public int DMG_light = 20;
-    public int DMG_medium = 30;
-    public int DMG_heavy = 40;
-    public float attackRange = 0.5f;
+    private static int DMG_light = 20;
+    private static int DMG_medium = 30;
+    private static int DMG_heavy = 40;
+    private float attackRange = 0.5f;
 
-    public float attackRate = 0.5f;
+    private static float attackRate = 0.5f;
     float nextAttackTime = 0f;
 
-    public float stamina = 100f;
-    public float maxStamina = 100f;
-    private float StaminaRegenTimer = 1f;
+    private float stamina = 100f;
+    private static float maxStamina = 100f;
+    private static float StaminaRegenTimer = 1f;
     private const float StaminaDecreasePerFrame = 1f;
     private const float StaminaIncreasePerFrame = 35;
     private const float StaminaTimeToRegen = 1f;
@@ -187,5 +187,47 @@ public class PlayerCombat : MonoBehaviour
             return;
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    public static void setDMG(int[] DMG)
+    {
+        DMG_light = DMG[0];
+        DMG_medium = DMG[1];
+        DMG_heavy = DMG[2];
+    }
+
+    public static void setAttackRate(float rate)
+    {
+        attackRate = rate;
+    }
+
+    public static void setStamina(float stamina)
+    {
+        maxStamina = stamina;
+    }
+
+    public static void setStaminaRegen(float stamRegen)
+    {
+        StaminaRegenTimer = stamRegen;
+    }
+
+    public static int[] getDMG()
+    {
+        return new int[3] { DMG_light, DMG_medium, DMG_heavy };
+    }
+
+    public static float getAttackRate()
+    {
+        return attackRate;
+    }
+
+    public static float getStamina()
+    {
+        return maxStamina;
+    }
+
+    public static float getStaminaRegen()
+    {
+        return StaminaRegenTimer ;
     }
 }

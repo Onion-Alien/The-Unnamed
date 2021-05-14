@@ -7,7 +7,7 @@ using UnityEngine;
  */
 
 public class PlayerController : MonoBehaviour
-{ 
+{
     private float movementInputDirection;
 
     private int amountOfJumpsLeft;
@@ -21,9 +21,9 @@ public class PlayerController : MonoBehaviour
     public bool isBlocking = false;
 
     private Rigidbody2D rb;
-    private Animator anim; 
+    private Animator anim;
 
-    public float movementSpeed = 10.0f;
+    public static float movementSpeed = 8.0f;
     public float jumpForce = 16.0f;
     public float groundCheckRadius;
 
@@ -69,22 +69,22 @@ public class PlayerController : MonoBehaviour
             ApplyMovement();
             CheckSurroundings();
         }
-    } 
+    }
     //checks if player is on the ground
     private void CheckSurroundings()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
-    
+
     //checks if player can jump and if they have any more jumps left
     private void CheckIfCanJump()
     {
-        if(isGrounded && rb.velocity.y <= 0)
+        if (isGrounded && rb.velocity.y <= 0)
         {
             amountOfJumpsLeft = amountOfJumps;
         }
-        
-        if(amountOfJumpsLeft <= 0)
+
+        if (amountOfJumpsLeft <= 0)
         {
             canJump = false;
         }
@@ -95,11 +95,11 @@ public class PlayerController : MonoBehaviour
     }
     private void CheckMovementDirection()
     {
-        if(isFacingRight && movementInputDirection < 0)
+        if (isFacingRight && movementInputDirection < 0)
         {
             Flip();
         }
-        else if(!isFacingRight && movementInputDirection > 0)
+        else if (!isFacingRight && movementInputDirection > 0)
         {
             Flip();
         }
@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
                 rb.constraints = RigidbodyConstraints2D.FreezePosition;
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 isFrozen = true;
-            
+
             }
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage, bool ignoreBlock)
     {
         if (!isDead)
-        { 
+        {
             if (isBlocking && !ignoreBlock)
             {
                 anim.SetTrigger("isBlock");
@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour
             {
                 anim.SetTrigger("isHit");
                 currentHealth -= damage;
-            }   
+            }
         }
         healthBar.Set(currentHealth);
         if (currentHealth <= 0)
@@ -236,5 +236,100 @@ public class PlayerController : MonoBehaviour
         gameOverScreen.Setup();
         gameOverScreenObject.SetActive(true);
         //handle death events here
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Powerup")
+        {
+            if (collision.name == "TripleJump")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(tripleJump());
+            }
+            else if(collision.name == "DoubleDamage")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(doubleDamage());
+            }
+            else if (collision.name == "DoubleHealth")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(doubleHealth());
+            }
+            else if (collision.name == "MoveSpeedBuff")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(movespeedBuff());
+            }
+            else if (collision.name == "StaminaBuff")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(doubleStamina());
+            }
+            else if (collision.name == "AttackSpeedBuff")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(attackSpeedBuff());
+            }
+        }
+    }
+
+    IEnumerator tripleJump()
+    {
+        HudScript.instance.activateJumpPowerup();
+        amountOfJumps = amountOfJumps + 1;
+        yield return new WaitForSeconds(5.0f);
+        amountOfJumps = amountOfJumps - 1;
+    }
+
+    IEnumerator doubleDamage()
+    {
+        HudScript.instance.activateDamage();
+        int[] temp = PlayerCombat.getDMG();
+        for (int i = 0; i <= 2; i++)
+        {
+            temp[i] = temp[i] * 2;
+        }
+        PlayerCombat.setDMG(temp);
+        yield return new WaitForSeconds(5.0f);
+        for (int i = 0; i <= 2; i++)
+        {
+            temp[i] = temp[i] / 2;
+        }
+        PlayerCombat.setDMG(temp);
+    }
+
+    IEnumerator doubleHealth()
+    {
+        HudScript.instance.activateHealthPowerup();
+        //Czn't find player hp variable (believe it doesn't exist on this variant for some reason)
+        yield return new WaitForSeconds(5.0f);
+    }
+
+    IEnumerator movespeedBuff()
+    {
+        HudScript.instance.activateMSpeed();
+        movementSpeed = movementSpeed * 1.5f;
+        yield return new WaitForSeconds(5.0f);
+        movementSpeed = movementSpeed / 1.5f;
+    }
+
+    IEnumerator doubleStamina()
+    {
+        HudScript.instance.activateStamina();
+        PlayerCombat.setStamina(PlayerCombat.getStamina() * 2);
+        PlayerCombat.setStaminaRegen(PlayerCombat.getStaminaRegen() * 2);
+        yield return new WaitForSeconds(5.0f);
+        PlayerCombat.setStamina(PlayerCombat.getStamina() / 2);
+        PlayerCombat.setStaminaRegen(PlayerCombat.getStaminaRegen() / 2);
+    }
+
+    IEnumerator attackSpeedBuff()
+    {
+        HudScript.instance.activateAtkSpeed();
+        PlayerCombat.setAttackRate(PlayerCombat.getAttackRate() * 2);
+        yield return new WaitForSeconds(5.0f);
+        PlayerCombat.setAttackRate(PlayerCombat.getAttackRate() / 2);
     }
 }

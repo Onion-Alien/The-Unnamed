@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class QuitMenu : MonoBehaviour
 {
     public GameObject canvas;
+    public GameObject button;
 
     private void Start()
     {
@@ -14,6 +15,7 @@ public class QuitMenu : MonoBehaviour
 
     public void activateCanvas()
     {
+        button.SetActive(false);
         canvas.SetActive(true);
     }
 
@@ -32,5 +34,6 @@ public class QuitMenu : MonoBehaviour
     public void goBack()
     {
         canvas.SetActive(false);
+        button.SetActive(true);
     }
 }
