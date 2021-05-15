@@ -8,11 +8,14 @@ public class CoinPickUp : MonoBehaviour
     public enum enemyType { GOBLIN, SKELETON, MUSHROOM, FLYINGEYE };
     public enemyType current;
 
-    
+    public float groundCheckRadius;
+    public Transform groundCheck;
+    private LayerMask whatIsGround;
 
-    void OnTriggerEnter2D (Collider2D other)
+
+    void OnCollisionEnter2D(Collision2D c)
     {
-        if(other.name == "Player")
+        if(c.gameObject.name == "Player")
         {
            
                 if (current == enemyType.GOBLIN)
@@ -39,5 +42,25 @@ public class CoinPickUp : MonoBehaviour
                
        
         }
+    }
+
+    private void Start()
+    {
+
+
+        whatIsGround = LayerMask.GetMask("Ground", "ignoreGround");
+
+    }
+
+    public bool IsGrounded()
+    {
+
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 }

@@ -79,7 +79,7 @@ public class EnemyHit : MonoBehaviour
         fragment1.SetActive(true);
         fragment2.SetActive(true);
         Instantiate(coin, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-        Instantiate(fragment1, new Vector2(transform.position.x + 1, transform.position.y), Quaternion.identity);
+        Instantiate(fragment1, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         Instantiate(fragment2, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
 
         Destroy(gameObject);

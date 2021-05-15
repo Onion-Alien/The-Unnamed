@@ -4,28 +4,43 @@ using UnityEngine;
 
 public class fragmentPickUp : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D other)
+    public GameObject g;
+    public float groundCheckRadius;
+    public Transform groundCheck;
+    private LayerMask whatIsGround;
+
+    void OnCollisionEnter2D(Collision2D c)
     {
        
-        if (other.name == "Player" && this.name == "RedFragment1")
+        if (c.gameObject.name == "Player")
+
         {
-            FragmentCount.fc.addRedF1(1);
+            
+            FragmentCount.fc.addFragment(1,g);
             Destroy(gameObject);
+
         }
-        else if (other.name == "Player" && this.name == "RedFragment2")
-        {
-            FragmentCount.fc.addRedF2(1);
-            Destroy(gameObject);
-        }
-        else if (other.name == "Player" && this.name == "GreenFragment1")
-        {
-            FragmentCount.fc.addGreenF1(1);
-            Destroy(gameObject);
-        }
-        else if (other.name == "Player" && this.name == "GreenFragment2")
-        {
-            FragmentCount.fc.addGreenF2(1);
-            Destroy(gameObject);
-        }
+        
+       
+    }
+
+    private void Start()
+    {
+        
+        
+        whatIsGround = LayerMask.GetMask("Ground", "ignoreGround");
+      
+    }
+
+    public bool IsGrounded()
+    {
+       
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+       
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 }
