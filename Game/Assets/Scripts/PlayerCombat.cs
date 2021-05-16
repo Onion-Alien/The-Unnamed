@@ -14,7 +14,7 @@ public class PlayerCombat : MonoBehaviour
     public Animator animator;
     public LayerMask enemyLayers;
     public LayerMask movableLayers;
-
+    public static PlayerCombat pcom;
     public int DMG_light = 20;
     public int DMG_medium = 30;
     public int DMG_heavy = 40;

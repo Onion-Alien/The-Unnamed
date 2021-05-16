@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private int amountOfJumpsLeft;
-
+    public static PlayerController pcon;
     private bool isFacingRight = true;
     private bool isWalking;
     public bool isGrounded;
@@ -68,9 +68,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void updateHealth(int value)
+    public void updateHealth(int value, GameObject item)
     {
-        if((currentHealth + value ) <= maxHealth)
+        if(item.name.Contains("RedPotion"))
+            {    if((currentHealth + value ) <= maxHealth)
         {
             currentHealth += value;
             healthBar.Set(currentHealth);
@@ -80,6 +81,9 @@ public class PlayerController : MonoBehaviour
             currentHealth = maxHealth;
             healthBar.Set(maxHealth);
         }
+
+        }
+    
     }
 
     public void Move(InputAction.CallbackContext context)
