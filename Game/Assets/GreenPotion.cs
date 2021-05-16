@@ -9,7 +9,7 @@ public class GreenPotion : MonoBehaviour
     {
         if (other.name == "Player")
         {
-            other.GetComponent<PlayerCombat>().increaseStam(15);
+            other.GetComponent<PlayerController>().updateHealth(15);
             Destroy(gameObject);
         }
     }

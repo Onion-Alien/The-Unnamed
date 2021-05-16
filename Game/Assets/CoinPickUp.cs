@@ -5,42 +5,20 @@ using UnityEngine;
 public class CoinPickUp : MonoBehaviour
 {
 
-    public enum enemyType { GOBLIN, SKELETON, MUSHROOM, FLYINGEYE };
-    public enemyType current;
+   /* public enum enemyType { GOBLIN, SKELETON, MUSHROOM, FLYINGEYE };
+    public enemyType current;*/
 
     public float groundCheckRadius;
     public Transform groundCheck;
     private LayerMask whatIsGround;
-
-
+    public int r1;
+    public int r2;
     void OnCollisionEnter2D(Collision2D c)
     {
         if(c.gameObject.name == "Player")
-        {
-           
-                if (current == enemyType.GOBLIN)
-                {
-                 GoldCount.gc.addGold(70);
-                 Destroy(gameObject);
-            }
-                else if (current == enemyType.MUSHROOM)
-                {
-                GoldCount.gc.addGold(80);
+        {     
+                GoldCount.gc.addGold(Random.Range(r1, r2));
                 Destroy(gameObject);
-            }
-                else if (current == enemyType.SKELETON)
-                {
-                GoldCount.gc.addGold(100);
-                Destroy(gameObject);
-            }
-                else if (current == enemyType.FLYINGEYE)
-                {
-                GoldCount.gc.addGold(50);
-                Destroy(gameObject);
-            }
-
-               
-       
         }
     }
 

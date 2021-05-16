@@ -16,11 +16,37 @@ public class EnemyHit : MonoBehaviour
     int currentHealth;
     public HealthBar healthBar;
     private Rigidbody2D rb;
-    public GameObject fragment1;
-    public GameObject fragment2;
+    public GameObject f1;
+    public GameObject f2;
+    public GameObject f3;
+    public GameObject f4;
 
-   
 
+     void drop(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                f1.SetActive(true);
+                Instantiate(f1, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                break;
+            case 2:
+                f2.SetActive(true);
+                Instantiate(f2, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                break;
+            case 3:
+                f3.SetActive(true);
+                Instantiate(f3, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                break;
+            case 4:
+                f4.SetActive(true);
+                Instantiate(f4, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                break;
+            default:
+                break;
+        }
+
+    }
     void Start()
     {
         currentHealth = maxHealth;
@@ -76,12 +102,9 @@ public class EnemyHit : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetBool("isDead", true);
         coin.SetActive(true);
-        fragment1.SetActive(true);
-        fragment2.SetActive(true);
+        drop(Random.Range(1, 4));
+        drop(Random.Range(1, 4));
         Instantiate(coin, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-        Instantiate(fragment1, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-        Instantiate(fragment2, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-
         Destroy(gameObject);
         
         
