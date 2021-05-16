@@ -19,6 +19,7 @@ public class FragmentCount : MonoBehaviour
     private void Awake()
     {
         fc = this;
+        
     }
 
     void Start()
