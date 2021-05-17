@@ -24,7 +24,8 @@ public class BOSS_Head : MonoBehaviour
     {
         Arm_Smasher,
         Arm_Spinner,
-        Idle
+        Idle,
+        Pause
     };
 
     private void Awake()
@@ -52,11 +53,7 @@ public class BOSS_Head : MonoBehaviour
                 case State.Idle:
                     Idle();
                     break;
-                case State.Arm_Smasher:
-                    StartCoroutine("Arm_Smasher");
-                    break;
-                case State.Arm_Spinner:
-                    StartCoroutine("Arm_Spinner");
+                case State.Pause:
                     break;
             }
             yield return 0;
@@ -73,17 +70,18 @@ public class BOSS_Head : MonoBehaviour
     {
         while (health >= 450)
         {
-            if (timer > 5f)
+            if (timer > 7f)
             {
-                StartCoroutine(Wait(0f, State.Arm_Spinner));
-                //StartCoroutine(Wait(0f, State.Arm_Smasher));
-                yield return new WaitForSeconds(2f);
-                StartCoroutine(Wait(0f, State.Arm_Smasher));
-                yield return new WaitForSeconds(2f);
-                StartCoroutine(Wait(0f, State.Arm_Smasher));
-                yield return new WaitForSeconds(5f);
-
+                _state = State.Pause;
+                arm_Spinner.doAttack1();
+                yield return new WaitForSeconds(8f);
+                arm_Smasher.doAttack1();
+                yield return new WaitForSeconds(3f);
+                arm_Smasher.doAttack1();
+                yield return new WaitForSeconds(3f);
+                arm_Smasher.doAttack1();
                 timer = 0;
+                _state = State.Idle;
             }
             yield return 0;
         }
@@ -92,23 +90,5 @@ public class BOSS_Head : MonoBehaviour
     private void Idle()
     {
         timer += 1 * Time.deltaTime;
-    }
-
-    private void Arm_Smasher()
-    {
-        if (!hasRunSmasher)
-        {
-            arm_Smasher._state = BOSS_Arm_Smasher.State.Seeking;
-            hasRunSmasher = true;
-        }
-    }
-
-    private void Arm_Spinner()
-    {
-        if (!hasRunSpinner)
-        {
-            arm_Spinner._state = BOSS_Arm_Spinner.State.Seeking;
-            hasRunSpinner = true;
-        }
     }
 }

@@ -12,12 +12,14 @@ public class BOSS_Arm_Smasher : MonoBehaviour
     private Vector3 trackingPos;
     public BOSS_Head head;
 
+    public bool Attack1Running;
+
     public State _state;
     public enum State
     {
-        Seeking,
+        Seek1,
         Idle,
-        Attacking,
+        Attack1,
         Pause
     };
 
@@ -36,16 +38,25 @@ public class BOSS_Arm_Smasher : MonoBehaviour
                 case State.Idle:
                     StartCoroutine("Idle");
                     break;
-                case State.Seeking:
-                    StartCoroutine("Seek");
+                case State.Seek1:
+                    StartCoroutine("Seek1");
                     break;
-                case State.Attacking:
-                    StartCoroutine("Attack");
+                case State.Attack1:
+                    StartCoroutine("Attack1");
                     break;
                 case State.Pause:
                     break;
             }
             yield return 0;
+        }
+    }
+
+    public void doAttack1()
+    {
+        if (!Attack1Running)
+        {
+            Attack1Running = true;
+            _state = State.Seek1;
         }
     }
 
@@ -61,7 +72,7 @@ public class BOSS_Arm_Smasher : MonoBehaviour
         }
     }
 
-    private void Seek()
+    private void Seek1()
     {
         foreach (SpriteRenderer x in GetComponentsInChildren<SpriteRenderer>())
         {
@@ -75,26 +86,25 @@ public class BOSS_Arm_Smasher : MonoBehaviour
         if (transform.position == trackingPos)
         {
             _state = State.Pause;
-            StartCoroutine(Wait(0.5f, State.Attacking));
-            attackPos = new Vector3(trackingPos.x, trackingPos.y - 5.3f);
+            StartCoroutine(Wait(0.5f, State.Attack1));
+            attackPos = new Vector3(trackingPos.x, trackingPos.y - 5.7f);
         }
     }
 
-    private void Attack()
+    private void Attack1()
     {
         if (transform.position != attackPos)
         {
-            transform.position = Vector2.MoveTowards(transform.position, attackPos, 100 * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, attackPos, 80 * Time.deltaTime);
         }
         if (transform.position == attackPos)
         {
-            StartCoroutine(Wait(0.2f, State.Idle));
-            head._state = BOSS_Head.State.Idle;
-            head.hasRunSmasher = false;
+            StartCoroutine(Wait(0.5f, State.Idle));
             foreach (SpriteRenderer x in GetComponentsInChildren<SpriteRenderer>())
             {
                 x.color = new Color(195, 195, 195);
             }
+            Attack1Running = false;
         }
     }
 

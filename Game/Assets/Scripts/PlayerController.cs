@@ -164,45 +164,6 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isBlocking", isBlocking);
     }
     //handles controller inputs for functions other than movement
-    private void CheckInput()
-    {
-
-        //if (Input.GetButtonDown("Jump"))
-        //{
-        //    Jump();
-        //}
-        //if (isGrounded)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.LeftShift))
-        //    {
-        //        if (playerCombat.stamina >= 20)
-        //        {
-        //            StartCoroutine(playerCombat.UseStamina(20f));
-        //            isBlocking = true;
-        //            rb.constraints = RigidbodyConstraints2D.FreezePosition;
-        //            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        //            isFrozen = true;
-        //        }
-        //    }
-        //    if (Input.GetKeyUp(KeyCode.LeftShift))
-        //    {
-        //        isBlocking = false;
-        //        rb.constraints = RigidbodyConstraints2D.None;
-        //        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        //        isFrozen = false;
-        //    }
-        //}
-    }
-
-    //private void Jump()
-    //{
-    //    if (canJump)
-    //    {
-    //        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-    //        amountOfJumpsLeft--;
-    //    }
-
-    //}
 
     private void Flip()
     {

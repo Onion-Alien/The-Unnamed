@@ -11,17 +11,23 @@ public class BOSS_Arm_Spinner : MonoBehaviour
     private Vector3 pos;
     public BOSS_Head head;
     private bool hasRun;
+    private bool Attack1Running;
+    public bool Attack2Running;
+    private bool Attack2Shoot;
 
     public GameObject spikes;
 
-    public State _state;
+    private State _state;
     public enum State
     {
-        Seeking,
         Idle,
-        Attacking,
+        Attack1,
+        Seek1,
+        Attack2,
+        Seek2,
         Pause
     };
+
     IEnumerator Start()
     {
         randomPos = idlePoint.position + (Vector3)Random.insideUnitCircle * 1;
@@ -39,10 +45,16 @@ public class BOSS_Arm_Spinner : MonoBehaviour
                 case State.Idle:
                     StartCoroutine("Idle");
                     break;
-                case State.Seeking:
-                    StartCoroutine("Seek");
+                case State.Seek1:
+                    StartCoroutine("Seek1");
                     break;
-                case State.Attacking:
+                case State.Attack1:
+                    StartCoroutine("Attack1");
+                    break;
+                case State.Seek2:
+                    StartCoroutine("Seek2");
+                    break;
+                case State.Attack2:
                     StartCoroutine("Attack2");
                     break;
                 case State.Pause:
@@ -52,7 +64,25 @@ public class BOSS_Arm_Spinner : MonoBehaviour
         }
     }
 
-    private void Seek()
+    public void doAttack1()
+    {
+        if (!Attack1Running)
+        {
+            Attack1Running = true;
+            _state = State.Seek1;
+        }
+    }
+
+    public void doAttack2()
+    {
+        if (!Attack2Running)
+        {
+            Attack2Running = true;
+            _state = State.Seek2;
+        }
+    }
+
+    private void Seek1()
     {
         foreach (SpriteRenderer x in GetComponentsInChildren<SpriteRenderer>())
         {
@@ -69,16 +99,28 @@ public class BOSS_Arm_Spinner : MonoBehaviour
         }
         if (transform.position == pos)
         {
-            _state = State.Pause;
-            StartCoroutine(Wait(0.5f, State.Attacking));
+            _state = State.Attack1;
         }
     }
 
-    private Vector3 getOpposite()
+    private void Seek2()
     {
-        return pos != left ? left : right;
+        foreach (SpriteRenderer x in GetComponentsInChildren<SpriteRenderer>())
+        {
+            x.color = Color.red;
+        }
+        pos = center;
+        if (transform.position != pos)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, center, 20f * Time.deltaTime);
+        }
+        if (transform.position == pos)
+        {
+            _state = State.Attack2;
+        }
     }
-    private void Attack()
+
+    private void Attack1()
     {
         if (transform.position != getOpposite())
         {
@@ -87,48 +129,50 @@ public class BOSS_Arm_Spinner : MonoBehaviour
         if (transform.position == getOpposite())
         {
             StartCoroutine(Wait(0.5f, State.Idle));
-            head._state = BOSS_Head.State.Idle;
-            head.hasRunSpinner = false;
             hasRun = false;
             foreach (SpriteRenderer x in GetComponentsInChildren<SpriteRenderer>())
             {
                 x.color = new Color(195f, 195f, 195f);
             }
+            Attack1Running = false;
         }
     }
 
     private void Attack2()
     {
-        pos = center;
-        if (transform.position != pos)
+        if (!Attack2Shoot)
         {
-            transform.position = Vector2.MoveTowards(transform.position, pos, 20 * Time.deltaTime);
-        }
-        if (transform.position == pos)
-        {
+            Attack2Shoot = true;
             StartCoroutine("Shoot");
-            StartCoroutine(Wait(3f, State.Idle));
-            head._state = BOSS_Head.State.Idle;
-            head.hasRunSpinner = false;
-            hasRun = false;
-            foreach (SpriteRenderer x in GetComponentsInChildren<SpriteRenderer>())
-            {
-                x.color = new Color(195f, 195f, 195f);
-            }
         }
+        foreach (SpriteRenderer x in GetComponentsInChildren<SpriteRenderer>())
+        {
+            x.color = new Color(195f, 195f, 195f);
+        }
+        StartCoroutine(Wait(5f, State.Idle));
+        Attack2Running = false;
+    }
+
+    private Vector3 getOpposite()
+    {
+        return pos != left ? left : right;
     }
 
     IEnumerator Shoot()
     {
         GameObject g = Instantiate(spikes, transform.position, transform.rotation);
-        g.AddComponent<Rigidbody2D>();
+        g.AddComponent<Rigidbody2D>(); 
         Rigidbody2D rb = g.GetComponent<Rigidbody2D>();
-        //rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.gravityScale = 0f;
         SpriteRenderer sr = g.GetComponent<SpriteRenderer>();
+        Spike spike = g.GetComponent<Spike>();
         sr.sortingLayerName = "Background";
         sr.sortingOrder = 5;
-        rb.AddForce(transform.up * 500f);
-        yield return new WaitForSeconds(1f);
+        sr.material.color = Color.red;
+        spike.Launch(700f, 1.5f);
+        yield return new WaitForSeconds(0.05f);
+        Attack2Shoot = false;
     }
 
     IEnumerator Wait(float i, State state)
@@ -137,10 +181,9 @@ public class BOSS_Arm_Spinner : MonoBehaviour
         _state = state;
     }
 
-
     void Update()
     {
-        if (_state == State.Attacking)
+        if (_state == State.Attack1)
         {
             transform.Rotate(0, 0, 1000 * Time.deltaTime);
         }
