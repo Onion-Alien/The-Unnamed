@@ -41,6 +41,7 @@ public class PlayerCombat : MonoBehaviour
     private void Start()
     {
         stamBar.SetMax(Mathf.RoundToInt(maxStamina));
+        stamBar.showHP((int)stamina, (int)maxStamina);
     }
 
     void Update()
@@ -60,11 +61,14 @@ public class PlayerCombat : MonoBehaviour
             {
                 stamina = Mathf.Clamp(stamina + (StaminaIncreasePerFrame * Time.deltaTime), 0.0f, maxStamina); //sets stamina based on delta time
                 stamBar.Set(Mathf.RoundToInt(stamina)); //rounds to int because hp bar needs floats
+               
             }
             else
             {
                 StaminaRegenTimer += Time.deltaTime;
+
             }
+            stamBar.showHP((int)stamina, (int)maxStamina);
         }
     }
 
@@ -74,12 +78,15 @@ public class PlayerCombat : MonoBehaviour
         {
             stamina += value;
             stamBar.Set((int)stamina);
+           
         }
         else
         {
             stamina = maxStamina;
             stamBar.Set((int)maxStamina);
+
         }
+        stamBar.showHP((int)stamina, (int)maxStamina);
     }
 
     
@@ -90,6 +97,7 @@ public class PlayerCombat : MonoBehaviour
         stamina -= stamCost;
         stamBar.Set(Mathf.RoundToInt(stamina));
         StaminaRegenTimer = 0.0f;
+        stamBar.showHP((int)stamina, (int)maxStamina);
     }
 
     public IEnumerator SetStamina(float stam)

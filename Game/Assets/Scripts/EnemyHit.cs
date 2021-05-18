@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 /**
  * This script will be used to play the hit animation
  * once the enemy is hit by the player
@@ -22,6 +23,9 @@ public class EnemyHit : MonoBehaviour
     public GameObject f4;
     public GameObject f5;
     public GameObject f6;
+    public GameObject showDamage;
+
+
 
 
     void drop(int i)
@@ -62,6 +66,7 @@ public class EnemyHit : MonoBehaviour
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         healthBar.SetMax(maxHealth);
+        healthBar.showHP(currentHealth, maxHealth);
     }
 
     private void Update()
@@ -84,15 +89,28 @@ public class EnemyHit : MonoBehaviour
         }
     }
 
+    void ShowDamage(string text)
+    {
+        if(showDamage)
+        {
+            GameObject prefab = Instantiate(showDamage, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
+            prefab.GetComponentInChildren<TextMesh>().text = text;
+        }
+    }
     public void TakeDamage(int damage)
     {
+        ShowDamage(damage.ToString());
         currentHealth -= damage;
         healthBar.Set(currentHealth);
+        healthBar.showHP(currentHealth, maxHealth);
+       
         // play the hit animation if the enemy is hit
 
         if (currentHealth > 0)
         {
             animator.SetTrigger("isHit");
+       
+            
         }
 
         //Play the dead animation if the current health equals to or less than 0
@@ -101,6 +119,7 @@ public class EnemyHit : MonoBehaviour
             Die();
             
         }
+        Destroy(showDamage);
     }
 
     

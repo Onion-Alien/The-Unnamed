@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private LayerMask whatIsGround;
     public GameOverScreen gameOverScreen;
     private PlayerCombat playerCombat;
-   
+    public GameObject showDamage;
     private float horizontal;
 
     void Start()
@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
         healthBar.SetMax(maxHealth);
         amountOfJumpsLeft = amountOfJumps;
         whatIsGround = LayerMask.GetMask("Ground", "ignoreGround");
+        healthBar.showHP(currentHealth, maxHealth);
 
     }
 
@@ -242,8 +243,18 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 
+    void ShowDamage(string text)
+    {
+        if (showDamage)
+        {
+            GameObject prefab = Instantiate(showDamage, new Vector2(transform.position.x, transform.position.y + 3), Quaternion.identity);
+            prefab.GetComponentInChildren<TextMesh>().text = text;
+        }
+    }
+
     public void TakeDamage(int damage, bool ignoreBlock)
     {
+        ShowDamage(damage.ToString());
         if (!isDead)
         {
             if (isBlocking && !ignoreBlock)
@@ -258,6 +269,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         healthBar.Set(currentHealth);
+        healthBar.showHP(currentHealth, maxHealth);
         if (currentHealth <= 0)
         {
             Die();
