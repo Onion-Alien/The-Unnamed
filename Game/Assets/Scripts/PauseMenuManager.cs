@@ -12,6 +12,7 @@ public class PauseMenuManager : MonoBehaviour
     public GameObject selectionImage;
     public float highlightMoveAmount = 0.88f;
     public int state;
+    public GameObject exitMenu;
 
     void Start()
     {
@@ -51,6 +52,7 @@ public class PauseMenuManager : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
+        exitMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }

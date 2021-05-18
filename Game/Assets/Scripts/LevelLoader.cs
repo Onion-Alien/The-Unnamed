@@ -6,10 +6,15 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public GameObject player;
+    public Animator animator;
+    public float transitionTime = 1f;
 
     public void Start()
     {
-        playerSpawn();
+        if (SceneManager.GetActiveScene().buildIndex > 0)
+        {
+            playerSpawn();
+        }
     }
 
     public void playerRespawn()
@@ -20,13 +25,13 @@ public class LevelLoader : MonoBehaviour
 
     public void loadNextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(LoadNextLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
     public void exitToMain()
     {
         SaveManager.instance.Save();
-        SceneManager.LoadScene("MainMenu");
+        StartCoroutine(goToMain());
     }
 
     public void quitGame()
@@ -44,6 +49,44 @@ public class LevelLoader : MonoBehaviour
         else
         {
             player.transform.position = new Vector3(-52.8f, 82.0f, 0.0f);
+        }
+    }
+
+    IEnumerator LoadNextLevel(int index)
+    {
+        animator.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+
+        SceneManager.LoadScene(index);
+    }
+
+    IEnumerator LoadNextLevelString(string level)
+    {
+        animator.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(level);
+    }
+
+    IEnumerator goToMain()
+    {
+        animator.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1.0f);
+      
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void loadFromMain()
+    {
+        if (SaveManager.instance.checkSaveExist())
+        {
+            SaveManager.instance.Load();
+            StartCoroutine(LoadNextLevelString(SaveManager.instance.getCurrentLevel()));
+
         }
     }
 }

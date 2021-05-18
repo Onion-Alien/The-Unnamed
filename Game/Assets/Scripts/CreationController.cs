@@ -25,13 +25,6 @@ public class CreationController : MonoBehaviour
         inputField.Select();
     }
 
-    //transitions the scene to the first level
-
-    public void enterGame()
-    {
-        SceneManager.LoadScene("Bailey WIP");
-    }
-
     //Creates character, saves name and current level to disc using SaveManager class which doesn't destroy upon changing scenes
 
     public void createCharacter()
@@ -44,7 +37,6 @@ public class CreationController : MonoBehaviour
             SaveManager.instance.saveName(userName);
             SaveManager.instance.savePlayerPosition(0.0f, 0.0f);
             SaveManager.instance.Save();
-            enterGame();
         }
     }
 }

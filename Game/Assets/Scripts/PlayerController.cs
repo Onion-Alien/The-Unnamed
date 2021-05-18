@@ -242,32 +242,32 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "Powerup")
         {
-            if (collision.name == "TripleJump")
+            if (collision.name == "JumpPowerup")
             {
                 Destroy(collision.gameObject);
                 StartCoroutine(tripleJump());
             }
-            else if(collision.name == "DoubleDamage")
+            else if(collision.name == "DamagePowerup")
             {
                 Destroy(collision.gameObject);
                 StartCoroutine(doubleDamage());
             }
-            else if (collision.name == "DoubleHealth")
+            else if (collision.name == "HealthPowerup")
             {
                 Destroy(collision.gameObject);
                 StartCoroutine(doubleHealth());
             }
-            else if (collision.name == "MoveSpeedBuff")
+            else if (collision.name == "MoveSpeedPowerup")
             {
                 Destroy(collision.gameObject);
                 StartCoroutine(movespeedBuff());
             }
-            else if (collision.name == "StaminaBuff")
+            else if (collision.name == "StaminaPowerup")
             {
                 Destroy(collision.gameObject);
                 StartCoroutine(doubleStamina());
             }
-            else if (collision.name == "AttackSpeedBuff")
+            else if (collision.name == "AtkSpeedPowerup")
             {
                 Destroy(collision.gameObject);
                 StartCoroutine(attackSpeedBuff());
@@ -279,7 +279,7 @@ public class PlayerController : MonoBehaviour
     {
         HudScript.instance.activateJumpPowerup();
         amountOfJumps = amountOfJumps + 1;
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(10.0f);
         amountOfJumps = amountOfJumps - 1;
     }
 
@@ -292,7 +292,7 @@ public class PlayerController : MonoBehaviour
             temp[i] = temp[i] * 2;
         }
         PlayerCombat.setDMG(temp);
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(10.0f);
         for (int i = 0; i <= 2; i++)
         {
             temp[i] = temp[i] / 2;
@@ -311,7 +311,7 @@ public class PlayerController : MonoBehaviour
     {
         HudScript.instance.activateMSpeed();
         movementSpeed = movementSpeed * 1.5f;
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(10.0f);
         movementSpeed = movementSpeed / 1.5f;
     }
 
@@ -320,7 +320,7 @@ public class PlayerController : MonoBehaviour
         HudScript.instance.activateStamina();
         PlayerCombat.setStamina(PlayerCombat.getStamina() * 2);
         PlayerCombat.setStaminaRegen(PlayerCombat.getStaminaRegen() * 2);
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(10.0f);
         PlayerCombat.setStamina(PlayerCombat.getStamina() / 2);
         PlayerCombat.setStaminaRegen(PlayerCombat.getStaminaRegen() / 2);
     }
@@ -329,7 +329,7 @@ public class PlayerController : MonoBehaviour
     {
         HudScript.instance.activateAtkSpeed();
         PlayerCombat.setAttackRate(PlayerCombat.getAttackRate() * 2);
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(10.0f);
         PlayerCombat.setAttackRate(PlayerCombat.getAttackRate() / 2);
     }
 }
