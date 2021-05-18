@@ -30,7 +30,7 @@ public class HudScript : MonoBehaviour
     IEnumerator damage()
     {
         damagePowerup.SetActive(true);
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(10.0f);
         damagePowerup.SetActive(false);
     }
 
@@ -42,7 +42,7 @@ public class HudScript : MonoBehaviour
     IEnumerator stamina()
     {
         staminaPowerup.SetActive(true);
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(10.0f);
         staminaPowerup.SetActive(false);
     }
 
@@ -54,7 +54,7 @@ public class HudScript : MonoBehaviour
     IEnumerator atkSpeed()
     {
         atkSpeedPowerup.SetActive(true);
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(10.0f);
         atkSpeedPowerup.SetActive(false);
     }
 
@@ -66,7 +66,7 @@ public class HudScript : MonoBehaviour
     IEnumerator mSpeed()
     {
         mSpeedPowerup.SetActive(true);
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(10.0f);
         mSpeedPowerup.SetActive(false);
     }
 
@@ -78,7 +78,7 @@ public class HudScript : MonoBehaviour
     IEnumerator jump()
     {
         jumpPowerup.SetActive(true);
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(10.0f);
         jumpPowerup.SetActive(false);
     }
 
@@ -90,7 +90,7 @@ public class HudScript : MonoBehaviour
     IEnumerator health()
     {
         healthPowerup.SetActive(true);
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(10.0f);
         healthPowerup.SetActive(false);
     }
 }

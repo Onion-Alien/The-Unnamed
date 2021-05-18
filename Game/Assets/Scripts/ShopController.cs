@@ -57,8 +57,6 @@ public class ShopController : MonoBehaviour
             
         if (selectedButton != null && (selectedButton.name != "Return" || selectedButton.name != "Purchase" || selectedButton.name != "purchaseTab" || selectedButton.name != "sellTab" || selectedButton.name != "Addgold") && buttonSelected)
         {
-            Debug.Log("selectedbutton = " + selectedButton);
-
             switch (selectedButton.name)
             {
                 case ("UpgradeHealth"):

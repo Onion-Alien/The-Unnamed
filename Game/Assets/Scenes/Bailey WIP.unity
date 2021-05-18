@@ -2020,6 +2020,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6058398750116585379, guid: fbf175fcc7250454e97bb9dbbb199e0f,
+        type: 3}
+      propertyPath: m_Text
+      value: Double Damage (10s)
+      objectReference: {fileID: 0}
     - target: {fileID: 6058398750444010940, guid: fbf175fcc7250454e97bb9dbbb199e0f,
         type: 3}
       propertyPath: m_Name
@@ -2129,6 +2134,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058398750457750290, guid: fbf175fcc7250454e97bb9dbbb199e0f,
+        type: 3}
+      propertyPath: m_Text
+      value: Triple Jump (10s)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058398751525245315, guid: fbf175fcc7250454e97bb9dbbb199e0f,
+        type: 3}
+      propertyPath: m_Text
+      value: Health Buff (10s)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058398751549560096, guid: fbf175fcc7250454e97bb9dbbb199e0f,
+        type: 3}
+      propertyPath: m_Text
+      value: Movespeed Buff (10s)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058398751894629495, guid: fbf175fcc7250454e97bb9dbbb199e0f,
+        type: 3}
+      propertyPath: m_Text
+      value: Stamina Buff (10s)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbf175fcc7250454e97bb9dbbb199e0f, type: 3}
