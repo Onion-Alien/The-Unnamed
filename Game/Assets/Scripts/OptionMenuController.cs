@@ -15,7 +15,6 @@ public class OptionMenuController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("PlayerPrefs.GetInt(fullscreen) = " + PlayerPrefs.GetInt("fullscreen"));
         resolution = -2;
         if (PlayerPrefs.GetInt("fullscreen") == 1)
         {
@@ -33,10 +32,6 @@ public class OptionMenuController : MonoBehaviour
 
         }
         fsTogglePressed = false;
-    }
-
-    void Update()
-    {
     }
 
     public void getResolution(int val)

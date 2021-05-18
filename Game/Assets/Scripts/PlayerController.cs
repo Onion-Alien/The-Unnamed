@@ -1,6 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/*
+ * This script controls the player controller
+ */
 
 public class PlayerController : MonoBehaviour
 { 
@@ -10,8 +14,11 @@ public class PlayerController : MonoBehaviour
 
     private bool isFacingRight = true;
     private bool isWalking;
-    private bool isGrounded;
+    public bool isGrounded;
     private bool canJump;
+    public bool isDead = false;
+    public bool isFrozen = false;
+    public bool isBlocking = false;
 
     private Rigidbody2D rb;
     private Animator anim; 
@@ -25,43 +32,51 @@ public class PlayerController : MonoBehaviour
     public int currentHealth;
 
     public HealthBar healthBar;
-
     public Transform groundCheck;
-
     public LayerMask whatIsGround;
+    private PlayerCombat playerCombat;
+    public GameOverScreen gameOverScreen;
+    public GameObject gameOverScreenObject;
 
-    // Start is called before the first frame update
     void Start()
     {
+        gameOverScreenObject.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMax(maxHealth);
         amountOfJumpsLeft = amountOfJumps;
+        playerCombat = GetComponent<PlayerCombat>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!PauseMenuManager.isPaused)
         {
-            CheckInput();
-            CheckMovementDirection();
-            UpdateAnimations();
-            CheckIfCanJump();
+            if (!isDead)
+            {
+                CheckInput();
+                CheckMovementDirection();
+                CheckIfCanJump();
+                UpdateAnimations();
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        ApplyMovement();
-        CheckSurroundings();
+        if (!isDead)
+        {
+            ApplyMovement();
+            CheckSurroundings();
+        }
     } 
-
+    //checks if player is on the ground
     private void CheckSurroundings()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
-
+    
+    //checks if player can jump and if they have any more jumps left
     private void CheckIfCanJump()
     {
         if(isGrounded && rb.velocity.y <= 0)
@@ -104,15 +119,40 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isWalking", isWalking);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelocity", rb.velocity.y);
+        anim.SetBool("isBlocking", isBlocking);
     }
-
+    //handles controller inputs for functions other than movement
     private void CheckInput()
     {
         movementInputDirection = Input.GetAxisRaw("Horizontal");
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Die();
+        }
+
 
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
+        }
+        if (isGrounded)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                StartCoroutine(playerCombat.UseStamina(20f));
+                isBlocking = true;
+                rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                isFrozen = true;
+            
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                isBlocking = false;
+                rb.constraints = RigidbodyConstraints2D.None;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                isFrozen = false;
+            }
         }
     }
 
@@ -128,17 +168,73 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyMovement()
     {
-        rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
+        if (!isBlocking)
+        {
+            rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
+        }
     }
 
     private void Flip()
     {
-        isFacingRight = !isFacingRight;
-        transform.Rotate(0.0f, 180.0f, 0.0f);
+        if (!isFrozen)
+        {
+            isFacingRight = !isFacingRight;
+            transform.Rotate(0.0f, 180.0f, 0.0f);
+        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
+
+    public void TakeDamage(int damage, bool ignoreBlock)
+    {
+        if (!isDead)
+        { 
+            if (isBlocking && !ignoreBlock)
+            {
+                anim.SetTrigger("isBlock");
+                currentHealth -= (int)(damage * 0.1);
+            }
+            else
+            {
+                anim.SetTrigger("isHit");
+                currentHealth -= damage;
+            }   
+        }
+        healthBar.Set(currentHealth);
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    //Freezes the player, used for after attacks so you can't move and spam attacks
+    public void Freeze()
+    {
+        StartCoroutine("freezeTime");
+    }
+
+    private IEnumerator freezeTime()
+    {
+        isFrozen = true;
+        rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        yield return new WaitForSeconds(0.5f);
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        isFrozen = false;
+
+    }
+
+    private void Die()
+    {
+        isDead = true;
+        anim.SetBool("isWalking", false);
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        anim.SetBool("isDead", true);
+
+        gameOverScreen.Setup();
+        gameOverScreenObject.SetActive(true);
+        //handle death events here
     }
 }
