@@ -73,7 +73,7 @@ public class BOSS_Head : MonoBehaviour
             if (timer > 7f)
             {
                 _state = State.Pause;
-                arm_Spinner.doAttack1();
+                arm_Spinner.doAttack2();
                 yield return new WaitForSeconds(8f);
                 arm_Smasher.doAttack1();
                 yield return new WaitForSeconds(3f);
