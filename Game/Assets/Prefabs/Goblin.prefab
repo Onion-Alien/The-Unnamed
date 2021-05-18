@@ -419,8 +419,12 @@ MonoBehaviour:
   coin: {fileID: 7911630415059488806}
   maxHealth: 100
   healthBar: {fileID: 1080123812316048876}
-  fragment1: {fileID: 2138364455083868966}
-  fragment2: {fileID: 7165923514446650269}
+  f1: {fileID: 7603758587159701305, guid: d1b40958190bb4e5e84bc794e89bd989, type: 3}
+  f2: {fileID: 3317185029966772908, guid: e54fc5e2b22ee4d85abf94616edbfe3a, type: 3}
+  f3: {fileID: 8523407312971131456, guid: abbdd3a1a2a6c4c018a5410c1c62d7e9, type: 3}
+  f4: {fileID: 1478204507626025123, guid: f8a2ec2544d45477bb299683d8451f3f, type: 3}
+  f5: {fileID: 3297244923704224227, guid: 9def2d1992e3e4ccb9a48a7969831a8f, type: 3}
+  f6: {fileID: 8821142972860897296, guid: 8fa5f11a8d824419285e27a6e1ca4769, type: 3}
 --- !u!114 &58258480
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,9 +20,11 @@ public class EnemyHit : MonoBehaviour
     public GameObject f2;
     public GameObject f3;
     public GameObject f4;
+    public GameObject f5;
+    public GameObject f6;
 
 
-     void drop(int i)
+    void drop(int i)
     {
         switch (i)
         {
@@ -41,6 +43,14 @@ public class EnemyHit : MonoBehaviour
             case 4:
                 f4.SetActive(true);
                 Instantiate(f4, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                break;
+            case 5:
+                f5.SetActive(true);
+                Instantiate(f5, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                break;
+            case 6:
+                f4.SetActive(true);
+                Instantiate(f6, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
                 break;
             default:
                 break;
@@ -102,8 +112,8 @@ public class EnemyHit : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetBool("isDead", true);
         coin.SetActive(true);
-        drop(Random.Range(1, 4));
-        drop(Random.Range(1, 4));
+        drop(Random.Range(1, 6));
+        drop(Random.Range(1, 6));
         Instantiate(coin, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         Destroy(gameObject);
         

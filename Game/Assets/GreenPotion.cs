@@ -13,7 +13,8 @@ public class GreenPotion : MonoBehaviour
     {
         if (c.gameObject.name == "Player")
         {
-            PlayerCombat.pcom.increaseStam(15);
+            c.gameObject.GetComponent<PlayerCombat>().increaseStam(15);
+         
             Destroy(gameObject);
         }
     }

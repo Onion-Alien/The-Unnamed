@@ -13,7 +13,8 @@ public class RedPotion : MonoBehaviour
     {
         if (c.gameObject.name == "Player")
         {
-            PlayerController.pcon.updateHealth(25,g);
+
+            c.gameObject.GetComponent<PlayerController>().updateHealth(25,g);
             Destroy(gameObject);
         }
     }
@@ -23,6 +24,7 @@ public class RedPotion : MonoBehaviour
 
 
         whatIsGround = LayerMask.GetMask("Ground", "ignoreGround");
+        
 
     }
 
