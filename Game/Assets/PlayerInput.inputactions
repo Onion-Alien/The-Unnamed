@@ -30,14 +30,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Attack_Medium",
-                    "type": "Button",
-                    "id": "83c81ef0-5364-43b6-8ef9-be8714754de1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Attack_Heavy",
                     "type": "Button",
                     "id": "2e1284a7-7878-4c90-ae68-9c30dbb095f0",
@@ -162,28 +154,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Attack_Light",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "248f4bc0-d38e-4da5-9283-6043cfa015d3",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack_Medium",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "498edf4f-6e8a-4f67-b959-785d224ceaa9",
-                    "path": "<Keyboard>/k",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack_Medium",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

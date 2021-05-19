@@ -16,7 +16,6 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask movableLayers;
 
     public int DMG_light = 20;
-    public int DMG_medium = 30;
     public int DMG_heavy = 40;
     public float attackRange = 0.5f;
 
@@ -86,7 +85,7 @@ public class PlayerCombat : MonoBehaviour
     //player light attack
     public void Light(InputAction.CallbackContext context)
     {
-        if (pc.IsGrounded() && Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
+        if (Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
         {
             animator.SetTrigger("ATK_Light");
 
@@ -100,23 +99,11 @@ public class PlayerCombat : MonoBehaviour
             nextAttackTime = Time.time + 0.5f / attackRate;
         }
     }
-    //player medium attack
-    public void Medium(InputAction.CallbackContext context)
-    {
-        if (pc.IsGrounded() && Time.time >= nextAttackTime && stamina >= 20 && !pc.isBlocking)
-        {
-            animator.SetTrigger("ATK_Medium");
-            StartCoroutine(Damage(DMG_medium));
-            StartCoroutine(moveObject("ATK_Medium"));
-            StartCoroutine(UseStamina(20f));
-            pc.Freeze();
-            nextAttackTime = Time.time + 0.5f / attackRate;
-        }
-    }
+
     //player heavy attack which also is enabled to move certain objects
     public void Heavy(InputAction.CallbackContext context)
     {
-        if (pc.IsGrounded() && Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
+        if (Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
         {
             animator.SetTrigger("ATK_Heavy");
             StartCoroutine(Damage(DMG_heavy));
@@ -169,7 +156,23 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyHit>().TakeDamage(dmg);
+            if (enemy.GetComponent<BOSS_Arm_Smasher>())
+            {
+                enemy.GetComponent<BOSS_Arm_Smasher>().TakeDamage(dmg);
+                foreach (SpriteRenderer x in enemy.GetComponentsInChildren<SpriteRenderer>())
+                {
+                    x.GetComponent<SpriteRenderer>().color = Color.red;
+                }
+                yield return new WaitForSeconds(0.1f);
+                foreach (SpriteRenderer x in enemy.GetComponentsInChildren<SpriteRenderer>())
+                {
+                    x.GetComponent<SpriteRenderer>().color = Color.green;
+                }
+            }
+            else
+            {
+                enemy.GetComponent<EnemyHit>().TakeDamage(dmg);
+            }
             enemy.GetComponent<Rigidbody2D>().AddForce(transform.up * Random.Range(200f, 500f));
             enemy.GetComponent<Rigidbody2D>().AddForce(transform.right * Random.Range(200f, 500f));
         }

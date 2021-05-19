@@ -171,7 +171,7 @@ public class BOSS_Arm_Spinner : MonoBehaviour
         sr.sortingOrder = 5;
         sr.material.color = Color.red;
         spike.Launch(700f, 2f);
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(Random.Range(0.05f, 0.1f));
         Attack2Shoot = false;
     }
 

@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canJump)
         {
+            GetComponent<Animator>().SetTrigger("isJumping");
             if (context.performed)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
