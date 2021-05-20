@@ -8,6 +8,7 @@ public class MoveName : MonoBehaviour
     public Transform objectToFollow;
     public Text nametag;
     public Vector3 offset;
+    public bool isPlayer;
 
     public float nameToggle;
 
@@ -49,7 +50,7 @@ public class MoveName : MonoBehaviour
     //Get name string from SaveManager object
     public void getName()
     {
-        if (SaveManager.instance.getName() != null)
+        if (SaveManager.instance.getName() != "temp")
         {
             nametag.text = SaveManager.instance.getName();
         }

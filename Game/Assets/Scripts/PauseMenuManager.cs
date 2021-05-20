@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PauseMenuManager : MonoBehaviour
@@ -8,18 +9,22 @@ public class PauseMenuManager : MonoBehaviour
     public GameObject pauseMenu;
     public static bool isPaused;
     public bool optionOpen = false;
+    public GameObject selectionImage;
+    public float highlightMoveAmount = 0.88f;
+    public int state;
+    public GameObject exitMenu;
 
     void Start()
     {
+        state = 0;
         pauseMenu.SetActive(false);
     }
 
     //Controls for pausing the game, checks if options menu is current open, if so does not unpause
     void Update()
-    {
-
-        if (!OptionController.instance.isActiveAndEnabled)
-        {
+    { 
+        //if (!OptionController.instance.isActiveAndEnabled)
+        //{
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (isPaused && !optionOpen)
@@ -31,9 +36,8 @@ public class PauseMenuManager : MonoBehaviour
                     PauseGame();
                 }
             }
-        }
+        //}
     }
-
 
     //Pauses the game, freezes time, sets isPaused to true for other methods
     public void PauseGame()
@@ -48,6 +52,7 @@ public class PauseMenuManager : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
+        exitMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
@@ -64,5 +69,72 @@ public class PauseMenuManager : MonoBehaviour
         //Note only works on built project, not with editor
         SaveManager.instance.Save();
         Application.Quit();
+    }
+
+    void highLightMove(int moveTo)
+    {
+        if (state == 0)
+        {
+            if (moveTo == 1)
+            {
+                selectionImage.transform.Translate(new Vector3(0, -highlightMoveAmount, 0));
+            }
+            else if (moveTo == 2)
+            {
+                selectionImage.transform.Translate(new Vector3(0, -(highlightMoveAmount * 2), 0));
+            }
+            else if (moveTo == 3)
+            {
+                selectionImage.transform.Translate(new Vector3(0, -(highlightMoveAmount * 3), 0));
+            }
+            state = moveTo;
+        }
+        if (state == 1)
+        {
+            if (moveTo == 0)
+            {
+                selectionImage.transform.Translate(new Vector3(0, highlightMoveAmount, 0));
+            }
+            else if (moveTo == 2)
+            {
+                selectionImage.transform.Translate(new Vector3(0, -highlightMoveAmount, 0));
+            }
+            else if (moveTo == 3)
+            {
+                selectionImage.transform.Translate(new Vector3(0, -highlightMoveAmount * 2, 0));
+            }
+            state = moveTo;
+        }
+        if (state == 2)
+        {
+            if (moveTo == 0)
+            {
+                selectionImage.transform.Translate(new Vector3(0, highlightMoveAmount * 2, 0));
+            }
+            else if (moveTo == 1)
+            {
+                selectionImage.transform.Translate(new Vector3(0, highlightMoveAmount, 0));
+            }
+            else if (moveTo == 3)
+            {
+                selectionImage.transform.Translate(new Vector3(0, -highlightMoveAmount, 0));
+            }
+            state = moveTo;
+        }
+    }
+
+    public void moveResume()
+    {
+        highLightMove(0);
+    }
+
+    public void moveOptions()
+    {
+        highLightMove(1);
+    }
+
+    public void moveQuit()
+    {
+        highLightMove(2);
     }
 }

@@ -31,7 +31,10 @@ public class OptionController : MonoBehaviour
     //Creates an instance of this object that doesn't get destroyed upon changing scenes.
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
         DontDestroyOnLoad(gameObject);
     }
 

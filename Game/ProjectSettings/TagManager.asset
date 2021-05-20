@@ -3,13 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Start
-  - Stop
-  - Movable
-  - Enemy
-  - Ground
-  - Checkpoint
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -17,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - Enemies
-  - Player
-  - Ground
-  - Walls
-  - Movable
-  - ignoreGround
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -46,16 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Background
-    uniqueID: 3313374289
-    locked: 0
-  - name: Platforms
-    uniqueID: 3029356641
-    locked: 0
-  - name: UI
-    uniqueID: 413841657
-    locked: 0
-  - name: Player
-    uniqueID: 2200550901
     locked: 0
