@@ -29,7 +29,7 @@ public class Spike : MonoBehaviour
             {
                 if (col.CompareTag("Player"))
                 {
-                    col.GetComponent<PlayerController>().TakeDamage(spikeDmg, true);
+                    col.GetComponent<PlayerControllerBaileyVersion>().TakeDamage(spikeDmg, true);
                 }
             }
             yield return new WaitForSeconds(1f);

@@ -14,7 +14,7 @@ public class InstantKillSpikes : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerController>().TakeDamage(100, true);
+            collision.GetComponent<PlayerControllerBaileyVersion>().TakeDamage(100, true);
         }
     }
 }

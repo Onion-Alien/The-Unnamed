@@ -22,7 +22,7 @@ public class EnemyAttack : MonoBehaviour
 		Collider2D colInfo = Physics2D.OverlapCircle(attackPoint.position, attackRange, attackMask);
 		if (colInfo != null)
 		{
-			colInfo.GetComponent<PlayerController>().TakeDamage(attackDamage, false);
+			colInfo.GetComponent<PlayerControllerBaileyVersion>().TakeDamage(attackDamage, false);
 		}
 	}
 

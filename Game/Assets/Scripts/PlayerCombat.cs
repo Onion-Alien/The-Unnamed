@@ -31,11 +31,11 @@ public class PlayerCombat : MonoBehaviour
     private const float StaminaTimeToRegen = 1f;
     public HealthBar stamBar;
 
-    private PlayerController pc;
+    private PlayerControllerBaileyVersion pc;
 
     private void Awake()
     {
-        pc = GetComponent<PlayerController>();
+        pc = GetComponent<PlayerControllerBaileyVersion>();
     }
 
     private void Start()
@@ -86,7 +86,7 @@ public class PlayerCombat : MonoBehaviour
     //player light attack
     public void Light(InputAction.CallbackContext context)
     {
-        if (pc.IsGrounded() && Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
+        if (pc.isGrounded && Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
         {
             animator.SetTrigger("ATK_Light");
 
@@ -103,7 +103,7 @@ public class PlayerCombat : MonoBehaviour
     //player medium attack
     public void Medium(InputAction.CallbackContext context)
     {
-        if (pc.IsGrounded() && Time.time >= nextAttackTime && stamina >= 20 && !pc.isBlocking)
+        if (pc.isGrounded && Time.time >= nextAttackTime && stamina >= 20 && !pc.isBlocking)
         {
             animator.SetTrigger("ATK_Medium");
             StartCoroutine(Damage(DMG_medium));
@@ -116,7 +116,7 @@ public class PlayerCombat : MonoBehaviour
     //player heavy attack which also is enabled to move certain objects
     public void Heavy(InputAction.CallbackContext context)
     {
-        if (pc.IsGrounded() && Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
+        if (pc.isGrounded && Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
         {
             animator.SetTrigger("ATK_Heavy");
             StartCoroutine(Damage(DMG_heavy));

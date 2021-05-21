@@ -62,7 +62,8 @@ public class MainMenuController : MonoBehaviour
             {
                 if (SaveManager.instance.checkSaveExist())
                 {
-                newGame.interactable = false;options.interactable = false;exit.interactable = false;
+                //   newGame. = false;options.interactable = false;exit.interactable = false;
+                newGame.enabled = false;
                 }
             }
             else if (n == 2)

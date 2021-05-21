@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class ShopController : MonoBehaviour
 {
@@ -21,7 +21,7 @@ public class ShopController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        originalButtonColor = buyButtonObj.colors.normalColor;
+     //   originalButtonColor = buyButtonObj.colors.normalColor;
         modifiedColor = Color.white;
         modifiedColor.a = 0.5f;
         playerRB = player.GetComponent<Rigidbody2D>();
@@ -100,7 +100,7 @@ public class ShopController : MonoBehaviour
                     itemName = "UpgradeRunSpeed";
                     if (boughtItem == "UpgradeRunSpeed")
                     {
-                        PlayerController.movementSpeed += 0.5f;
+                        PlayerControllerBaileyVersion.movementSpeed += 0.5f;
                     }
                     break;
                 case ("HealthPotButton"):

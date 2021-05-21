@@ -73,6 +73,7 @@ public class OptionController : MonoBehaviour
     //Gets dropdown selection index, assigns appropriate values to dimensions array
     public void getResolution()
     {
+        Debug.Log("shit pressed ");
         resolution = dropdown.value;
         resoSelected = true;
         dimensions[0] = actualHeights[resolution];
@@ -123,10 +124,12 @@ public class OptionController : MonoBehaviour
     {
         if (!fsTogglePressed)
         {
+            fullscreenToggle.Select();
             fsTogglePressed = true;
         }
         else
         {
+            fullscreenToggle.Select();
             fsTogglePressed = false;
         }
     }
