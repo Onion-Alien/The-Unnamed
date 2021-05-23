@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PauseMenuManager : MonoBehaviour
@@ -21,23 +22,6 @@ public class PauseMenuManager : MonoBehaviour
     }
 
     //Controls for pausing the game, checks if options menu is current open, if so does not unpause
-    void Update()
-    { 
-        //if (!OptionController.instance.isActiveAndEnabled)
-        //{
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (isPaused && !optionOpen)
-                {
-                    ResumeGame();
-                }
-                else if (!isPaused)
-                {
-                    PauseGame();
-                }
-            }
-        //}
-    }
 
     //Pauses the game, freezes time, sets isPaused to true for other methods
     public void PauseGame()

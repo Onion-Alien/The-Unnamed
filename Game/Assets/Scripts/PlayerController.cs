@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isFacingRight = true;
     private bool isWalking;
-    public bool isGrounded;
+    public bool isGrounded = true;
     private bool canJump;
     public bool isDead = false;
     public bool isFrozen = false;
@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+       // IsGrounded();
+
         if (!PauseMenuManager.isPaused)
         {
             if (!isDead)
@@ -68,6 +70,7 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
+        Debug.Log("trying to move");
         horizontal = context.ReadValue<Vector2>().x;
     }
 
@@ -117,7 +120,9 @@ public class PlayerController : MonoBehaviour
     //checks if player is on the ground
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+    
+        // return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        return true;
     }
 
     //checks if player can jump and if they have any more jumps left
@@ -205,7 +210,7 @@ public class PlayerController : MonoBehaviour
     //Freezes the player, used for after attacks so you can't move and spam attacks
     public void Freeze()
     {
-        //StartCoroutine("freezeTime");
+        StartCoroutine("freezeTime");
     }
 
     private IEnumerator freezeTime()

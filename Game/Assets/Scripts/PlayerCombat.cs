@@ -31,11 +31,11 @@ public class PlayerCombat : MonoBehaviour
     private const float StaminaTimeToRegen = 1f;
     public HealthBar stamBar;
 
-    private PlayerControllerBaileyVersion pc;
+    private PlayerController pc;
 
     private void Awake()
     {
-        pc = GetComponent<PlayerControllerBaileyVersion>();
+        pc = GetComponent<PlayerController>();
     }
 
     private void Start()

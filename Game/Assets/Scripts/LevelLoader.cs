@@ -48,7 +48,7 @@ public class LevelLoader : MonoBehaviour
         }
         else
         {
-            player.transform.position = new Vector3(-74.18f, 85.23f, 0.0f);
+            player.transform.position = new Vector3(-77.18f, 90.53f, 0.0f);
         }
     }
 

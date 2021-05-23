@@ -40,7 +40,7 @@ public class ShopKeeper : MonoBehaviour
         merchantText.transform.position = new Vector3(shopKeeper.transform.position.x, shopKeeper.transform.position.y + 1.6f, shopKeeper.transform.position.z);
 
         //Checks if player is close and if so, stops shopkeeper from walking and displays the text
-        if (player.transform.position.x < shopKeeper.transform.position.x + 2.5f && player.transform.position.x > shopKeeper.transform.position.x - 2.5f)
+        if (player.transform.position.x < shopKeeper.transform.position.x + 2.5f && player.transform.position.x > shopKeeper.transform.position.x - 2.5f && player.transform.position.y < shopKeeper.transform.position.y + 0.5f && player.transform.position.y > shopKeeper.transform.position.y - 0.5f)
         {
             if (!shopActive)
             {
@@ -56,17 +56,17 @@ public class ShopKeeper : MonoBehaviour
         //Checks for user input key B to open shop window, if playerProx is true
         if (playerInProx)
         {
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                toggleShop();
-                ShopController.selectedButton = null;
-            }
+            //if (Input.GetKeyDown(KeyCode.B))
+            //{
+            //    toggleShop();
+            //    ShopController.selectedButton = null;
+            //}
 
-            if (!(player.transform.position.x < shopKeeper.transform.position.x + 2.0f && player.transform.position.x > shopKeeper.transform.position.x - 2.0f))
-            {
-                playerInProx = false;
-                merchantText.SetActive(false);
-            }
+            //if (!(player.transform.position.x < shopKeeper.transform.position.x + 2.0f && player.transform.position.x > shopKeeper.transform.position.x - 2.0f))
+            //{
+            //    playerInProx = false;
+            //    merchantText.SetActive(false);
+            //}
         }
 
         //Checks current location against the point he is walking to, to see if its time to stop walking
