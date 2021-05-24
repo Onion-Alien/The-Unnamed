@@ -91,19 +91,21 @@ public class EnemyHit : MonoBehaviour
 
     void ShowDamage(string text)
     {
-        if(showDamage)
+        if (showDamage)
         {
-            GameObject prefab = Instantiate(showDamage, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
+            GameObject prefab = Instantiate(showDamage, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
             prefab.GetComponentInChildren<TextMesh>().text = text;
         }
     }
     public void TakeDamage(int damage)
     {
+
         ShowDamage(damage.ToString());
+    
         currentHealth -= damage;
         healthBar.Set(currentHealth);
         healthBar.showHP(currentHealth, maxHealth);
-       
+        
         // play the hit animation if the enemy is hit
 
         if (currentHealth > 0)
@@ -112,14 +114,14 @@ public class EnemyHit : MonoBehaviour
        
             
         }
-
         //Play the dead animation if the current health equals to or less than 0
-        if (currentHealth <= 0)
+       else if (currentHealth <= 0)
         {
             Die();
             
         }
-        Destroy(showDamage);
+       
+
     }
 
     
@@ -127,7 +129,7 @@ public class EnemyHit : MonoBehaviour
     //Set the trigger to playing the death animation to true and destroy the object 1 second after the Goblin is dead
     void Die()
     {
-        animator.SetBool("isIdle", true);
+        
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetBool("isDead", true);
         coin.SetActive(true);

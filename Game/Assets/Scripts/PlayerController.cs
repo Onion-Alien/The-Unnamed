@@ -247,20 +247,22 @@ public class PlayerController : MonoBehaviour
     {
         if (showDamage)
         {
-            GameObject prefab = Instantiate(showDamage, new Vector2(transform.position.x, transform.position.y + 3), Quaternion.identity);
+            GameObject prefab = Instantiate(showDamage, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
             prefab.GetComponentInChildren<TextMesh>().text = text;
         }
     }
 
     public void TakeDamage(int damage, bool ignoreBlock)
     {
-        ShowDamage(damage.ToString());
+       ShowDamage(damage.ToString());
+       
         if (!isDead)
         {
             if (isBlocking && !ignoreBlock)
             {
                 anim.SetTrigger("isBlock");
                 currentHealth -= (int)(damage * 0.1);
+
             }
             else
             {

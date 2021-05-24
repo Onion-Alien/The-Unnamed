@@ -11,14 +11,18 @@ public class EnemyStateMachine : StateMachineBehaviour
 	Enemy enemy;
 	EnemyAttack enemyAttack;
 	private bool isAttacking;
+	
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+		animator.SetBool("isIdle", false);
 		player = GameObject.FindGameObjectWithTag("Player").transform;
 		rb = animator.GetComponent<Rigidbody2D>();
 		enemy = animator.GetComponent<Enemy>();
 		enemyAttack = animator.GetComponent<EnemyAttack>();
+
+
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -27,26 +31,46 @@ public class EnemyStateMachine : StateMachineBehaviour
 		float yDistance = player.position.y - rb.position.y;
 		float xDistance = player.position.x - rb.position.x;
 
-		if (Vector2.Distance(player.position, rb.position) <= enemyAttack.attackRange)
-		{
-			animator.SetTrigger("attack");
-			isAttacking = true;
-		}
 
-		// only tracks player if within x and y range
+
 		if (enemy.IsGrounded() && !isAttacking)
-        {
-			if (xDistance < 20 && xDistance > -20)
+		{
+
+			if (xDistance <= 20 && xDistance >= -20)
 			{
+
 				if (yDistance < 3 && yDistance > -3)
 				{
+
+					animator.SetBool("isIdle", false);
 					enemy.LookAt(player);
 					Vector2 target = new Vector2(player.position.x, rb.position.y);
 					Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
 					rb.MovePosition(newPos);
 				}
+				if (Vector2.Distance(player.position, rb.position) <= enemyAttack.attackRange)
+				{
+					animator.SetTrigger("attack");
+					isAttacking = true;
+
+				}
 			}
-        }
+			else
+            {
+				
+				animator.SetBool("isIdle", true);
+			}
+
+			
+		
+		
+		}
+		
+
+		// only tracks player if within x and y range
+		
+
+
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -54,5 +78,6 @@ public class EnemyStateMachine : StateMachineBehaviour
 	{
 		animator.ResetTrigger("attack");
 		isAttacking = false;
+		animator.SetBool("isIdle", false);
 	}
 }
