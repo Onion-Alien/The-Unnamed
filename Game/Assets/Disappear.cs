@@ -5,10 +5,10 @@ using UnityEngine;
 public class Disappear : MonoBehaviour
 {
     // Start is called before the first frame update
-    void start()
+    void Start()
     {
        
-        Destroy(gameObject);
+        Destroy(gameObject,1f);
     }
 
     
