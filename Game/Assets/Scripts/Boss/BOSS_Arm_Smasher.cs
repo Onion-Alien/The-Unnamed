@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BossArmSmasher : MonoBehaviour
+public class BOSS_Arm_Smasher : MonoBehaviour
 {
     public Transform idlePoint;
     private Vector3 randomPos;

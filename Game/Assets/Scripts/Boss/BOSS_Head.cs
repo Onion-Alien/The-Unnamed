@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BOSS_Head : MonoBehaviour
 {
-    private BossArmSmasher armSmasher;
-    private BossArmSpinner armSpinner;
+    private BOSS_Arm_Smasher armSmasher;
+    private BOSS_Arm_Spinner armSpinner;
     public State _state;
     public Phase _phase;
     private float timer;
@@ -32,8 +32,8 @@ public class BOSS_Head : MonoBehaviour
 
     private void Awake()
     {
-        armSmasher = GameObject.Find("Arm_Smasher").GetComponent<BossArmSmasher>();
-        armSpinner = GameObject.Find("Arm_Spinner").GetComponent<BossArmSpinner>();
+        armSmasher = GameObject.Find("Arm_Smasher").GetComponent<BOSS_Arm_Smasher>();
+        armSpinner = GameObject.Find("Arm_Spinner").GetComponent<BOSS_Arm_Spinner>();
 
         health = 2000;
     }

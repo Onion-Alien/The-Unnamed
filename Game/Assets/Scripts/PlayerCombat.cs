@@ -155,9 +155,9 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            if (enemy.GetComponent<BossArmSmasher>())
+            if (enemy.GetComponent<BOSS_Arm_Smasher>())
             {
-                enemy.GetComponent<BossArmSmasher>().TakeDamage(dmg);
+                enemy.GetComponent<BOSS_Arm_Smasher>().TakeDamage(dmg);
                 foreach (SpriteRenderer x in enemy.GetComponentsInChildren<SpriteRenderer>())
                 {
                     x.GetComponent<SpriteRenderer>().color = Color.red;

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BossArmSpinner : MonoBehaviour
+public class BOSS_Arm_Spinner : MonoBehaviour
 {
     public Transform idlePoint;
     private Vector3 randomPos;
