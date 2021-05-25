@@ -25,9 +25,6 @@ public class EnemyHit : MonoBehaviour
     public GameObject f6;
     public GameObject showDamage;
 
-
-
-
     void drop(int i)
     {
         switch (i)
@@ -67,26 +64,6 @@ public class EnemyHit : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         healthBar.SetMax(maxHealth);
         healthBar.showHP(currentHealth, maxHealth);
-    }
-
-    private void Update()
-    {
-        CheckIdle();
-    }
-
-    
-
-    // checks if enemy is idle
-    void CheckIdle()
-    {
-        if (rb.velocity.x > 0.01f || rb.velocity.x < -0.01f)
-        {
-            animator.SetBool("isIdle", false);
-        }
-        else
-        {
-            animator.SetBool("isIdle", true);
-        }
     }
 
     void ShowDamage(string text)

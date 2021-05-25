@@ -57,4 +57,22 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
+	public bool RangeCheck(Animator animator, Transform player, Rigidbody2D rb)
+	{
+		float yDistance = player.position.y - rb.position.y;
+		float xDistance = player.position.x - rb.position.x;
+
+		if (IsGrounded())
+		{
+			if (xDistance <= 12 && xDistance >= -12)
+			{
+				if (yDistance < 3 && yDistance > -3)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 }

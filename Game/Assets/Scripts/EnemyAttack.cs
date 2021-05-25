@@ -16,7 +16,6 @@ public class EnemyAttack : MonoBehaviour
 	public LayerMask attackMask;
 	public Transform attackPoint;
 
-
 	public void Attack()
 	{
 		//conduct the attack and reduce player's HP once the player reaches the attack point
@@ -25,8 +24,6 @@ public class EnemyAttack : MonoBehaviour
         {
 			colInfo.GetComponent<PlayerController>().TakeDamage(attackDamage, true);
         }
-		
-		
 	}
 	
 
