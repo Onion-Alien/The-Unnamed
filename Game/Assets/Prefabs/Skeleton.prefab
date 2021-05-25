@@ -907,11 +907,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 230f4294a10a3486885b596545ec18a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 20
+  attackDamage: 50
   attackRange: 1.5
   attackMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1
   attackPoint: {fileID: 1790564207445289753}
 --- !u!70 &2559832255554210443
 CapsuleCollider2D:
