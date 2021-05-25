@@ -1,22 +1,22 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class BOSS_Arm_Smasher : MonoBehaviour
+public class BossArmSmasher : MonoBehaviour
 {
     public Transform idlePoint;
-    Vector3 randomPos;
+    private Vector3 randomPos;
     private GameObject player;
 
     private Vector3 attackPos;
     private Vector3 trackingPos;
     public BOSS_Head head;
 
-    public bool Attack1Running;
-    public bool AttackSpecialRunning;
+    public bool attack1Running;
+    public bool attackSpecialRunning;
     public bool attackSpecial;
 
-    public State _state;
+    public State state;
     public enum State
     {
         Seek1,
@@ -33,11 +33,11 @@ public class BOSS_Arm_Smasher : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         head = GameObject.Find("Head").GetComponent<BOSS_Head>();
         
-        _state = State.Idle;
+        state = State.Idle;
 
         while (true)
         {
-            switch (_state)
+            switch (state)
             {
                 case State.Idle:
                     StartCoroutine("Idle");
@@ -63,16 +63,16 @@ public class BOSS_Arm_Smasher : MonoBehaviour
 
     public void doAttack1()
     {
-        if (!Attack1Running)
+        if (!attack1Running)
         {
-            Attack1Running = true;
-            _state = State.Seek1;
+            attack1Running = true;
+            state = State.Seek1;
         }
     }
 
     public void doSpecial()
     {
-        if (!AttackSpecialRunning)
+        if (!attackSpecialRunning)
         {
             foreach (SpriteRenderer x in GetComponentsInChildren<SpriteRenderer>())
             {
@@ -82,8 +82,8 @@ public class BOSS_Arm_Smasher : MonoBehaviour
             {
                 x.enabled = false;
             }
-            AttackSpecialRunning = true;
-            _state = State.SeekSpecial;
+            attackSpecialRunning = true;
+            state = State.SeekSpecial;
         }
     }
 
@@ -112,7 +112,7 @@ public class BOSS_Arm_Smasher : MonoBehaviour
         }
         if (transform.position == trackingPos)
         {
-            _state = State.Pause;
+            state = State.Pause;
             attackPos = new Vector3(trackingPos.x, trackingPos.y - 5.7f);
             StartCoroutine(Wait(1f, State.AttackSpecial));
         }
@@ -131,7 +131,7 @@ public class BOSS_Arm_Smasher : MonoBehaviour
         }
         if (transform.position == trackingPos)
         {
-            _state = State.Pause;
+            state = State.Pause;
             StartCoroutine(Wait(0.5f, State.Attack1));
             attackPos = new Vector3(trackingPos.x, trackingPos.y - 5.7f);
         }
@@ -146,7 +146,7 @@ public class BOSS_Arm_Smasher : MonoBehaviour
         if (transform.position == attackPos)
         {
             StartCoroutine(Wait(0.5f, State.Idle));
-            Attack1Running = false;
+            attack1Running = false;
         }
     }
 
@@ -165,7 +165,7 @@ public class BOSS_Arm_Smasher : MonoBehaviour
         {
             Invoke("EnableSpikes", 5f);
             StartCoroutine(Wait(5f, State.Idle));
-            AttackSpecialRunning = false;
+            attackSpecialRunning = false;
         }
     }
 
@@ -180,7 +180,7 @@ public class BOSS_Arm_Smasher : MonoBehaviour
     IEnumerator Wait(float i, State state)
     {
         yield return new WaitForSeconds(i);
-        _state = state;
+        this.state = state;
     }
 
     public void Death()

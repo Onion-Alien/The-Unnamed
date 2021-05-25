@@ -1,24 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BOSS_Arm_Spinner : MonoBehaviour
+public class BossArmSpinner : MonoBehaviour
 {
     public Transform idlePoint;
-    Vector3 randomPos;
+    private Vector3 randomPos;
 
     private Vector3 left, right, center;
     private Vector3 pos;
     public BOSS_Head head;
     private bool hasRun;
-    private bool Attack1Running;
-    public bool Attack2Running;
-    private bool Attack2Shoot;
+    private bool attack1Running;
+    public bool attack2Running;
+    private bool attack2Shoot;
 
     public GameObject spikes;
 
-    private State _state;
-    public enum State
+    private State state;
+
+    private enum State
     {
         Idle,
         Attack1,
@@ -28,7 +28,7 @@ public class BOSS_Arm_Spinner : MonoBehaviour
         Pause
     };
 
-    IEnumerator Start()
+    private IEnumerator Start()
     {
         randomPos = idlePoint.position + (Vector3)Random.insideUnitCircle * 1;
         left = GameObject.Find("Left").transform.position;
@@ -36,11 +36,11 @@ public class BOSS_Arm_Spinner : MonoBehaviour
         center = GameObject.Find("Center").transform.position;
         head = GameObject.Find("Head").GetComponent<BOSS_Head>();
 
-        _state = State.Idle;
+        state = State.Idle;
 
         while (true)
         {
-            switch (_state)
+            switch (state)
             {
                 case State.Idle:
                     StartCoroutine("Idle");
@@ -66,19 +66,19 @@ public class BOSS_Arm_Spinner : MonoBehaviour
 
     public void doAttack1()
     {
-        if (!Attack1Running)
+        if (!attack1Running)
         {
-            Attack1Running = true;
-            _state = State.Seek1;
+            attack1Running = true;
+            state = State.Seek1;
         }
     }
 
     public void doAttack2()
     {
-        if (!Attack2Running)
+        if (!attack2Running)
         {
-            Attack2Running = true;
-            _state = State.Seek2;
+            attack2Running = true;
+            state = State.Seek2;
         }
     }
 
@@ -99,7 +99,7 @@ public class BOSS_Arm_Spinner : MonoBehaviour
         }
         if (transform.position == pos)
         {
-            _state = State.Attack1;
+            state = State.Attack1;
         }
     }
 
@@ -116,7 +116,7 @@ public class BOSS_Arm_Spinner : MonoBehaviour
         }
         if (transform.position == pos)
         {
-            _state = State.Attack2;
+            state = State.Attack2;
         }
     }
 
@@ -134,15 +134,15 @@ public class BOSS_Arm_Spinner : MonoBehaviour
             {
                 x.color = new Color(195f, 195f, 195f);
             }
-            Attack1Running = false;
+            attack1Running = false;
         }
     }
 
     private void Attack2()
     {
-        if (!Attack2Shoot)
+        if (!attack2Shoot)
         {
-            Attack2Shoot = true;
+            attack2Shoot = true;
             StartCoroutine("Shoot");
         }
         foreach (SpriteRenderer x in GetComponentsInChildren<SpriteRenderer>())
@@ -150,7 +150,7 @@ public class BOSS_Arm_Spinner : MonoBehaviour
             x.color = new Color(195f, 195f, 195f);
         }
         StartCoroutine(Wait(5f, State.Idle));
-        Attack2Running = false;
+        attack2Running = false;
     }
 
     private Vector3 getOpposite()
@@ -158,7 +158,7 @@ public class BOSS_Arm_Spinner : MonoBehaviour
         return pos != left ? left : right;
     }
 
-    IEnumerator Shoot()
+    private IEnumerator Shoot()
     {
         GameObject g = Instantiate(spikes, transform.position, transform.rotation);
         g.AddComponent<Rigidbody2D>(); 
@@ -172,18 +172,18 @@ public class BOSS_Arm_Spinner : MonoBehaviour
         sr.material.color = Color.red;
         spike.Launch(700f, 2f);
         yield return new WaitForSeconds(Random.Range(0.05f, 0.1f));
-        Attack2Shoot = false;
+        attack2Shoot = false;
     }
 
-    IEnumerator Wait(float i, State state)
+    private IEnumerator Wait(float i, State s)
     {
         yield return new WaitForSeconds(i);
-        _state = state;
+        state = s;
     }
 
-    void Update()
+    private void Update()
     {
-        if (_state == State.Attack1)
+        if (state == State.Attack1)
         {
             transform.Rotate(0, 0, 1000 * Time.deltaTime);
         }

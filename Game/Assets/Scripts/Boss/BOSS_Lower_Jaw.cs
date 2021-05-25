@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BOSS_Lower_Jaw : MonoBehaviour
 {
     public Transform idlePoint;
-    Vector3 randomPos;
+    private Vector3 randomPos;
 
 
     private bool isActive = true;
@@ -15,7 +13,7 @@ public class BOSS_Lower_Jaw : MonoBehaviour
         randomPos = idlePoint.position + (Vector3)Random.insideUnitCircle * 0.3f;
     }
 
-    void Update()
+    private void Update()
     {
         //transform.Rotate(0, 0, 500 * Time.deltaTime);
         if (isActive)
