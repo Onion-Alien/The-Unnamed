@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,17 +14,16 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask enemyLayers;
     public LayerMask movableLayers;
 
-    private static int DMG_light = 20;
-    private static int DMG_medium = 30;
-    private static int DMG_heavy = 40;
-    private float attackRange = 0.5f;
+    public int dmgLight = 20;
+    public int dmgHeavy = 40;
+    public float attackRange = 0.5f;
 
-    private static float attackRate = 0.5f;
-    float nextAttackTime = 0f;
+    public float attackRate = 0.5f;
+    private float nextAttackTime = 0f;
 
-    private float stamina = 100f;
-    private static float maxStamina = 100f;
-    private static float StaminaRegenTimer = 1f;
+    public float stamina = 100f;
+    public float maxStamina = 100f;
+    private float staminaRegenTimer = 1f;
     private const float StaminaDecreasePerFrame = 1f;
     private const float StaminaIncreasePerFrame = 35;
     private const float StaminaTimeToRegen = 1f;
@@ -43,7 +41,7 @@ public class PlayerCombat : MonoBehaviour
         stamBar.SetMax(Mathf.RoundToInt(maxStamina));
     }
 
-    void Update()
+    private void Update()
     {
         if (!pc.isDead)
         {
@@ -55,14 +53,14 @@ public class PlayerCombat : MonoBehaviour
     {
         if (stamina < maxStamina)
         {
-            if (StaminaRegenTimer >= StaminaTimeToRegen)
+            if (staminaRegenTimer >= StaminaTimeToRegen)
             {
                 stamina = Mathf.Clamp(stamina + (StaminaIncreasePerFrame * Time.deltaTime), 0.0f, maxStamina); //sets stamina based on delta time
                 stamBar.Set(Mathf.RoundToInt(stamina)); //rounds to int because hp bar needs floats
             }
             else
             {
-                StaminaRegenTimer += Time.deltaTime;
+                staminaRegenTimer += Time.deltaTime;
             }
         }
     }
@@ -72,54 +70,42 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         stamina -= stamCost;
         stamBar.Set(Mathf.RoundToInt(stamina));
-        StaminaRegenTimer = 0.0f;
+        staminaRegenTimer = 0.0f;
     }
 
-    public IEnumerator SetStamina(float stam)
+    private IEnumerator SetStamina(float stam)
     {
         yield return new WaitForSeconds(0.2f);
         stamina += stam;
         stamBar.Set(Mathf.RoundToInt(stamina));
-        StaminaRegenTimer = 0.0f;
+        staminaRegenTimer = 0.0f;
     }
 
     //player light attack
     public void Light(InputAction.CallbackContext context)
     {
-        if (pc.isGrounded && Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
+        if (Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
         {
             animator.SetTrigger("ATK_Light");
 
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
             foreach(Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<EnemyHit>().TakeDamage(DMG_light);
+                enemy.GetComponent<EnemyHit>().TakeDamage(dmgLight);
             }
             StartCoroutine(UseStamina(20f));
             pc.Freeze();
             nextAttackTime = Time.time + 0.5f / attackRate;
         }
     }
-    //player medium attack
-    public void Medium(InputAction.CallbackContext context)
-    {
-        if (pc.isGrounded && Time.time >= nextAttackTime && stamina >= 20 && !pc.isBlocking)
-        {
-            animator.SetTrigger("ATK_Medium");
-            StartCoroutine(Damage(DMG_medium));
-            StartCoroutine(moveObject("ATK_Medium"));
-            StartCoroutine(UseStamina(20f));
-            pc.Freeze();
-            nextAttackTime = Time.time + 0.5f / attackRate;
-        }
-    }
+
     //player heavy attack which also is enabled to move certain objects
     public void Heavy(InputAction.CallbackContext context)
     {
-        if (pc.isGrounded && Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
+        if (Time.time >= nextAttackTime && stamina >= 40 && !pc.isBlocking)
         {
             animator.SetTrigger("ATK_Heavy");
-            StartCoroutine(Damage(DMG_heavy));
+            StartCoroutine(Damage(dmgHeavy));
             StartCoroutine(moveObject("ATK_Heavy"));
             StartCoroutine(UseStamina(40f));
             pc.Freeze();
@@ -169,7 +155,23 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyHit>().TakeDamage(dmg);
+            if (enemy.GetComponent<BOSS_Arm_Smasher>())
+            {
+                enemy.GetComponent<BOSS_Arm_Smasher>().TakeDamage(dmg);
+                foreach (SpriteRenderer x in enemy.GetComponentsInChildren<SpriteRenderer>())
+                {
+                    x.GetComponent<SpriteRenderer>().color = Color.red;
+                }
+                yield return new WaitForSeconds(0.1f);
+                foreach (SpriteRenderer x in enemy.GetComponentsInChildren<SpriteRenderer>())
+                {
+                    x.GetComponent<SpriteRenderer>().color = Color.green;
+                }
+            }
+            else
+            {
+                enemy.GetComponent<EnemyHit>().TakeDamage(dmg);
+            }
             enemy.GetComponent<Rigidbody2D>().AddForce(transform.up * Random.Range(200f, 500f));
             enemy.GetComponent<Rigidbody2D>().AddForce(transform.right * Random.Range(200f, 500f));
         }

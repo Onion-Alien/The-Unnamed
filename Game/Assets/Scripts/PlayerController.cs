@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +12,6 @@ public class PlayerController : MonoBehaviour
 
     private bool isFacingRight = true;
     private bool isWalking;
-    public bool isGrounded = true;
     private bool canJump;
     public bool isDead = false;
     public bool isFrozen = false;
@@ -38,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     private float horizontal;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -49,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void Update()
+    private void Update()
     {
        // IsGrounded();
 
@@ -118,7 +116,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //checks if player is on the ground
-    public bool IsGrounded()
+    private bool IsGrounded()
     {
     
         // return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);

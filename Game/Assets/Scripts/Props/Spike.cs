@@ -10,6 +10,7 @@ public class Spike : MonoBehaviour
 {
     private Coroutine dmg;
     public int spikeDmg = 50;
+    private bool isLaunch;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -23,23 +24,29 @@ public class Spike : MonoBehaviour
 
     private IEnumerator Damage(Collider2D col)
     {
-        while (true)
+        if (col)
         {
-            if (col != null)
+            if (col.CompareTag("Player"))
             {
-                if (col.CompareTag("Player"))
-                {
-                    col.GetComponent<PlayerControllerBaileyVersion>().TakeDamage(spikeDmg, true);
-                }
+                col.GetComponent<PlayerController>().TakeDamage(spikeDmg, true);
             }
-            yield return new WaitForSeconds(1f);
         }
+        yield return new WaitForSeconds(1f);
+    }
+
+    private void Update()
+    {
+        if (isLaunch)
+        {
+            transform.Translate(Vector3.up * Time.deltaTime * 10);
+        }     
     }
 
     public void Launch(float force, float decayTime)
     {
+        isLaunch = true;
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        GetComponent<Rigidbody2D>().AddForce(transform.up * force);
+        //GetComponent<Rigidbody2D>().AddForce(transform.up * force);
         StartCoroutine(Remove(decayTime));
     }
 
