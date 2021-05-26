@@ -95,15 +95,11 @@ public class PlayerController : MonoBehaviour
         {
             if (context.performed)
             {
-                //temp value to fix error 21/05/21
-                if (10 >= 20)
-                {
-                    StartCoroutine(playerCombat.UseStamina(20f));
-                    isBlocking = true;
-                    rb.constraints = RigidbodyConstraints2D.FreezePosition;
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                    isFrozen = true;
-                }
+                StartCoroutine(playerCombat.UseStamina(20f));
+                isBlocking = true;
+                rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                isFrozen = true;
             }
             if (context.canceled)
             {

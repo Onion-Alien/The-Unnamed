@@ -8,7 +8,7 @@ public class Death_Region : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            collision.GetComponent<PlayerControllerBaileyVersion>().TakeDamage(99999, true);
+            collision.GetComponent<PlayerController>().TakeDamage(99999, true);
         }
     }
 }
