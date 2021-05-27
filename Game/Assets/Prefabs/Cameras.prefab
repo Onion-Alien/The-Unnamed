@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2691010033397859354}
   - component: {fileID: 2691010033397859332}
   - component: {fileID: 2691010033397859355}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LookaheadTime: 0.1
+  m_LookaheadTime: 0
   m_LookaheadSmoothing: 10
   m_LookaheadIgnoreY: 1
   m_XDamping: 1
@@ -65,12 +65,12 @@ MonoBehaviour:
   m_ScreenX: 0.5
   m_ScreenY: 0.6
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.3
-  m_DeadZoneHeight: 0.1
+  m_DeadZoneWidth: 0
+  m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
+  m_SoftZoneHeight: 2
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4258888481452013142}
   - component: {fileID: 4258888481452013140}
   - component: {fileID: 4258888481452013143}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cameras
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2691010033420867820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -62.39, y: 65.600006, z: -10}
+  m_LocalPosition: {x: 100.55, y: 257.13, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2691010034316522616}
@@ -146,7 +146,7 @@ Camera:
   far clip plane: 12265.32
   field of view: 60
   orthographic: 1
-  orthographic size: 6.5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -214,7 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2691010034316522616}
   - component: {fileID: 2691010034316522617}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,13 +252,13 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 99
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 6.5
+    OrthographicSize: 8
     NearClipPlane: 0.0613266
     FarClipPlane: 12265.32
     Dutch: 0
