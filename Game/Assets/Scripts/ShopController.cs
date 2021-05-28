@@ -57,87 +57,87 @@ public class ShopController : MonoBehaviour
             
         if (selectedButton != null && (selectedButton.name != "Return" || selectedButton.name != "Purchase" || selectedButton.name != "purchaseTab" || selectedButton.name != "sellTab" || selectedButton.name != "Addgold") && buttonSelected)
         {
-            switch (selectedButton.name)
-            {
-                case ("UpgradeHealth"):
-                    itemCost = 18;
-                    itemName = "UpgradeHealth";
-                    if(boughtItem == "UpgradeHealth") {
-                      //Cant do health yet, no health variable  PlayerCombat.setheal
-                    }
-                    break;
-                case ("UpgradeStamina"):
-                    itemCost = 13;
-                    itemName = "UpgradeStamina";
-                    if (boughtItem == "UpgradeStamina")
-                    {
-                        PlayerCombat.setStamina(PlayerCombat.getStamina() + 15.0f);
-                    }
-                    break;
-                case ("UpgradeDamage"):
-                    itemCost = 20;
-                    itemName = "UpgradeDamage";
-                    if (boughtItem == "UpgradeDamage")
-                    {
-                        int[] tempArr = PlayerCombat.getDMG();
-                        for(int i = 0; i <= 2; i++)
-                        {
-                            tempArr[i] += 3;
-                        }
-                        PlayerCombat.setDMG(tempArr);
-                    }
-                    break;
-                case ("UpgradeAttackSpeed"):
-                    itemCost = 33;
-                    itemName = "UpgradeAttackSpeed";
-                    if (boughtItem == "UpgradeAttackSpeed")
-                    {
-                        PlayerCombat.setAttackRate(PlayerCombat.getAttackRate() + 0.1f);
-                    }
-                    break;
-                case ("UpgradeRunSpeed"):
-                    itemCost = 47;
-                    itemName = "UpgradeRunSpeed";
-                    if (boughtItem == "UpgradeRunSpeed")
-                    {
-                        PlayerControllerBaileyVersion.movementSpeed += 0.5f;
-                    }
-                    break;
-                case ("HealthPotButton"):
-                    itemCost = 14;
-                    itemName = "HealthPotButton";
-                    if (boughtItem == "HealthPotButton")
-                    {
+            //switch (selectedButton.name)
+            //{
+            //    case ("UpgradeHealth"):
+            //        itemCost = 18;
+            //        itemName = "UpgradeHealth";
+            //        if(boughtItem == "UpgradeHealth") {
+            //          //Cant do health yet, no health variable  PlayerCombat.setheal
+            //        }
+            //        break;
+            //    case ("UpgradeStamina"):
+            //        itemCost = 13;
+            //        itemName = "UpgradeStamina";
+            //        if (boughtItem == "UpgradeStamina")
+            //        {
+            //            PlayerCombat.setStamina(PlayerCombat.getStamina() + 15.0f);
+            //        }
+            //        break;
+            //    case ("UpgradeDamage"):
+            //        itemCost = 20;
+            //        itemName = "UpgradeDamage";
+            //        if (boughtItem == "UpgradeDamage")
+            //        {
+            //            int[] tempArr = PlayerCombat.getDMG();
+            //            for(int i = 0; i <= 2; i++)
+            //            {
+            //                tempArr[i] += 3;
+            //            }
+            //            PlayerCombat.setDMG(tempArr);
+            //        }
+            //        break;
+            //    case ("UpgradeAttackSpeed"):
+            //        itemCost = 33;
+            //        itemName = "UpgradeAttackSpeed";
+            //        if (boughtItem == "UpgradeAttackSpeed")
+            //        {
+            //            PlayerCombat.setAttackRate(PlayerCombat.getAttackRate() + 0.1f);
+            //        }
+            //        break;
+            //    case ("UpgradeRunSpeed"):
+            //        itemCost = 47;
+            //        itemName = "UpgradeRunSpeed";
+            //        if (boughtItem == "UpgradeRunSpeed")
+            //        {
+            //            PlayerControllerBaileyVersion.movementSpeed += 0.5f;
+            //        }
+            //        break;
+            //    case ("HealthPotButton"):
+            //        itemCost = 14;
+            //        itemName = "HealthPotButton";
+            //        if (boughtItem == "HealthPotButton")
+            //        {
                         
-                    }
-                    break;
-                case ("StaminaPotButton"):
-                    itemCost = 12;
-                    itemName = "StaminaPotButton";
-                    if (boughtItem == "StaminaPotButton")
-                    {
+            //        }
+            //        break;
+            //    case ("StaminaPotButton"):
+            //        itemCost = 12;
+            //        itemName = "StaminaPotButton";
+            //        if (boughtItem == "StaminaPotButton")
+            //        {
 
-                    }
-                    break;
-                case ("StaminaRingButton"):
-                    itemCost = 98;
-                    itemName = "StaminaRingButton";
-                    if (boughtItem == "StaminaRingButton")
-                    {
-                        PlayerCombat.setStaminaRegen(PlayerCombat.getStaminaRegen() - 0.2f);
-                        staminaRing.SetActive(false);
-                    }
-                    break;
-                case ("HealthRingButton"):
-                    itemCost = 115;
-                    itemName = "HealthRingButton";
-                    if (boughtItem == "HealthRingButton")
-                    {
-                        //Cant do yet
+            //        }
+            //        break;
+            //    case ("StaminaRingButton"):
+            //        itemCost = 98;
+            //        itemName = "StaminaRingButton";
+            //        if (boughtItem == "StaminaRingButton")
+            //        {
+            //            PlayerCombat.setStaminaRegen(PlayerCombat.getStaminaRegen() - 0.2f);
+            //            staminaRing.SetActive(false);
+            //        }
+            //        break;
+            //    case ("HealthRingButton"):
+            //        itemCost = 115;
+            //        itemName = "HealthRingButton";
+            //        if (boughtItem == "HealthRingButton")
+            //        {
+            //            //Cant do yet
 
-                    }
-                    break;
-            }          
+            //        }
+            //        break;
+            //}          
         }
         else
         {

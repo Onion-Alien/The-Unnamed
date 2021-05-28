@@ -183,45 +183,45 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-    public static void setDMG(int[] DMG)
-    {
-        DMG_light = DMG[0];
-        DMG_medium = DMG[1];
-        DMG_heavy = DMG[2];
-    }
+    //public static void setDMG(int[] DMG)
+    //{
+    //    DMG_light = DMG[0];
+    //    DMG_medium = DMG[1];
+    //    DMG_heavy = DMG[2];
+    //}
 
-    public static void setAttackRate(float rate)
-    {
-        attackRate = rate;
-    }
+    //public static void setAttackRate(float rate)
+    //{
+    //    attackRate = rate;
+    //}
 
-    public static void setStamina(float stamina)
-    {
-        maxStamina = stamina;
-    }
+    //public static void setStamina(float stamina)
+    //{
+    //    maxStamina = stamina;
+    //}
 
-    public static void setStaminaRegen(float stamRegen)
-    {
-        StaminaRegenTimer = stamRegen;
-    }
+    //public static void setStaminaRegen(float stamRegen)
+    //{
+    //    StaminaRegenTimer = stamRegen;
+    //}
 
-    public static int[] getDMG()
-    {
-        return new int[3] { DMG_light, DMG_medium, DMG_heavy };
-    }
+    //public static int[] getDMG()
+    //{
+    //    return new int[3] { DMG_light, DMG_medium, DMG_heavy };
+    //}
 
-    public static float getAttackRate()
-    {
-        return attackRate;
-    }
+    //public static float getAttackRate()
+    //{
+    //    return attackRate;
+    //}
 
-    public static float getStamina()
-    {
-        return maxStamina;
-    }
+    //public static float getStamina()
+    //{
+    //    return maxStamina;
+    //}
 
-    public static float getStaminaRegen()
-    {
-        return StaminaRegenTimer ;
-    }
+    //public static float getStaminaRegen()
+    //{
+    //    return StaminaRegenTimer ;
+    //}
 }

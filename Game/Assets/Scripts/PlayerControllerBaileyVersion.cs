@@ -238,39 +238,39 @@ public class PlayerControllerBaileyVersion : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Powerup")
-        {
-            if (collision.name == "JumpPowerup")
-            {
-                Destroy(collision.gameObject);
-                StartCoroutine(tripleJump());
-            }
-            else if (collision.name == "DamagePowerup")
-            {
-                Destroy(collision.gameObject);
-                StartCoroutine(doubleDamage());
-            }
-            else if (collision.name == "HealthPowerup")
-            {
-                Destroy(collision.gameObject);
-                StartCoroutine(doubleHealth());
-            }
-            else if (collision.name == "MoveSpeedPowerup")
-            {
-                Destroy(collision.gameObject);
-                StartCoroutine(movespeedBuff());
-            }
-            else if (collision.name == "StaminaPowerup")
-            {
-                Destroy(collision.gameObject);
-                StartCoroutine(doubleStamina());
-            }
-            else if (collision.name == "AtkSpeedPowerup")
-            {
-                Destroy(collision.gameObject);
-                StartCoroutine(attackSpeedBuff());
-            }
-        }
+        //if (collision.tag == "Powerup")
+        //{
+        //    if (collision.name == "JumpPowerup")
+        //    {
+        //        Destroy(collision.gameObject);
+        //        StartCoroutine(tripleJump());
+        //    }
+        //    else if (collision.name == "DamagePowerup")
+        //    {
+        //        Destroy(collision.gameObject);
+        //        StartCoroutine(doubleDamage());
+        //    }
+        //    else if (collision.name == "HealthPowerup")
+        //    {
+        //        Destroy(collision.gameObject);
+        //        StartCoroutine(doubleHealth());
+        //    }
+        //    else if (collision.name == "MoveSpeedPowerup")
+        //    {
+        //        Destroy(collision.gameObject);
+        //        StartCoroutine(movespeedBuff());
+        //    }
+        //    else if (collision.name == "StaminaPowerup")
+        //    {
+        //        Destroy(collision.gameObject);
+        //        StartCoroutine(doubleStamina());
+        //    }
+        //    else if (collision.name == "AtkSpeedPowerup")
+        //    {
+        //        Destroy(collision.gameObject);
+        //        StartCoroutine(attackSpeedBuff());
+        //    }
+        //}
     }
 
     IEnumerator tripleJump()
@@ -281,22 +281,22 @@ public class PlayerControllerBaileyVersion : MonoBehaviour
         amountOfJumps = amountOfJumps - 1;
     }
 
-    IEnumerator doubleDamage()
-    {
-        HudScript.instance.activateDamage();
-        int[] temp = PlayerCombat.getDMG();
-        for (int i = 0; i <= 2; i++)
-        {
-            temp[i] = temp[i] * 2;
-        }
-        PlayerCombat.setDMG(temp);
-        yield return new WaitForSeconds(10.0f);
-        for (int i = 0; i <= 2; i++)
-        {
-            temp[i] = temp[i] / 2;
-        }
-        PlayerCombat.setDMG(temp);
-    }
+    //IEnumerator doubleDamage()
+    //{
+    //    HudScript.instance.activateDamage();
+    //    int[] temp = PlayerCombat.getDMG();
+    //    for (int i = 0; i <= 2; i++)
+    //    {
+    //        temp[i] = temp[i] * 2;
+    //    }
+    //    PlayerCombat.setDMG(temp);
+    //    yield return new WaitForSeconds(10.0f);
+    //    for (int i = 0; i <= 2; i++)
+    //    {
+    //        temp[i] = temp[i] / 2;
+    //    }
+    //    PlayerCombat.setDMG(temp);
+    //}
 
     IEnumerator doubleHealth()
     {
@@ -313,21 +313,21 @@ public class PlayerControllerBaileyVersion : MonoBehaviour
         movementSpeed = movementSpeed / 1.5f;
     }
 
-    IEnumerator doubleStamina()
-    {
-        HudScript.instance.activateStamina();
-        PlayerCombat.setStamina(PlayerCombat.getStamina() * 2);
-        PlayerCombat.setStaminaRegen(PlayerCombat.getStaminaRegen() * 2);
-        yield return new WaitForSeconds(10.0f);
-        PlayerCombat.setStamina(PlayerCombat.getStamina() / 2);
-        PlayerCombat.setStaminaRegen(PlayerCombat.getStaminaRegen() / 2);
-    }
+    //IEnumerator doubleStamina()
+    //{
+    //    HudScript.instance.activateStamina();
+    //    PlayerCombat.setStamina(PlayerCombat.getStamina() * 2);
+    //    PlayerCombat.setStaminaRegen(PlayerCombat.getStaminaRegen() * 2);
+    //    yield return new WaitForSeconds(10.0f);
+    //    PlayerCombat.setStamina(PlayerCombat.getStamina() / 2);
+    //    PlayerCombat.setStaminaRegen(PlayerCombat.getStaminaRegen() / 2);
+    //}
 
-    IEnumerator attackSpeedBuff()
-    {
-        HudScript.instance.activateAtkSpeed();
-        PlayerCombat.setAttackRate(PlayerCombat.getAttackRate() * 2);
-        yield return new WaitForSeconds(10.0f);
-        PlayerCombat.setAttackRate(PlayerCombat.getAttackRate() / 2);
-    }
+    //IEnumerator attackSpeedBuff()
+    //{
+    //    HudScript.instance.activateAtkSpeed();
+    //    PlayerCombat.setAttackRate(PlayerCombat.getAttackRate() * 2);
+    //    yield return new WaitForSeconds(10.0f);
+    //    PlayerCombat.setAttackRate(PlayerCombat.getAttackRate() / 2);
+    //}
 }
