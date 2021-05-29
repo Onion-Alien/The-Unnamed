@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isFacingRight = true;
     private bool isWalking;
-    public bool isGrounded = true;
+    public bool isGrounded;
     private bool canJump;
     public bool isDead = false;
     public bool isFrozen = false;
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
-    public float movementSpeed = 10.0f;
+    public static float movementSpeed = 10.0f;
     public float jumpForce = 16.0f;
     public float groundCheckRadius;
 
@@ -51,8 +51,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-       // IsGrounded();
-
         if (!PauseMenuManager.isPaused)
         {
             if (!isDead)
@@ -70,7 +68,6 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        Debug.Log("trying to move");
         horizontal = context.ReadValue<Vector2>().x;
     }
 
@@ -120,9 +117,7 @@ public class PlayerController : MonoBehaviour
     //checks if player is on the ground
     public bool IsGrounded()
     {
-    
-        // return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-        return true;
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
 
     //checks if player can jump and if they have any more jumps left
@@ -210,7 +205,7 @@ public class PlayerController : MonoBehaviour
     //Freezes the player, used for after attacks so you can't move and spam attacks
     public void Freeze()
     {
-        StartCoroutine("freezeTime");
+        //StartCoroutine("freezeTime");
     }
 
     private IEnumerator freezeTime()
@@ -226,12 +221,12 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        isDead = true;
-        anim.SetBool("isWalking", false);
-        rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        anim.SetBool("isDead", true);
+        //isDead = true;
+        //anim.SetBool("isWalking", false);
+        //rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        //anim.SetBool("isDead", true);
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         //needs a continue/restart btn
         //gameOverScreen.Setup();
         //currentHealth = 100;
@@ -239,5 +234,100 @@ public class PlayerController : MonoBehaviour
         //rb.constraints = RigidbodyConstraints2D.None;
         //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         //gameObject.SetActive(true);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Powerup")
+        {
+            if (collision.name == "JumpPowerup")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(tripleJump());
+            }
+            else if (collision.name == "DamagePowerup")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(doubleDamage());
+            }
+            else if (collision.name == "HealthPowerup")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(doubleHealth());
+            }
+            else if (collision.name == "MoveSpeedPowerup")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(movespeedBuff());
+            }
+            else if (collision.name == "StaminaPowerup")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(doubleStamina());
+            }
+            else if (collision.name == "AtkSpeedPowerup")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(attackSpeedBuff());
+            }
+        }
+    }
+
+    IEnumerator tripleJump()
+    {
+        HudScript.instance.activateJumpPowerup();
+        amountOfJumps = amountOfJumps + 1;
+        yield return new WaitForSeconds(10.0f);
+        amountOfJumps = amountOfJumps - 1;
+    }
+
+    IEnumerator doubleDamage()
+    {
+        HudScript.instance.activateDamage();
+        int[] temp = PlayerCombat.getDMG();
+        for (int i = 0; i <= 2; i++)
+        {
+            temp[i] = temp[i] * 2;
+        }
+        PlayerCombat.setDMG(temp);
+        yield return new WaitForSeconds(10.0f);
+        for (int i = 0; i <= 2; i++)
+        {
+            temp[i] = temp[i] / 2;
+        }
+        PlayerCombat.setDMG(temp);
+    }
+
+    IEnumerator doubleHealth()
+    {
+        HudScript.instance.activateHealthPowerup();
+        //Czn't find player hp variable (believe it doesn't exist on this variant for some reason)
+        yield return new WaitForSeconds(5.0f);
+    }
+
+    IEnumerator movespeedBuff()
+    {
+        HudScript.instance.activateMSpeed();
+        movementSpeed = movementSpeed * 1.5f;
+        yield return new WaitForSeconds(10.0f);
+        movementSpeed = movementSpeed / 1.5f;
+    }
+
+    IEnumerator doubleStamina()
+    {
+        HudScript.instance.activateStamina();
+        PlayerCombat.setStamina(PlayerCombat.getStamina() * 2);
+        PlayerCombat.setStaminaRegen(PlayerCombat.getStaminaRegen() * 2);
+        yield return new WaitForSeconds(10.0f);
+        PlayerCombat.setStamina(PlayerCombat.getStamina() / 2);
+        PlayerCombat.setStaminaRegen(PlayerCombat.getStaminaRegen() / 2);
+    }
+
+    IEnumerator attackSpeedBuff()
+    {
+        HudScript.instance.activateAtkSpeed();
+        PlayerCombat.setAttackRate(PlayerCombat.getAttackRate() * 2);
+        yield return new WaitForSeconds(10.0f);
+        PlayerCombat.setAttackRate(PlayerCombat.getAttackRate() / 2);
     }
 }
