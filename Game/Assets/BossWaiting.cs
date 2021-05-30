@@ -59,9 +59,8 @@ public class BossWaiting : MonoBehaviour
                     isIdle = true;
                 }
             }
-            if (playerDistance < 8.0f && playerDistance > -8.0f)
+            if (playerDistance < 8.0f && playerDistance > -8.0f && player.transform.position.y < gameObject.transform.position.y + 4.0f && player.transform.position.y > gameObject.transform.position.y - 4.0f)
             {
-                //arenaWalls.SetActive(true);
                 if (!isLeft)
                 {
                     flip();

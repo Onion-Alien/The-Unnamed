@@ -68,6 +68,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "KillPlayer",
+                    "type": "Button",
+                    "id": "9a817fe4-4cb8-46e3-9f2a-1169630ae05d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -266,6 +274,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "OpenShop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "747658cc-4676-4035-a6c4-d6d478292368",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "KillPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

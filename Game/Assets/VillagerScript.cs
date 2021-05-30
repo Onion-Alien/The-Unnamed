@@ -49,6 +49,7 @@ public class VillagerScript : MonoBehaviour
     public void updateAnim()
     {
         anim.SetBool("isIdle", isIdle);
+        anim.SetBool("isWalking", isWalking);
     }
 
     public void startWalking()
@@ -73,33 +74,28 @@ public class VillagerScript : MonoBehaviour
 
     public void randomWalk()
     {
-            isIdle = false;
-            isWalking = true;
-            walkPoint = Random.Range(minX, maxX);
+        isIdle = false;
+        isWalking = true;
+        walkPoint = Random.Range(minX, maxX);
 
-            if (gameObject.transform.position.x > walkPoint)
+        if (gameObject.transform.position.x > walkPoint)
+        {
+            direction = -1;
+            if (!isLeft)
             {
-                direction = -1;
-                if (!isLeft)
-                {
-                    flip();
-                    toggleIsLeft();
-                }
+                flip();
+                toggleIsLeft();
             }
-            else
+        }
+        else
+        {
+            direction = 1;
+            if (isLeft)
             {
-                direction = 1;
-                if (isLeft)
-                {
-                    flip();
-                    toggleIsLeft();
-                }
+                flip();
+                toggleIsLeft();
             }
-    }
-
-    public void destroyThis()
-    {
-        Destroy(this);
+        }
     }
 
 }

@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     public HealthBar healthBar;
     public Transform groundCheck;
     private LayerMask whatIsGround;
-    public GameOverScreen gameOverScreen;
+    public GameObject gameOverScreen;
     private PlayerCombat playerCombat;
 
     private float horizontal;
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         healthBar.SetMax(maxHealth);
         amountOfJumpsLeft = amountOfJumps;
         whatIsGround = LayerMask.GetMask("Ground", "ignoreGround");
-
+        gameOverScreen.SetActive(false);
     }
 
     void Update()
@@ -219,21 +219,13 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void Die()
+    public void Die()
     {
-        //isDead = true;
-        //anim.SetBool("isWalking", false);
-        //rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        //anim.SetBool("isDead", true);
-
-        //gameObject.SetActive(false);
-        //needs a continue/restart btn
-        //gameOverScreen.Setup();
-        //currentHealth = 100;
-        //healthBar.Set(currentHealth);
-        //rb.constraints = RigidbodyConstraints2D.None;
-        //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        //gameObject.SetActive(true);
+        isDead = true;
+        anim.SetBool("isWalking", false);
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        anim.SetBool("isDead", true);
+        gameOverScreen.SetActive(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
