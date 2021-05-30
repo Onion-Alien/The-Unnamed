@@ -57,7 +57,7 @@ public class ShopController : MonoBehaviour
             buttonGlow.Play();
         }
             
-        if (selectedButton != null && (selectedButton.name != "Return" || selectedButton.name != "Purchase" || selectedButton.name != "purchaseTab" || selectedButton.name != "sellTab" || selectedButton.name != "Addgold" || selectedButton.name != "craftTab") && buttonSelected)
+        if (selectedButton != null && (selectedButton.name != "Return" || selectedButton.name != "Purchase" || selectedButton.name != "Addgold") && buttonSelected)
         {
             switch (selectedButton.name)
             {
@@ -141,6 +141,34 @@ public class ShopController : MonoBehaviour
 
                     }
                     break;
+                case ("purchaseTab"):
+                    sellItemTab.transform.GetComponent<Image>().color = purchaseTab.transform.GetComponent<Image>().color;
+                    sellCanvas.gameObject.SetActive(false);
+                    purchaseTab.transform.GetComponent<Image>().color = Color.white;
+                    craftTab.transform.GetComponent<Image>().color = Color.white;
+                    buyButton.text = "Buy Item";
+                    break;
+                case ("sellTab"):
+                    buyButtonObj.gameObject.SetActive(true);
+                    buttonGlow.enableEmission = false;
+                    disableParticles();
+                    purchaseTab.transform.GetComponent<Image>().color = sellItemTab.transform.GetComponent<Image>().color;
+                    sellItemTab.transform.GetComponent<Image>().color = Color.white;
+                    craftTab.transform.GetComponent<Image>().color = Color.white;
+                    sellCanvas.gameObject.SetActive(true);
+                    buyButton.text = "Sell Item";
+                    
+                    break;
+                case ("craftTab"):
+                    sellCanvas.gameObject.SetActive(false);
+                    craftCanvas.gameObject.SetActive(true);
+                    craftTab.transform.GetComponent<Image>().color = sellItemTab.transform.GetComponent<Image>().color;
+                    sellItemTab.transform.GetComponent<Image>().color = Color.white;
+                    purchaseTab.transform.GetComponent<Image>().color = Color.white;
+                    buyButton.text = "Craft Potions";
+                  
+                    break;
+                    resetVariables();
             }
         }
         else
@@ -186,53 +214,7 @@ public class ShopController : MonoBehaviour
 
 
   
-    public void switchSellTab()
-    {
-        if (!sellActive)
-        {
-            buyButtonObj.gameObject.SetActive(true);
-            buttonGlow.enableEmission = false;
-            disableParticles();
-            purchaseTab.transform.GetComponent<Image>().color = sellItemTab.transform.GetComponent<Image>().color;
-            sellItemTab.transform.GetComponent<Image>().color = Color.white;
-            craftTab.transform.GetComponent<Image>().color = Color.white;
-            sellCanvas.gameObject.SetActive(true);
-            buyButton.text = "Sell Item";
-            sellActive = true;
-            resetVariables();
-
-        }
-
-    }
-
-    public void switchPurchaseTab()
-        { 
-       if (sellActive)
-        {
-            sellItemTab.transform.GetComponent<Image>().color = purchaseTab.transform.GetComponent<Image>().color;
-            sellCanvas.gameObject.SetActive(false);
-            purchaseTab.transform.GetComponent<Image>().color = Color.white;
-            craftTab.transform.GetComponent<Image>().color = Color.white;
-            buyButton.text = "Buy Item";
-            sellActive = false;
-        }
-       
-    }
-
-    public void switcCraftTab()
-    {
-        selectedButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-         if (selectedButton.name.Contains("craftTab"))
-        {
-            sellCanvas.gameObject.SetActive(false);
-            craftCanvas.gameObject.SetActive(true);
-            craftTab.transform.GetComponent<Image>().color = sellItemTab.transform.GetComponent<Image>().color;
-            sellItemTab.transform.GetComponent<Image>().color = Color.white;
-            purchaseTab.transform.GetComponent<Image>().color = Color.white;
-            buyButton.text = "Craft Potions";
-            craftActive = true;
-        }
-    }
+   
     
 
    
