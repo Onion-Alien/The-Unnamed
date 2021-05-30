@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,16 +12,15 @@ public class PlayerController : MonoBehaviour
 
     private bool isFacingRight = true;
     private bool isWalking;
-    public bool isGrounded;
     private bool canJump;
-    public bool isDead = false;
-    public bool isFrozen = false;
-    public bool isBlocking = false;
+    public bool isDead;
+    public bool isFrozen;
+    public bool isBlocking;
 
     private Rigidbody2D rb;
     private Animator anim; 
 
-    public float movementSpeed = 10.0f;
+    public static float movementSpeed = 10.0f;
     public float jumpForce = 16.0f;
     public float groundCheckRadius;
 
@@ -33,12 +31,12 @@ public class PlayerController : MonoBehaviour
     public HealthBar healthBar;
     public Transform groundCheck;
     private LayerMask whatIsGround;
-    public GameOverScreen gameOverScreen;
+    public GameObject gameOverScreen;
     private PlayerCombat playerCombat;
 
     private float horizontal;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -46,10 +44,10 @@ public class PlayerController : MonoBehaviour
         healthBar.SetMax(maxHealth);
         amountOfJumpsLeft = amountOfJumps;
         whatIsGround = LayerMask.GetMask("Ground", "ignoreGround");
-
+        gameOverScreen.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
         if (!PauseMenuManager.isPaused)
         {
@@ -75,6 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canJump)
         {
+            anim.SetTrigger("isJumping");
             if (context.performed)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -113,7 +112,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //checks if player is on the ground
-    public bool IsGrounded()
+    private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround); 
     }
@@ -164,45 +163,6 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isBlocking", isBlocking);
     }
     //handles controller inputs for functions other than movement
-    private void CheckInput()
-    {
-
-        //if (Input.GetButtonDown("Jump"))
-        //{
-        //    Jump();
-        //}
-        //if (isGrounded)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.LeftShift))
-        //    {
-        //        if (playerCombat.stamina >= 20)
-        //        {
-        //            StartCoroutine(playerCombat.UseStamina(20f));
-        //            isBlocking = true;
-        //            rb.constraints = RigidbodyConstraints2D.FreezePosition;
-        //            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        //            isFrozen = true;
-        //        }
-        //    }
-        //    if (Input.GetKeyUp(KeyCode.LeftShift))
-        //    {
-        //        isBlocking = false;
-        //        rb.constraints = RigidbodyConstraints2D.None;
-        //        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        //        isFrozen = false;
-        //    }
-        //}
-    }
-
-    //private void Jump()
-    //{
-    //    if (canJump)
-    //    {
-    //        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-    //        amountOfJumpsLeft--;
-    //    }
-
-    //}
 
     private void Flip()
     {
@@ -256,20 +216,100 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void Die()
+    public void Die()
     {
         isDead = true;
         anim.SetBool("isWalking", false);
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         anim.SetBool("isDead", true);
+        gameOverScreen.SetActive(true);
+    }
 
-        gameObject.SetActive(false);
-        //needs a continue/restart btn
-        //gameOverScreen.Setup();
-        //currentHealth = 100;
-        //healthBar.Set(currentHealth);
-        //rb.constraints = RigidbodyConstraints2D.None;
-        //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        //gameObject.SetActive(true);
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Powerup")
+        {
+            if (collision.name == "JumpPowerup")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(tripleJump());
+            }
+            else if (collision.name == "DamagePowerup")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(doubleDamage());
+            }
+            else if (collision.name == "HealthPowerup")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(doubleHealth());
+            }
+            else if (collision.name == "MoveSpeedPowerup")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(movespeedBuff());
+            }
+            else if (collision.name == "StaminaPowerup")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(doubleStamina());
+            }
+            else if (collision.name == "AtkSpeedPowerup")
+            {
+                Destroy(collision.gameObject);
+                StartCoroutine(attackSpeedBuff());
+            }
+        }
+    }
+
+    IEnumerator tripleJump()
+    {
+        HudScript.instance.activateJumpPowerup();
+        amountOfJumps = amountOfJumps + 1;
+        yield return new WaitForSeconds(10.0f);
+        amountOfJumps = amountOfJumps - 1;
+    }
+
+    IEnumerator doubleDamage()
+    {
+        HudScript.instance.activateDamage();
+        playerCombat.dmgLight *= 2;
+        playerCombat.dmgHeavy *= 2;
+        yield return new WaitForSeconds(10.0f);
+        playerCombat.dmgLight /= 2;
+        playerCombat.dmgHeavy /= 2;
+    }
+
+    IEnumerator doubleHealth()
+    {
+        HudScript.instance.activateHealthPowerup();
+        //Czn't find player hp variable (believe it doesn't exist on this variant for some reason)
+        yield return new WaitForSeconds(5.0f);
+    }
+
+    IEnumerator movespeedBuff()
+    {
+        HudScript.instance.activateMSpeed();
+        movementSpeed = movementSpeed * 1.5f;
+        yield return new WaitForSeconds(10.0f);
+        movementSpeed = movementSpeed / 1.5f;
+    }
+
+    IEnumerator doubleStamina()
+    {
+        HudScript.instance.activateStamina();
+        playerCombat.setStamina(playerCombat.getStamina() * 2);
+        playerCombat.setStaminaRegen(playerCombat.getStaminaRegen() * 2);
+        yield return new WaitForSeconds(10.0f);
+        playerCombat.setStamina(playerCombat.getStamina() / 2);
+        playerCombat.setStaminaRegen(playerCombat.getStaminaRegen() / 2);
+    }
+
+    IEnumerator attackSpeedBuff()
+    {
+        HudScript.instance.activateAtkSpeed();
+        playerCombat.setAttackRate(playerCombat.getAttackRate() * 2);
+        yield return new WaitForSeconds(10.0f);
+        playerCombat.setAttackRate(playerCombat.getAttackRate() / 2);
     }
 }

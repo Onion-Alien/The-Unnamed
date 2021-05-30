@@ -8,15 +8,11 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    public Vector2 currentCheckpoint;
-    private bool hasRun = false;
+    public GameObject player;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!hasRun)
-        {
-            GetComponent<SpriteRenderer>().color = Color.yellow;
-            currentCheckpoint = transform.position;
-        }
+        GetComponent<SpriteRenderer>().color = Color.yellow;
+        SaveManager.instance.checkPointSave(player);
     }
 }

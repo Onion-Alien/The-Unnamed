@@ -31,7 +31,10 @@ public class OptionController : MonoBehaviour
     //Creates an instance of this object that doesn't get destroyed upon changing scenes.
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
         DontDestroyOnLoad(gameObject);
     }
 
@@ -70,6 +73,7 @@ public class OptionController : MonoBehaviour
     //Gets dropdown selection index, assigns appropriate values to dimensions array
     public void getResolution()
     {
+        Debug.Log("shit pressed ");
         resolution = dropdown.value;
         resoSelected = true;
         dimensions[0] = actualHeights[resolution];
@@ -120,10 +124,12 @@ public class OptionController : MonoBehaviour
     {
         if (!fsTogglePressed)
         {
+            fullscreenToggle.Select();
             fsTogglePressed = true;
         }
         else
         {
+            fullscreenToggle.Select();
             fsTogglePressed = false;
         }
     }

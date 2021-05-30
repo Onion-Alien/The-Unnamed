@@ -23,8 +23,8 @@ TagManager:
   - Walls
   - Movable
   - ignoreGround
-  - Environment
-  - Background
+  - Player
+  - Enemy
   - 
   - 
   - 
@@ -48,17 +48,14 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Background
-    uniqueID: 366763487
-    locked: 0
-  - name: Environment
     uniqueID: 3313374289
     locked: 0
   - name: Platforms
     uniqueID: 3029356641
     locked: 0
-  - name: Player
-    uniqueID: 2200550901
-    locked: 0
   - name: UI
     uniqueID: 413841657
+    locked: 0
+  - name: Player
+    uniqueID: 2200550901
     locked: 0

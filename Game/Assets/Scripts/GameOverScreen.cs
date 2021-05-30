@@ -10,9 +10,9 @@ using UnityEngine.UI;
 public class GameOverScreen : MonoBehaviour
 {
 
-    public void Setup()
+    public void Start()
     {
-        gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
     
 }

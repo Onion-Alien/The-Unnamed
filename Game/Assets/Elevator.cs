@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Elevator : MonoBehaviour
 {
-    Node[] pathNode;
-    int currentNode;
+    private Node[] pathNode;
+    private int currentNode;
     private GameObject platform;
     public float speed;
-    float timer;
-    Vector3 currentPos, startPos;
-    bool reverse = false;
-    public bool isEnabled = false;
+    private float timer;
+    private Vector3 currentPos, startPos;
+    private bool reverse;
+    public bool isEnabled;
     public bool singleUse;
-    void Start()
+
+    private void Start()
     {
         pathNode = GetComponentsInChildren<Node>();
         platform = transform.Find("Platform").gameObject;
@@ -21,7 +20,7 @@ public class Elevator : MonoBehaviour
         CheckNode();
     }
 
-    void CheckNode()
+    private void CheckNode()
     {
         timer = 0;
         startPos = platform.transform.position;
@@ -37,23 +36,21 @@ public class Elevator : MonoBehaviour
     {
         for (int i = 0; i < trans.childCount; i++)
         {
-            if (!transform.GetChild(i).name.Equals("Platform"))
+            if (transform.GetChild(i).name.Equals("Platform")) continue;
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(transform.GetChild(i).position, 0.1f);
+            Gizmos.color = Color.blue;
+            if (i < trans.childCount - 1)
             {
-                Gizmos.color = Color.red;
-                Gizmos.DrawSphere(transform.GetChild(i).position, 0.1f);
-                Gizmos.color = Color.blue;
-                if (i < trans.childCount - 1)
-                {
-                    Gizmos.DrawLine(transform.GetChild(i).position, transform.GetChild(i + 1).position);
-                }
-                DrawGizmos(transform.GetChild(i));
+                Gizmos.DrawLine(transform.GetChild(i).position, transform.GetChild(i + 1).position);
             }
+            DrawGizmos(transform.GetChild(i));
         }
     }
 
-    void Update()
+    private void Update()
     {
-        isEnabled = GetComponentInChildren<Platform>().col_check;
+        isEnabled = GetComponentInChildren<Platform>().colCheck;
         if (isEnabled)
         {
             Move();

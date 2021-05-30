@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class MainMenuController : MonoBehaviour
     private bool hoverTrue = false;
     public float highlightMoveAmount = 0.93f;
     public int state;
+    public Button newGame, options, exit;
 
     void Start()
     {
@@ -51,28 +53,28 @@ public class MainMenuController : MonoBehaviour
 
     public void itemSelected(int n)
     {
-        if(n == 0)
-        {
-            mainMenu.SetActive(false);
-            characterCreation.SetActive(true);
-        }
-        else if (n == 1)
-        {
-            if (SaveManager.instance.checkSaveExist())
+            if (n == 0)
             {
-                SaveManager.instance.Load();
-                int currentLevel = SaveManager.instance.getCurrentLevel();
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + (currentLevel + 1));
+                mainMenu.SetActive(false);
+                characterCreation.SetActive(true);
             }
-        }
-        else if (n == 2)
-        {
-            OptionController.instance.enableCanvas(mainMenu);
-        }
-        else if (n == 3)
-        {
-            Application.Quit();
-        }
+            else if (n == 1)
+            {
+                if (SaveManager.instance.checkSaveExist())
+                {
+                //   newGame. = false;options.interactable = false;exit.interactable = false;
+              //  newGame.enabled = false;
+                }
+            }
+            else if (n == 2)
+            {
+                OptionController.instance.enableCanvas(mainMenu);
+            }
+            else if (n == 3)
+            {
+                Application.Quit();
+            }
+        
     }
 
     //Changes the location of the menu highlight bar thing, has 3 cases for each button..
