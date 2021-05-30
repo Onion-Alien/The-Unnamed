@@ -30,6 +30,7 @@ public class LevelLoader : MonoBehaviour
 
     public void exitToMain()
     {
+        //this wont work from credits if mainmenu wasnt the starting point
         SaveManager.instance.Save();
         StartCoroutine(goToMain());
     }

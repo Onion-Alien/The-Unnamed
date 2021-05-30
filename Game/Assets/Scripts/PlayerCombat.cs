@@ -184,4 +184,40 @@ public class PlayerCombat : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+
+    public void setDMG(int[] DMG)
+    {
+        dmgLight = DMG[0];
+        dmgHeavy = DMG[2];
+    }
+
+    public void setAttackRate(float rate)
+    {
+        attackRate = rate;
+    }
+
+    public void setStamina(float stamina)
+    {
+        maxStamina = stamina;
+    }
+
+    public void setStaminaRegen(float stamRegen)
+    {
+        staminaRegenTimer = stamRegen;
+    }
+    
+    public float getAttackRate()
+    {
+        return attackRate;
+    }
+
+    public float getStamina()
+    {
+        return maxStamina;
+    }
+
+    public float getStaminaRegen()
+    {
+        return staminaRegenTimer;
+    }
 }

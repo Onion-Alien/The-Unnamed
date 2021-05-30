@@ -26,19 +26,19 @@ public class PauseMenuManager : MonoBehaviour
     //Pauses the game, freezes time, sets isPaused to true for other methods
     public void PauseGame()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-        isPaused = true;
-    }
-
-
-    //resumes game
-    public void ResumeGame()
-    {
-        pauseMenu.SetActive(false);
-        exitMenu.SetActive(false);
-        Time.timeScale = 1f;
-        isPaused = false;
+        if (!isPaused)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+            isPaused = true;
+        }
+        else
+        {
+            pauseMenu.SetActive(false);
+            exitMenu.SetActive(false);
+            Time.timeScale = 1f;
+            isPaused = false;
+        }
     }
 
     //Uses the immortal object OptionController to access the options menu

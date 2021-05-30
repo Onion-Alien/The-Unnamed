@@ -705,14 +705,13 @@ MonoBehaviour:
   isDead: 0
   isFrozen: 0
   isBlocking: 0
-  movementSpeed: 10
-  jumpForce: 16
+  jumpForce: 14
   groundCheckRadius: 0
   amountOfJumps: 1
   maxHealth: 100
   currentHealth: 0
-  healthBar: {fileID: 0}
-  groundCheck: {fileID: 0}
+  healthBar: {fileID: 1819368949824443917}
+  groundCheck: {fileID: 1819368950753400107}
   gameOverScreen: {fileID: 0}
 --- !u!50 &1819368950613052335
 Rigidbody2D:
@@ -913,6 +912,18 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 368f25e5-3523-4a12-ac04-5a2398a33341
     m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 65d7b9da-1487-4867-ab9f-560701d47dcf
+    m_ActionName: Player/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 15e26a98-4b74-4e90-b92e-b41b4a55eaa4
+    m_ActionName: Player/OpenShop[/Keyboard/b]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9a817fe4-4cb8-46e3-9f2a-1169630ae05d
+    m_ActionName: Player/KillPlayer[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
