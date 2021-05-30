@@ -4,26 +4,27 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-  - Ground
-  - Powerup
   - Start
   - Stop
+  - Movable
+  - Enemy
+  - Ground
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - 
   - Water
   - UI
+  - Enemies
+  - Player
+  - Ground
+  - Walls
+  - Movable
   - ignoreGround
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
@@ -47,32 +48,14 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Background
-    uniqueID: 4014439707
+    uniqueID: 3313374289
     locked: 0
   - name: Platforms
-    uniqueID: 3218344133
-    locked: 0
-  - name: Enviromental
-    uniqueID: 2224181345
-    locked: 0
-  - name: Props
-    uniqueID: 3004169787
-    locked: 0
-  - name: Enemies
-    uniqueID: 775410489
-    locked: 0
-  - name: Enemy
-    uniqueID: 4114069727
-    locked: 0
-  - name: Player
-    uniqueID: 957205169
+    uniqueID: 3029356641
     locked: 0
   - name: UI
-    uniqueID: 4166799549
+    uniqueID: 413841657
     locked: 0
-  - name: OnTopOfPlayer
-    uniqueID: 4079936717
-    locked: 0
-  - name: New Layer
-    uniqueID: 1509684797
+  - name: Player
+    uniqueID: 2200550901
     locked: 0

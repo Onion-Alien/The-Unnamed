@@ -6,6 +6,7 @@ public class VillagerScript : MonoBehaviour
 {
     private bool isIdle = true;
     private bool isWalking = false;
+    public GameObject namePlate;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -63,6 +64,7 @@ public class VillagerScript : MonoBehaviour
     private void flip()
     {
         gameObject.transform.Rotate(0.0f, 180.0f, 0.0f);
+        namePlate.transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
     public void toggleIsLeft()
@@ -72,28 +74,28 @@ public class VillagerScript : MonoBehaviour
 
     public void randomWalk()
     {
-            isIdle = false;
-            isWalking = true;
-            walkPoint = Random.Range(minX, maxX);
+        isIdle = false;
+        isWalking = true;
+        walkPoint = Random.Range(minX, maxX);
 
-            if (gameObject.transform.position.x > walkPoint)
+        if (gameObject.transform.position.x > walkPoint)
+        {
+            direction = -1;
+            if (!isLeft)
             {
-                direction = -1;
-                if (!isLeft)
-                {
-                    flip();
-                    toggleIsLeft();
-                }
+                flip();
+                toggleIsLeft();
             }
-            else
+        }
+        else
+        {
+            direction = 1;
+            if (isLeft)
             {
-                direction = 1;
-                if (isLeft)
-                {
-                    flip();
-                    toggleIsLeft();
-                }
+                flip();
+                toggleIsLeft();
             }
+        }
     }
 
 }

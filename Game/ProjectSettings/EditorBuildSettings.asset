@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 3c5a1d40825fe99498cd02b3f270b7a9
   - enabled: 1
-    path: Assets/Scenes/Bailey WIP.unity
-    guid: ef610ca19ef14ea4e9a946ce22f95092
-  - enabled: 1
     path: Assets/Scenes/Liam WIP.unity
     guid: 90135512d76de4f45aade6fa104ef79d
+  - enabled: 1
+    path: Assets/Scenes/Bailey WIP.unity
+    guid: ef610ca19ef14ea4e9a946ce22f95092
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3498e7194e80cac44874623737c2fadd,
       type: 2}

@@ -6,42 +6,44 @@ using UnityEngine.UI;
 
 public class DragDropper : MonoBehaviour
 {
-    private Vector3 mousePosition;
-    private Rigidbody2D rb;
-    private Vector2 direction;
-    private float moveSpeed = 100f;
-    private bool hovering;
+    //Used to be a class that made canvas's moveable by holding right click and moving around the screen, but since we have the cool new input system all of this doesn't work, love it
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    //private Vector3 mousePosition;
+    //private Rigidbody2D rb;
+    //private Vector2 direction;
+    //private float moveSpeed = 100f;
+    //private bool hovering;
 
-    void Update()
-    {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        direction = (mousePosition - transform.position).normalized;
-        rb.velocity = new Vector2(direction.x * moveSpeed, direction.y * moveSpeed);
+    //void Start()
+    //{
+    //    rb = GetComponent<Rigidbody2D>();
+    //}
 
-        if (Input.GetMouseButton(1))
-        {
-            transform.position = transform.position + (new Vector3(rb.velocity.x, rb.velocity.y, 0.0f));
-        }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
-    }
+    //void Update()
+    //{
+    //    mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //    direction = (mousePosition - transform.position).normalized;
+    //    rb.velocity = new Vector2(direction.x * moveSpeed, direction.y * moveSpeed);
 
-    public void toggleHovering()
-    {
-        if (hovering)
-        {
-            hovering = false;
-        }
-        else
-        {
-            hovering = true;
-        }
-    }
+    //    if (Input.GetMouseButton(1))
+    //    {
+    //        transform.position = transform.position + (new Vector3(rb.velocity.x, rb.velocity.y, 0.0f));
+    //    }
+    //    else
+    //    {
+    //        rb.velocity = Vector2.zero;
+    //    }
+    //}
+
+    //public void toggleHovering()
+    //{
+    //    if (hovering)
+    //    {
+    //        hovering = false;
+    //    }
+    //    else
+    //    {
+    //        hovering = true;
+    //    }
+    //}
 }
