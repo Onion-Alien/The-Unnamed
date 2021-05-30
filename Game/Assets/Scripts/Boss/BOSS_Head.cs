@@ -7,7 +7,7 @@ public class BOSS_Head : MonoBehaviour
     private BOSS_Arm_Spinner armSpinner;
     public State _state;
     public Phase _phase;
-    private float timer;
+    public float timer;
 
     public int health;
     public HealthBar healthBar;
@@ -61,10 +61,6 @@ public class BOSS_Head : MonoBehaviour
                 case State.Pause:
                     break;
             }
-            if (health <= 1900)
-            {
-                armSmasher.Death();
-            }
             yield return 0;
         }
     }
@@ -86,16 +82,25 @@ public class BOSS_Head : MonoBehaviour
                     StartCoroutine("Phase1");
                     break;
                 case Phase.Phase2:
+                    StopCoroutine("Phase1");
                     StartCoroutine("Phase2");
+                    break;
+                case Phase.Phase3:
+                    StopCoroutine("Phase2");
+                    StartCoroutine("Phase3");
                     break;
             }
             if (health >= 1500)
             {
                 _phase = Phase.Phase1;
             }
-            if (health >= 1000 && health < 1500)
+            if (health >= 750 && health < 1500)
             {
                 _phase = Phase.Phase2;
+            }
+            if (health < 750)
+            {
+                _phase = Phase.Phase3;
             }
         }
     }
@@ -105,8 +110,7 @@ public class BOSS_Head : MonoBehaviour
         switch(Mathf.CeilToInt(timer))
         { 
             case 10:
-                armSmasher.doSpecial();
-                //arm_Spinner.doAttack1();
+                armSpinner.doAttack1();
                 break;
             case 15:
                 armSmasher.doAttack1();
@@ -121,6 +125,7 @@ public class BOSS_Head : MonoBehaviour
                 armSpinner.doAttack2();
                 break;
             case 35:
+                armSmasher.doSpecial();
                 break;
             case 40:
                 timer = 0;
@@ -133,7 +138,63 @@ public class BOSS_Head : MonoBehaviour
     {
         switch (Mathf.CeilToInt(timer))
         {
-
+            case 10:
+                armSmasher.doAttack1();
+                break;
+            case 13:
+                armSmasher.doAttack1();
+                break;
+            case 16:
+                armSmasher.doAttack1();
+                break;
+            case 19:
+                armSmasher.doAttack1();
+                break;
+            case 25:
+                armSpinner.doAttack2();
+                break;
+            case 30:
+                armSmasher.doAttack1();
+                break;
+            case 35:
+                armSmasher.doSpecial();
+                break;
+            case 40:
+                timer = 0;
+                _state = State.Idle;
+                break;
+        }
+    }
+    
+    private void Phase3()
+    {
+        switch (Mathf.CeilToInt(timer))
+        {
+            case 10:
+                armSmasher.doAttack1();
+                break;
+            case 13:
+                armSmasher.doAttack1();
+                break;
+            case 16:
+                armSmasher.doAttack1();
+                break;
+            case 19:
+                armSmasher.doAttack1();
+                break;
+            case 25:
+                armSpinner.doAttack2();
+                break;
+            case 30:
+                armSmasher.doAttack1();
+                break;
+            case 35:
+                armSmasher.doSpecial();
+                break;
+            case 40:
+                timer = 0;
+                _state = State.Idle;
+                break;
         }
     }
 
@@ -143,8 +204,13 @@ public class BOSS_Head : MonoBehaviour
         healthBar.Set(health);
         if (health <= 0)
         {
-            //Die();
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        throw new System.NotImplementedException();
     }
 
     private void Idle()

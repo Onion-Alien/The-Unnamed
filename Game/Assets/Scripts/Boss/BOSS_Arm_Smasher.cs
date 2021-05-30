@@ -74,15 +74,12 @@ public class BOSS_Arm_Smasher : MonoBehaviour
     {
         if (!attackSpecialRunning)
         {
+            attackSpecialRunning = true;
             foreach (SpriteRenderer x in GetComponentsInChildren<SpriteRenderer>())
             {
                 x.color = Color.green;
+
             }
-            foreach (Spike x in GetComponentsInChildren<Spike>())
-            {
-                x.enabled = false;
-            }
-            attackSpecialRunning = true;
             state = State.SeekSpecial;
         }
     }
@@ -137,6 +134,19 @@ public class BOSS_Arm_Smasher : MonoBehaviour
         }
     }
 
+    private void AttackSpecial()
+    {
+        if (transform.position != attackPos)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, attackPos, 80 * Time.deltaTime);
+        }
+        if (transform.position == attackPos)
+        {
+            StartCoroutine(Wait(5f, State.Idle));
+            attackSpecialRunning = false;
+        }
+    }
+
     private void Attack1()
     {
         if (transform.position != attackPos)
@@ -155,40 +165,9 @@ public class BOSS_Arm_Smasher : MonoBehaviour
         head.TakeDamage(damage);
     }
 
-    private void AttackSpecial()
-    {
-        if (transform.position != attackPos)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, attackPos, 80 * Time.deltaTime);
-        }
-        if (transform.position == attackPos)
-        {
-            Invoke("EnableSpikes", 5f);
-            StartCoroutine(Wait(5f, State.Idle));
-            attackSpecialRunning = false;
-        }
-    }
-
-    private void EnableSpikes()
-    {
-        foreach (Spike x in GetComponentsInChildren<Spike>())
-        {
-            x.enabled = true;
-        }
-    }
-
     IEnumerator Wait(float i, State state)
     {
         yield return new WaitForSeconds(i);
         this.state = state;
-    }
-
-    public void Death()
-    {
-        foreach (Rigidbody2D x in GetComponentsInChildren<Rigidbody2D>())
-        {
-            x.constraints = RigidbodyConstraints2D.None;
-        }
-        gameObject.SetActive(false);
     }
 }

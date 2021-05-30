@@ -170,8 +170,8 @@ public class BOSS_Arm_Spinner : MonoBehaviour
         sr.sortingLayerName = "Background";
         sr.sortingOrder = 5;
         sr.material.color = Color.red;
-        spike.Launch(700f, 2f);
-        yield return new WaitForSeconds(Random.Range(0.05f, 0.1f));
+        spike.Launch(400f, 5f);
+        yield return new WaitForSeconds(Random.Range(0.05f, 0.07f));
         attack2Shoot = false;
     }
 
