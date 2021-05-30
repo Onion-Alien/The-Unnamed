@@ -6,14 +6,14 @@ using System.Collections.Generic;
 public class ShopController : MonoBehaviour
 {
     public ParticleSystem buttonGlow;
-    public GameObject sellCanvas;
+    public GameObject sellCanvas,craftCanvas;
     public static GameObject selectedButton;
     public GameObject staminaRing, healthRing;
-    public GameObject purchaseTab, sellItemTab, buyButtonObj;
+    public GameObject purchaseTab, sellItemTab,craftTab, buyButtonObj;
     public Text goldText, buyButton;
     private int playerGold, itemCost;
     private string itemName, boughtItem;
-    private bool buttonSelected, sellActive;
+    private bool buttonSelected, sellActive,craftActive;
     public GameObject player;
     private Rigidbody2D playerRB;
     private Color originalButtonColor, modifiedColor;
@@ -22,10 +22,12 @@ public class ShopController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        craftActive = false;
         gameObject.SetActive(false);
         modifiedColor = Color.white;
         sellCanvas.gameObject.SetActive(false);
-        modifiedColor.a = 0.5f;
+        craftCanvas.gameObject.SetActive(false);
+        modifiedColor.a = 5f;
         playerRB = player.GetComponent<Rigidbody2D>();
         disableParticles();
         pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombat>();
@@ -54,11 +56,11 @@ public class ShopController : MonoBehaviour
             buyButton.text = "Buy Item";
             selectedButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
             buttonGlow.enableEmission = true;
-            buttonGlow.emissionRate = 1.0f;
+            buttonGlow.emissionRate = 5.0f;
             buttonGlow.Play();
         }
 
-        if (selectedButton != null && (selectedButton.name != "Return" || selectedButton.name != "Purchase" || selectedButton.name != "purchaseTab" || selectedButton.name != "sellTab" || selectedButton.name != "Addgold") && buttonSelected)
+        if (selectedButton != null && (selectedButton.name != "Return" || selectedButton.name != "Purchase" || selectedButton.name != "purchaseTab" || selectedButton.name != "sellTab" || selectedButton.name != "Addgold" || selectedButton.name != "craftTab") && buttonSelected)
         {
             switch (selectedButton.name)
             {
@@ -189,6 +191,7 @@ public class ShopController : MonoBehaviour
             buttonGlow.enableEmission = false;
             disableParticles();
             purchaseTab.transform.GetComponent<Image>().color = sellItemTab.transform.GetComponent<Image>().color;
+            craftTab.transform.GetComponent<Image>().color = sellItemTab.transform.GetComponent<Image>().color;
             sellItemTab.transform.GetComponent<Image>().color = Color.white;
             sellCanvas.gameObject.SetActive(true);
             buyButton.text = "Sell Item";
@@ -197,7 +200,20 @@ public class ShopController : MonoBehaviour
             resetVariables();
         }
     }
+    public void switcCraftTab()
+    {
+        if (!craftActive)
+        {
+            
 
+            craftTab.transform.GetComponent<Image>().color = Color.white;
+            sellItemTab.transform.GetComponent<Image>().color = craftTab.transform.GetComponent<Image>().color;
+            purchaseTab.transform.GetComponent<Image>().color = craftTab.transform.GetComponent<Image>().color;
+            craftCanvas.gameObject.SetActive(true);
+            buyButton.gameObject.SetActive(false);
+            craftActive = true;
+        }
+    }
     public void switchPurchaseTab()
     {
         if (sellActive)
@@ -209,6 +225,9 @@ public class ShopController : MonoBehaviour
             sellActive = false;
         }
     }
+
+        
+
 
     public void disableParticles()
     {
@@ -237,6 +256,7 @@ public class ShopController : MonoBehaviour
     {
         selectedButton = null;
         buttonSelected = false;
+      
         itemCost = 0;
         boughtItem = "";
     }
