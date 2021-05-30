@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
  */
 
 public class PlayerController : MonoBehaviour
-{
+{ 
     private int amountOfJumpsLeft;
 
     private bool isFacingRight = true;
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public bool isBlocking = false;
 
     private Rigidbody2D rb;
-    private Animator anim;
+    private Animator anim; 
 
     public float movementSpeed = 10.0f;
     public float jumpForce = 16.0f;
@@ -49,8 +49,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-       // IsGrounded();
-
         if (!PauseMenuManager.isPaused)
         {
             if (!isDead)
@@ -68,7 +66,6 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        Debug.Log("trying to move");
         horizontal = context.ReadValue<Vector2>().x;
     }
 
@@ -76,7 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canJump)
         {
-            GetComponent<Animator>().SetTrigger("isJumping");
+            anim.SetTrigger("isJumping");
             if (context.performed)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -95,11 +92,14 @@ public class PlayerController : MonoBehaviour
         {
             if (context.performed)
             {
-                StartCoroutine(playerCombat.UseStamina(20f));
-                isBlocking = true;
-                rb.constraints = RigidbodyConstraints2D.FreezePosition;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                isFrozen = true;
+                if (playerCombat.stamina >= 20)
+                {
+                    StartCoroutine(playerCombat.UseStamina(20f));
+                    isBlocking = true;
+                    rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    isFrozen = true;
+                }
             }
             if (context.canceled)
             {
@@ -114,20 +114,18 @@ public class PlayerController : MonoBehaviour
     //checks if player is on the ground
     private bool IsGrounded()
     {
-    
-        // return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-        return true;
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround); 
     }
-
+    
     //checks if player can jump and if they have any more jumps left
     private void CheckIfCanJump()
     {
-        if (IsGrounded() && rb.velocity.y <= 1)
+        if(IsGrounded() && rb.velocity.y <= 1)
         {
             amountOfJumpsLeft = amountOfJumps;
         }
-
-        if (amountOfJumpsLeft <= 0)
+        
+        if(amountOfJumpsLeft <= 0)
         {
             canJump = false;
         }
@@ -138,11 +136,11 @@ public class PlayerController : MonoBehaviour
     }
     private void CheckMovementDirection()
     {
-        if (isFacingRight && horizontal < 0)
+        if(isFacingRight && horizontal < 0)
         {
             Flip();
         }
-        else if (!isFacingRight && horizontal > 0)
+        else if(!isFacingRight && horizontal > 0)
         {
             Flip();
         }
@@ -183,7 +181,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage, bool ignoreBlock)
     {
         if (!isDead)
-        {
+        { 
             if (isBlocking && !ignoreBlock)
             {
                 anim.SetTrigger("isBlock");
@@ -193,7 +191,7 @@ public class PlayerController : MonoBehaviour
             {
                 anim.SetTrigger("isHit");
                 currentHealth -= damage;
-            }
+            }   
         }
         healthBar.Set(currentHealth);
         if (currentHealth <= 0)
@@ -204,7 +202,7 @@ public class PlayerController : MonoBehaviour
     //Freezes the player, used for after attacks so you can't move and spam attacks
     public void Freeze()
     {
-        StartCoroutine("freezeTime");
+        //StartCoroutine("freezeTime");
     }
 
     private IEnumerator freezeTime()

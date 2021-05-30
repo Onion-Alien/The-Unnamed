@@ -463,6 +463,7 @@ MonoBehaviour:
   objectToFollow: {fileID: 1819368950613052333}
   nametag: {fileID: 1426910783638698728}
   offset: {x: 0, y: 0, z: 0}
+  isPlayer: 0
   nameToggle: 0
 --- !u!1 &1819368949584728010
 GameObject:
@@ -698,23 +699,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1819368950613052321}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f007582c170b8e47bb33111f448a119, type: 3}
+  m_Script: {fileID: 11500000, guid: 0908089c847d0d44f965994fcf801fb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 0
   isDead: 0
   isFrozen: 0
   isBlocking: 0
-  movementSpeed: 6
-  jumpForce: 13
-  groundCheckRadius: 0.25
-  amountOfJumps: 2
-  maxHealth: 300
-  currentHealth: 300
-  healthBar: {fileID: 1819368949824443917}
-  groundCheck: {fileID: 1819368950753400107}
-  gameOverScreen: {fileID: 5114663932115325661, guid: 413ecd2ab86d24ebca5c166bc4de951c,
-    type: 3}
+  movementSpeed: 10
+  jumpForce: 16
+  groundCheckRadius: 0
+  amountOfJumps: 1
+  maxHealth: 100
+  currentHealth: 0
+  healthBar: {fileID: 0}
+  groundCheck: {fileID: 0}
+  gameOverScreen: {fileID: 0}
 --- !u!50 &1819368950613052335
 Rigidbody2D:
   serializedVersion: 4
@@ -801,9 +800,8 @@ MonoBehaviour:
   movableLayers:
     serializedVersion: 2
     m_Bits: 1024
-  DMG_light: 20
-  DMG_medium: 30
-  DMG_heavy: 40
+  dmgLight: 20
+  dmgHeavy: 40
   attackRange: 0.8
   attackRate: 1
   stamina: 100
@@ -883,22 +881,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c144c67a-a559-4df0-818f-824cc94ddbec
     m_ActionName: Player/Attack_Light[/DualShock4GamepadHID/buttonNorth,/Keyboard/j]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1819368950613052328}
-        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
-        m_MethodName: Medium
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 83c81ef0-5364-43b6-8ef9-be8714754de1
-    m_ActionName: Player/Attack_Medium[/DualShock4GamepadHID/buttonWest,/Keyboard/k]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1819368950613052328}
