@@ -119,9 +119,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1916745476978617526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f609e60d8155df4b99a673d681b5b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikeDmg: 10
 --- !u!1 &3850367584909166789
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +209,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &3850367584909166788
@@ -253,6 +254,7 @@ MonoBehaviour:
   y: 0
   speed: 3
   spinningPlatform: 0
+  platform: 0
 --- !u!1 &7056672201442439849
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,9 +374,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7056672201442439849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f609e60d8155df4b99a673d681b5b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikeDmg: 10
 --- !u!1 &8664320074321545136
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,9 +497,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8664320074321545136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f609e60d8155df4b99a673d681b5b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikeDmg: 10
 --- !u!1 &9082353561462187437
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,6 +620,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9082353561462187437}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f609e60d8155df4b99a673d681b5b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikeDmg: 10

@@ -177,4 +177,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   g: {fileID: 8523407312971131456}
   groundCheckRadius: 0.1
-  groundCheck: {fileID: 0}
+  groundCheck: {fileID: 1800235503}

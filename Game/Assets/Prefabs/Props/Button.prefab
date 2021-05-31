@@ -46,8 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reusable: 0
-  force: 700
-  decayTime: 3
+  force: 0
+  decayTime: 0
+  multipleObjectInterval: 0
+  SpikeButton: 0
 --- !u!212 &8695454761773338373
 SpriteRenderer:
   m_ObjectHideFlags: 0

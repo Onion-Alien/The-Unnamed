@@ -119,9 +119,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 406201496325164788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f609e60d8155df4b99a673d681b5b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikeDmg: 10
 --- !u!1 &2380301259513742461
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +136,7 @@ GameObject:
   - component: {fileID: 130391969393331650}
   - component: {fileID: 6805383478257722469}
   m_Layer: 8
-  m_Name: Large_Crate
+  m_Name: Large_Crate 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,6 +176,7 @@ MonoBehaviour:
   y: 3
   speed: 1
   spinningPlatform: 0
+  platform: 0
 --- !u!212 &130391969393331650
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -223,7 +225,7 @@ SpriteRenderer:
   m_Size: {x: 2.03125, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &6805383478257722469
@@ -371,9 +373,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8859056399776902324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f609e60d8155df4b99a673d681b5b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikeDmg: 10
 --- !u!1 &8859056399796508712
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,9 +496,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8859056399796508712}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f609e60d8155df4b99a673d681b5b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikeDmg: 10
 --- !u!1 &8859056400682669332
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,6 +619,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8859056400682669332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f609e60d8155df4b99a673d681b5b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikeDmg: 10
