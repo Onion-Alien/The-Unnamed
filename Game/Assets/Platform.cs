@@ -9,7 +9,6 @@ public class Platform : MonoBehaviour
         {
             collision.collider.transform.SetParent(transform);
             colCheck = true;
-            GetComponentInParent<Elevator>().isEnabled = true;
         }
     }
 

@@ -15,8 +15,10 @@ public class fragmentPickUp : MonoBehaviour
         if (c.gameObject.name == "Player")
 
         {
+            
             FragmentCount.fc.addFragment(1,g);
             Destroy(gameObject);
+
         }
         
        

@@ -50,6 +50,7 @@ public class Elevator : MonoBehaviour
 
     private void Update()
     {
+        isEnabled = GetComponentInChildren<Platform>().colCheck;
         if (isEnabled)
         {
             Move();

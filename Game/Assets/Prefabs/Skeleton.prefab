@@ -911,7 +911,7 @@ MonoBehaviour:
   attackRange: 1.5
   attackMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1
   attackPoint: {fileID: 1790564207445289753}
 --- !u!70 &2559832255554210443
 CapsuleCollider2D:

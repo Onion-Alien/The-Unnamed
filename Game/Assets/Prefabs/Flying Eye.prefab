@@ -353,7 +353,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 412398839850295592}
-  hp: {fileID: 0}
 --- !u!1 &719297386385377151
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,7 +653,7 @@ Transform:
   m_GameObject: {fileID: 5536795074674432802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -368.39, y: 27.19, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.2554, z: 1}
   m_Children:
   - {fileID: 626426615131047620}
   - {fileID: 1819811011}
@@ -790,13 +789,8 @@ MonoBehaviour:
   coin: {fileID: 3168752429289260687}
   maxHealth: 100
   healthBar: {fileID: 412398839850295595}
-  f1: {fileID: 0}
-  f2: {fileID: 0}
-  f3: {fileID: 0}
-  f4: {fileID: 0}
-  f5: {fileID: 0}
-  f6: {fileID: 0}
-  showDamage: {fileID: 0}
+  fragment1: {fileID: 1650713614331285473}
+  fragment2: {fileID: 7509195016970999642}
 --- !u!114 &4531401196938103892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -813,7 +807,7 @@ MonoBehaviour:
   attackRange: 1.5
   attackMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1
   attackPoint: {fileID: 626426615131047620}
 --- !u!70 &1974785157269477425
 CapsuleCollider2D:
