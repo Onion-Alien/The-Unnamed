@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TX Village Props Billboard
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300052, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
   m_Transform:
     e00: 1
     e01: 0
