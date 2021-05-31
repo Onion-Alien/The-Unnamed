@@ -117,6 +117,7 @@ public class PlayerCombat : MonoBehaviour
             StartCoroutine(UseStamina(20f));
             pc.Freeze();
             nextAttackTime = Time.time + 0.5f / attackRate;
+
         }
     }
 

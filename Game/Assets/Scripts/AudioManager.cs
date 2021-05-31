@@ -17,10 +17,10 @@ public class AudioManager : MonoBehaviour
     private float mvol; // Global music volume
     private float evol; // Global effects volume
 
-    private void Start()
+    void Start()
     {
         //start the music
-        PlayMusic();
+        PlaySound("Theme");
     }
 
 

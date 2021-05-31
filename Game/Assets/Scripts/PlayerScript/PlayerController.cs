@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 /*
  * This script controls the player controller
  */
@@ -85,6 +86,8 @@ public class PlayerController : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             }
+
+            FindObjectOfType<AudioManager>().PlaySound("Jump");
         }
     }
 
@@ -189,11 +192,15 @@ public class PlayerController : MonoBehaviour
             {
                 anim.SetTrigger("isBlock");
                 currentHealth -= (int)(damage * 0.1);
+
+                FindObjectOfType<AudioManager>().PlaySound("Armor Damage");
             }
             else
             {
                 anim.SetTrigger("isHit");
                 currentHealth -= damage;
+
+                
             }   
         }
         healthBar.Set(currentHealth);
@@ -229,6 +236,8 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isDead", true);
         gameOverScreen.SetActive(true);
         gameOverScreen.GetComponent<GameOverScreen>().Setup();
+
+        FindObjectOfType<AudioManager>().PlaySound("Game Over");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

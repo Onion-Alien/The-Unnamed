@@ -12,6 +12,8 @@ public class StartBossFight : MonoBehaviour
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
             gameObject.transform.GetChild(1).gameObject.SetActive(true);
             gameObject.transform.Find("BOSS").gameObject.SetActive(true);
+
+            FindObjectOfType<AudioManager>().PlaySound("Battle");
         }
     }
 }

@@ -46,6 +46,8 @@ public class Moving_Crate : MonoBehaviour
         if (collision.gameObject.tag == "Player" && platform)
         {
             collision.collider.transform.SetParent(transform);
+
+            FindObjectOfType<AudioManager>().PlaySound("LandingOnCrate");
         }
     }
 
@@ -54,6 +56,8 @@ public class Moving_Crate : MonoBehaviour
         if (collision.gameObject.tag == "Player" && platform)
         {
             collision.collider.transform.SetParent(null);
+
+            FindObjectOfType<AudioManager>().PlaySound("LandingOnCrate");
         }
     }
 
