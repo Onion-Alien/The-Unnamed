@@ -39,6 +39,7 @@ public class PlayerCombat : MonoBehaviour
     private void Start()
     {
         stamBar.SetMax(Mathf.RoundToInt(maxStamina));
+        stamBar.showHP((int)stamina, (int)maxStamina);
     }
 
     private void Update()
@@ -51,6 +52,7 @@ public class PlayerCombat : MonoBehaviour
     //calculates current stamina and how long until stamina can regen based on time
     private void StaminaUpdate()
     {
+        
         if (stamina < maxStamina)
         {
             if (staminaRegenTimer >= StaminaTimeToRegen)
@@ -65,12 +67,31 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    public void increaseStam(float value)
+    {
+        if ((stamina + value) <= maxStamina)
+        {
+            stamina += value;
+            stamBar.Set((int)stamina);
+        }
+        else
+        {
+            stamina = maxStamina;
+            stamBar.Set((int)maxStamina);
+
+        }
+        stamBar.showHP((int)stamina, (int)maxStamina);
+    }
+
+    
+
     public IEnumerator UseStamina(float stamCost)
     {
         yield return new WaitForSeconds(0.2f);
         stamina -= stamCost;
         stamBar.Set(Mathf.RoundToInt(stamina));
         staminaRegenTimer = 0.0f;
+        stamBar.showHP((int)stamina, (int)maxStamina);
     }
 
     private IEnumerator SetStamina(float stam)
@@ -89,7 +110,7 @@ public class PlayerCombat : MonoBehaviour
             animator.SetTrigger("ATK_Light");
 
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-            foreach(Collider2D enemy in hitEnemies)
+            foreach (Collider2D enemy in hitEnemies)
             {
                 enemy.GetComponent<EnemyHit>().TakeDamage(dmgLight);
             }
@@ -123,26 +144,26 @@ public class PlayerCombat : MonoBehaviour
             StartCoroutine(SetStamina(40f));
         }
         yield return new WaitForSeconds(0.1f);
-        switch(attack)
+        switch (attack)
         {
             case "ATK_Heavy":
-            {
-                foreach (Collider2D movable in hitMovables)
                 {
-                    movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
-                    movable.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000000f);
+                    foreach (Collider2D movable in hitMovables)
+                    {
+                        movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
+                        movable.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000000f);
+                    }
+                    break;
                 }
-                break;
-            }
             case "ATK_Medium":
-            {
-                foreach (Collider2D movable in hitMovables)
                 {
-                    movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
-                    movable.GetComponent<Rigidbody2D>().AddForce(transform.right *- 1000000f);
+                    foreach (Collider2D movable in hitMovables)
+                    {
+                        movable.GetComponent<Rigidbody2D>().AddForce(transform.up * 500000f);
+                        movable.GetComponent<Rigidbody2D>().AddForce(transform.right * -1000000f);
+                    }
+                    break;
                 }
-                break;
-            }
         }
 
     }

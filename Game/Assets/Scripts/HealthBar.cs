@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     public Slider slider;
+    public Text hp;
     //sets the max health
     public void SetMax(int health)
     {
@@ -21,4 +22,10 @@ public class HealthBar : MonoBehaviour
     {
         slider.value = health;
     }
+
+    public void showHP(int current, int max)
+    {
+        hp.text = current.ToString() + "/" + max.ToString();
+    }
+
 }

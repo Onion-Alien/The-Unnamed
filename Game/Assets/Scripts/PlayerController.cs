@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim; 
 
-    public static float movementSpeed = 10.0f;
+    public float movementSpeed = 10.0f;
     public float jumpForce = 16.0f;
     public float groundCheckRadius;
 
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private LayerMask whatIsGround;
     public GameObject gameOverScreen;
     private PlayerCombat playerCombat;
+    public GameObject showDamage;
 
     private float horizontal;
 
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
         amountOfJumpsLeft = amountOfJumps;
         whatIsGround = LayerMask.GetMask("Ground", "ignoreGround");
         gameOverScreen.SetActive(false);
+        healthBar.showHP(currentHealth, maxHealth);
     }
 
     private void Update()
@@ -180,6 +182,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage, bool ignoreBlock)
     {
+        ShowDamage(damage.ToString());
         if (!isDead)
         { 
             if (isBlocking && !ignoreBlock)
@@ -194,11 +197,13 @@ public class PlayerController : MonoBehaviour
             }   
         }
         healthBar.Set(currentHealth);
+        healthBar.showHP(currentHealth, maxHealth);
         if (currentHealth <= 0)
         {
             Die();
         }
     }
+
     //Freezes the player, used for after attacks so you can't move and spam attacks
     public void Freeze()
     {
@@ -223,6 +228,7 @@ public class PlayerController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         anim.SetBool("isDead", true);
         gameOverScreen.SetActive(true);
+        gameOverScreen.GetComponent<GameOverScreen>().Setup();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -311,5 +317,31 @@ public class PlayerController : MonoBehaviour
         playerCombat.setAttackRate(playerCombat.getAttackRate() * 2);
         yield return new WaitForSeconds(10.0f);
         playerCombat.setAttackRate(playerCombat.getAttackRate() / 2);
+    }
+
+    public void updateHealth(int value, GameObject item)
+    {
+        if (item.name.Contains("RedPotion"))
+        {    
+            if ((currentHealth + value ) <= maxHealth)
+            {
+                currentHealth += value;
+                healthBar.Set(currentHealth);
+            }
+            else
+            {
+                currentHealth = maxHealth;
+                healthBar.Set(maxHealth);
+            }
+        }
+    }
+
+    void ShowDamage(string text)
+    {
+        if (showDamage)
+        {
+            GameObject prefab = Instantiate(showDamage, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
+            prefab.GetComponentInChildren<TextMesh>().text = text;
+        }
     }
 }

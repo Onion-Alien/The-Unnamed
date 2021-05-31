@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 8144547854591379780}
   - component: {fileID: 8144547854591379783}
   - component: {fileID: 8144547854591379782}
-  - component: {fileID: 3293227462295843275}
+  - component: {fileID: 7482621293799403047}
   m_Layer: 10
   m_Name: Spike Ball
   m_TagString: Untagged
@@ -127,7 +127,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -196,7 +196,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.21867509
---- !u!114 &3293227462295843275
+--- !u!114 &7482621293799403047
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,6 +205,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8144547854591379801}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6441428733c7b7942a534cf392a136d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
