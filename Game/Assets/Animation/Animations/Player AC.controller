@@ -405,12 +405,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: ATK_Medium
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: ATK_Heavy
     m_Type: 9
     m_DefaultFloat: 0
@@ -853,10 +847,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102936312796747884}
-    m_Position: {x: 320, y: 10, z: 0}
+    m_Position: {x: 280, y: 10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102186082399273200}
-    m_Position: {x: 320, y: 180, z: 0}
+    m_Position: {x: 280, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102153170140270550}
     m_Position: {x: 730, y: 330, z: 0}
@@ -865,10 +859,7 @@ AnimatorStateMachine:
     m_Position: {x: 760, y: 400, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102331342967997192}
-    m_Position: {x: 720, y: -120, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 2732934886406702470}
-    m_Position: {x: 480, y: -120, z: 0}
+    m_Position: {x: 490, y: -120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7533280216307269487}
     m_Position: {x: 260, y: -120, z: 0}
@@ -890,7 +881,6 @@ AnimatorStateMachine:
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 1101725151441657000}
-  - {fileID: 728632681919784157}
   - {fileID: 535112566099120357}
   - {fileID: -164105556848966548}
   - {fileID: -3443654870452873513}
