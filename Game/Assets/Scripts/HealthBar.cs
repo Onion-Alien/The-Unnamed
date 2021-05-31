@@ -25,7 +25,10 @@ public class HealthBar : MonoBehaviour
 
     public void showHP(int current, int max)
     {
-        hp.text = current.ToString() + "/" + max.ToString();
+        if (hp != null)
+        {
+            hp.text = current.ToString() + "/" + max.ToString();
+        }
     }
 
 }

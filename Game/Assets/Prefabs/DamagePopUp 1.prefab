@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8843312396951931329}
   - component: {fileID: 5004105124530595347}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DamagePopUp 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6063175080128044146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -349.98178, y: 30.242718, z: 5573.475}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7370909323896475828}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 7370909323896475829}
   - component: {fileID: 7370909323896475834}
   - component: {fileID: 7370909323896475831}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PopUpText
   m_TagString: Untagged
   m_Icon: {fileID: 0}

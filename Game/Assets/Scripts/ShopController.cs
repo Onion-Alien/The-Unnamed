@@ -39,7 +39,8 @@ public class ShopController : MonoBehaviour
     }
     void OnDisable()
     {
-        buttonGlow.enableEmission = false;
+        var emission = buttonGlow.emission;
+        emission.enabled = false;
         resetVariables();
         boughtItem = "";
     }

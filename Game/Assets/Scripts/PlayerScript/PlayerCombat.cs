@@ -24,7 +24,6 @@ public class PlayerCombat : MonoBehaviour
     public float stamina = 100f;
     public float maxStamina = 100f;
     private float staminaRegenTimer = 1f;
-    private const float StaminaDecreasePerFrame = 1f;
     private const float StaminaIncreasePerFrame = 35;
     private const float StaminaTimeToRegen = 1f;
     public HealthBar stamBar;
@@ -82,9 +81,7 @@ public class PlayerCombat : MonoBehaviour
         }
         stamBar.showHP((int)stamina, (int)maxStamina);
     }
-
     
-
     public IEnumerator UseStamina(float stamCost)
     {
         yield return new WaitForSeconds(0.2f);
@@ -204,12 +201,6 @@ public class PlayerCombat : MonoBehaviour
             return;
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
-
-    public void setDMG(int[] DMG)
-    {
-        dmgLight = DMG[0];
-        dmgHeavy = DMG[2];
     }
 
     public void setAttackRate(float rate)
