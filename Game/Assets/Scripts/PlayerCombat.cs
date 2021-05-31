@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 /*
  * This script contains all the functions for player combat
@@ -17,6 +19,7 @@ public class PlayerCombat : MonoBehaviour
     public int dmgLight = 20;
     public int dmgHeavy = 40;
     public float attackRange = 0.5f;
+    public bool canInteract;
 
     public float attackRate = 0.5f;
     private float nextAttackTime = 0f;
@@ -61,6 +64,22 @@ public class PlayerCombat : MonoBehaviour
             else
             {
                 staminaRegenTimer += Time.deltaTime;
+            }
+        }
+    }
+
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if (canInteract)
+        {
+            Collider2D[] portals = Physics2D.OverlapCircleAll(transform.position, 20f);
+            foreach (var x in portals)
+            {
+                Portal portal = x.GetComponent<Portal>();
+                if (portal != null)
+                {
+                    portal.Interact();
+                }
             }
         }
     }
