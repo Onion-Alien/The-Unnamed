@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool isFacingRight = true;
     private bool isWalking;
     public bool isGrounded;
-    private bool canJump;
+    public bool canJump;
     public bool isDead = false;
     public bool isFrozen = false;
     public bool isBlocking = false;
