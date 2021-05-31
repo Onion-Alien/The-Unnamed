@@ -23,8 +23,8 @@ TagManager:
   - Walls
   - Movable
   - ignoreGround
-  - Player
-  - Enemy
+  - 
+  - 
   - 
   - 
   - 

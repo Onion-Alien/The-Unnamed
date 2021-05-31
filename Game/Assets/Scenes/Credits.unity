@@ -142,6 +142,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5010350038402946798, guid: e2397d4cc50815c46845f635537f5c66,
+        type: 3}
+      propertyPath: m_Text
+      value: "The Unnanmed TM. \nA game by SA Games Inc.\n\n\n\n\nMade with Unity
+        Engine.\n\n\n\n\nLiam Yates - Project Leader, Developer\n\n\nBailey Hickman
+        - Scrum Master, Developer\n\n\nMinh Lu - Developer\n\n\nDaisy Xiao - Developer\n\n\nPutheara
+        Uth - Developer\n\n\n\n\n\n\nSpecial Thanks to - \n\nBella\nMatthew\nDaniel\n"
+      objectReference: {fileID: 0}
     - target: {fileID: 5010350038941375640, guid: e2397d4cc50815c46845f635537f5c66,
         type: 3}
       propertyPath: m_Camera
