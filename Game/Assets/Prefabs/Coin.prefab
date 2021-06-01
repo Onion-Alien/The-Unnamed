@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24348cc28ee4d4d9b84f9087397cfa3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  current: 0
   groundCheckRadius: 0.18
   groundCheck: {fileID: 140521347}
+  r1: 0
+  r2: 0
