@@ -9,11 +9,23 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 3c5a1d40825fe99498cd02b3f270b7a9
   - enabled: 1
-    path: Assets/Scenes/Liam WIP.unity
-    guid: 90135512d76de4f45aade6fa104ef79d
+    path: Assets/Scenes/Tutorial.unity
+    guid: 0fffbf7af0b657548991bb4f437e55c8
+  - enabled: 1
+    path: Assets/Scenes/World-Hub.unity
+    guid: 5109f5db80348e945821f05dd2d2daeb
+  - enabled: 1
+    path: Assets/Scenes/Daisy.unity
+    guid: 567eeaaa0353b4db2b84853210b07a53
+  - enabled: 1
+    path: Assets/Scenes/Minh WIP.unity
+    guid: 5488f87a3a80e184a95b195abf01ce59
   - enabled: 1
     path: Assets/Scenes/Bailey WIP.unity
     guid: ef610ca19ef14ea4e9a946ce22f95092
+  - enabled: 1
+    path: Assets/Scenes/Liam WIP.unity
+    guid: 90135512d76de4f45aade6fa104ef79d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3498e7194e80cac44874623737c2fadd,
       type: 2}

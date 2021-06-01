@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
- * This script is used by the enemy to perform attack and decrease the
+ * This script is used by the enemy to perform attack and crease the
  * player's health bar once the attack is executed
  */
 
 public class EnemyAttack : MonoBehaviour
 {
 
-	public int attackDamage = 20;
+	public int attackDamage = 8;
 
 	public float attackRange = 1f;
 	public LayerMask attackMask;
@@ -19,12 +19,18 @@ public class EnemyAttack : MonoBehaviour
 	public void Attack()
 	{
 		//conduct the attack and reduce player's HP once the player reaches the attack point
-		Collider2D colInfo = Physics2D.OverlapCircle(attackPoint.position, attackRange, attackMask);
-		if (colInfo != null)
+		Collider2D[] colInfo = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, attackMask);
+		foreach (Collider2D x in colInfo)
 		{
-			colInfo.GetComponent<PlayerController>().TakeDamage(attackDamage, false);
+			PlayerController pc = x.GetComponent<PlayerController>();
+			if (pc != null)
+			{
+				pc.TakeDamage(attackDamage, true);
+			}
 		}
 	}
-
-
 }
+
+
+
+

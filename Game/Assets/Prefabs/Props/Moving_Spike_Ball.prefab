@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6574536898657618170}
   - component: {fileID: 3042829601086149854}
   - component: {fileID: 6574536898657618168}
-  - component: {fileID: 543151645220745333}
   m_Layer: 8
   m_Name: Moving_Spike_Ball
   m_TagString: Untagged
@@ -101,6 +100,7 @@ MonoBehaviour:
   y: 0
   speed: 2
   spinningPlatform: 0
+  platform: 0
 --- !u!58 &6574536898657618168
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -117,15 +117,3 @@ CircleCollider2D:
   m_Offset: {x: -0.0075206757, y: 0}
   serializedVersion: 2
   m_Radius: 0.3203373
---- !u!114 &543151645220745333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6574536898657618151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

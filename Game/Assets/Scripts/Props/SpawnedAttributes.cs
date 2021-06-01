@@ -11,13 +11,13 @@ public class SpawnedAttributes : MonoBehaviour
     void Awake()
     {
         Spawner spawner = GetComponentInParent<Spawner>();
-        if (spawner.ignoreGround)
-        {
-            GameObject ground = GameObject.FindGameObjectWithTag("Ground");
-            Collider2D c1 = ground.GetComponent<Collider2D>();
-            Collider2D c2 = gameObject.GetComponent<Collider2D>();
-            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), c1);
-        }
+        // if (spawner.ignoreGround)
+        // {
+        //     GameObject ground = GameObject.FindGameObjectWithTag("Ground");
+        //     Collider2D c1 = ground.GetComponent<Collider2D>();
+        //     Collider2D c2 = gameObject.GetComponent<Collider2D>();
+        //     Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), c1);
+        // }
         if (spawner.isExpire)
         {
             StartCoroutine("remove");

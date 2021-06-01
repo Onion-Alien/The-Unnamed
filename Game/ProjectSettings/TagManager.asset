@@ -24,8 +24,8 @@ TagManager:
   - Walls
   - Movable
   - ignoreGround
-  - Player
-  - Enemy
+  - Pickup
+  - 
   - 
   - 
   - 
@@ -59,7 +59,4 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2200550901
-    locked: 0
-  - name: OnTopOfPlayer
-    uniqueID: 3724568167
     locked: 0

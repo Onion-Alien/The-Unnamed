@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 406201496325164789}
   - component: {fileID: 406201496325164784}
   - component: {fileID: 406201496325164787}
-  - component: {fileID: 406201496325164786}
+  - component: {fileID: 4593822054926891387}
   m_Layer: 0
   m_Name: SpikeTrap (3)
   m_TagString: Untagged
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.03125, y: 0.34375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -102,7 +102,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
     oldSize: {x: 1.03125, y: 0.34375}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 1.03125, y: 0.34375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -110,7 +110,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9749483, y: 0.29312515}
   m_EdgeRadius: 0
---- !u!114 &406201496325164786
+--- !u!114 &4593822054926891387
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,10 +119,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 406201496325164788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f609e60d8155df4b99a673d681b5b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeDmg: 50
+  spikeDmg: 10
 --- !u!1 &2380301259513742461
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +222,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.03125, y: 2}
+  m_Size: {x: 0.39, y: 0.35}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -246,7 +246,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2.03125, y: 2}
-    newSize: {x: 2.03125, y: 2}
+    newSize: {x: 0.39, y: 0.35}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 8859056399776902325}
   - component: {fileID: 8859056399776902320}
   - component: {fileID: 8859056399776902323}
-  - component: {fileID: 8859056399776902322}
+  - component: {fileID: 3801318817322374864}
   m_Layer: 0
   m_Name: SpikeTrap (2)
   m_TagString: Untagged
@@ -332,7 +332,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.03125, y: 0.34375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -356,7 +356,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
     oldSize: {x: 1.03125, y: 0.34375}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 1.03125, y: 0.34375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -364,7 +364,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9749483, y: 0.29312515}
   m_EdgeRadius: 0
---- !u!114 &8859056399776902322
+--- !u!114 &3801318817322374864
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -373,10 +373,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8859056399776902324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f609e60d8155df4b99a673d681b5b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeDmg: 50
+  spikeDmg: 10
 --- !u!1 &8859056399796508712
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 8859056399796508713}
   - component: {fileID: 8859056399796508716}
   - component: {fileID: 8859056399796508719}
-  - component: {fileID: 8859056399796508718}
+  - component: {fileID: 695621386080450668}
   m_Layer: 0
   m_Name: SpikeTrap
   m_TagString: Untagged
@@ -455,7 +455,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.03125, y: 0.34375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -479,7 +479,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
     oldSize: {x: 1.03125, y: 0.34375}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 1.03125, y: 0.34375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -487,7 +487,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.92242676, y: 0.29312515}
   m_EdgeRadius: 0
---- !u!114 &8859056399796508718
+--- !u!114 &695621386080450668
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -496,10 +496,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8859056399796508712}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f609e60d8155df4b99a673d681b5b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeDmg: 50
+  spikeDmg: 10
 --- !u!1 &8859056400682669332
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 8859056400682669333}
   - component: {fileID: 8859056400682669328}
   - component: {fileID: 8859056400682669331}
-  - component: {fileID: 8859056400682669330}
+  - component: {fileID: 5416140233499693513}
   m_Layer: 0
   m_Name: SpikeTrap (1)
   m_TagString: Untagged
@@ -578,7 +578,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.03125, y: 0.34375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -602,7 +602,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
     oldSize: {x: 1.03125, y: 0.34375}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 1.03125, y: 0.34375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -610,7 +610,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8875669, y: 0.29312515}
   m_EdgeRadius: 0
---- !u!114 &8859056400682669330
+--- !u!114 &5416140233499693513
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -619,7 +619,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8859056400682669332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650f8bff8d812c643b3eaead4666309a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f609e60d8155df4b99a673d681b5b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeDmg: 50
+  spikeDmg: 10

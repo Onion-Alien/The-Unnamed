@@ -18,6 +18,7 @@ public class ShopController : MonoBehaviour
     private Rigidbody2D playerRB;
     private Color originalButtonColor, modifiedColor;
     private PlayerCombat pc;
+    private PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class ShopController : MonoBehaviour
         playerRB = player.GetComponent<Rigidbody2D>();
         disableParticles();
         pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombat>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         //originalButtonColor = buyButtonObj.colors.normalColor;
         //buttonGlow.enableEmission = false;
@@ -37,7 +39,8 @@ public class ShopController : MonoBehaviour
     }
     void OnDisable()
     {
-        buttonGlow.enableEmission = false;
+        var emission = buttonGlow.emission;
+        emission.enabled = false;
         resetVariables();
         boughtItem = "";
     }
@@ -100,7 +103,7 @@ public class ShopController : MonoBehaviour
                     itemName = "UpgradeRunSpeed";
                     if (boughtItem == "UpgradeRunSpeed")
                     {
-                        PlayerController.movementSpeed += 0.5f;
+                        playerController.movementSpeed += 0.5f;
                     }
                     break;
                 case ("HealthPotButton"):

@@ -1,14 +1,57 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    private string playerName;
+
+    private string playerName = "debug";
     private string currentLevel;
+    private int levelsUnlocked = 3;
+    private int goldCount;
+    private int fragmentCount;
+    private int redF1;
+    private int redF2;
+    private int greenF1;
+    private int greenF2;
+    
+    public int RedF1
+    {
+        get => redF1;
+        set => redF1 = value;
+    }
+
+    public int RedF2
+    {
+        get => redF2;
+        set => redF2 = value;
+    }
+
+    public int GreenF1
+    {
+        get => greenF1;
+        set => greenF1 = value;
+    }
+
+    public int GreenF2
+    {
+        get => greenF2;
+        set => greenF2 = value;
+    }
+
+    public int FragmentCount
+    {
+        get => fragmentCount;
+        set => fragmentCount = value;
+    }
+
+    public int GoldCount
+    {
+        get => goldCount;
+        set => goldCount = value;
+    }
+
     public float x, y;
 
     public static SaveManager instance {get; private set; }
@@ -36,6 +79,12 @@ public class SaveManager : MonoBehaviour
             x = data.x; y = data.y;
             playerName = data.playerName;
             currentLevel = data.currentLevel;
+            levelsUnlocked = data.levelsUnlocked;
+            goldCount = data.goldCount;
+            redF1 = data.redF1;
+            redF2 = data.redF2;
+            greenF1 = data.greenF1;
+            greenF2 = data.greenF2;
             file.Close();
         }
     }
@@ -49,6 +98,12 @@ public class SaveManager : MonoBehaviour
         data.playerName = this.playerName;
         data.currentLevel = this.currentLevel;
         data.x = x;data.y = y;
+        data.levelsUnlocked = levelsUnlocked;
+        data.goldCount = goldCount;
+        data.redF1 = redF1;
+        data.redF2 = redF2;
+        data.greenF1 = greenF1;
+        data.greenF2 = greenF2;
         bf.Serialize(file, data);
         file.Close();
     }
@@ -70,6 +125,12 @@ public class SaveManager : MonoBehaviour
         public string playerName;
         public string currentLevel;
         public float x, y;
+        public int levelsUnlocked;
+        public int goldCount;
+        public int redF1;
+        public int redF2;
+        public int greenF1;
+        public int greenF2;
     }
 
     public void savePlayerPosition(float x, float y)
@@ -86,6 +147,11 @@ public class SaveManager : MonoBehaviour
     public void saveLevel(string s)
     {
         this.currentLevel = s;
+    }
+
+    public void UnlockNextLevel()
+    {
+        levelsUnlocked++;
     }
 
     public bool checkSaveExist()

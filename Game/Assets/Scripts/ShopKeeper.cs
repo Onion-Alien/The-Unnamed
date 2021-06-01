@@ -53,7 +53,6 @@ public class ShopKeeper : MonoBehaviour
             
         }
 
-        //Checks for user input key B to open shop window, if playerProx is true
         if (playerInProx)
         {
             if (!(player.transform.position.x < shopKeeper.transform.position.x + 2.0f && player.transform.position.x > shopKeeper.transform.position.x - 2.0f && player.transform.position.y < shopKeeper.transform.position.y + 3.0f && player.transform.position.y > shopKeeper.transform.position.y - 1.0f))
@@ -158,6 +157,7 @@ public class ShopKeeper : MonoBehaviour
         }
         else
         {
+            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             shopCanvas.SetActive(false);
             merchantText.SetActive(true);
             shopActive = false;
