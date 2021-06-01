@@ -50,6 +50,7 @@ public class ShopController : MonoBehaviour
     {
         playerRB.constraints = RigidbodyConstraints2D.FreezePosition;
         goldText.text = "Your Gold: " + playerGold.ToString();
+
         string temp = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
         
         if (temp != "Return" && temp != "Purchase" && buttonSelected)
@@ -203,6 +204,7 @@ public class ShopController : MonoBehaviour
 
     public void switchPurchaseTab()
     {
+        buyButton.gameObject.SetActive(true);
         if (sellActive)
         {
             sellItemTab.transform.GetComponent<Image>().color = purchaseTab.transform.GetComponent<Image>().color;
