@@ -62,17 +62,6 @@ public class WardenAI : MonoBehaviour
 
     private void Update()
     {
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-        if (anim.GetBool("isDead") == true)
-        {
-            isDead = true;
-            isRunning = false;
-            updateAnim();
-            arenaWalls.SetActive(false);
-          //  gameObject.SetActive(false);
-        }
-
         if (isInvis)
         {
             Color temp = gameObject.GetComponent<SpriteRenderer>().color;
@@ -99,11 +88,6 @@ public class WardenAI : MonoBehaviour
             fire.SetActive(true);
             healthbarObj.SetActive(true);
         }
-    }
-
-    private void die()
-    {
-        gameObject.SetActive(false);
     }
 
     private void runVelocity() 
@@ -137,22 +121,26 @@ public class WardenAI : MonoBehaviour
     public void bossUpdate()
     {
         updateDirection();
-            
+
+        if (maxHealth == 0)
+            {
+                isDead = true;
+            }
+
             if (playerDistance < 3.0f && playerDistance > -3.0f)
             {
-                isRunning = false;
+            isRunning = false;
                 attackPlayer();
             }
             else if (playerDistance < 10.0f && playerDistance > -10.0f)
             {
-                runToPlayer();
+            runToPlayer();
             }
-            else if (fightActive)
+            else if(fightActive)
             {
-
-                int random = Random.Range(1, 3);
-                isRunning = false;
-
+            int random = Random.Range(1, 3);
+            isRunning = false;
+            
                 if (random == 2)
                 {
                     goInvis();
@@ -171,12 +159,11 @@ public class WardenAI : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                StartCoroutine(delayBossUpdate());
-            }
-            updateAnim();
-        
+        else
+        {
+            StartCoroutine(delayBossUpdate());
+        }
+        updateAnim();
     }
 
     public void Jump()
@@ -260,7 +247,7 @@ public class WardenAI : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            player.GetComponent<PlayerController>().TakeDamage(Random.Range(30, 40), false);
+            player.GetComponent<PlayerController>().TakeDamage(Random.Range(5, 15), false);
 
             //Player hit animation
         }

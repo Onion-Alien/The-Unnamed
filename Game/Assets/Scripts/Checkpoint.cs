@@ -12,7 +12,6 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player"))
         GetComponent<SpriteRenderer>().color = Color.yellow;
         SaveManager.instance.checkPointSave(player);
     }
