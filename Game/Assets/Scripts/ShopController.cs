@@ -54,6 +54,7 @@ public class ShopController : MonoBehaviour
         stamCraftCheck();
         playerRB.constraints = RigidbodyConstraints2D.FreezePosition;
         goldText.text = "Your Gold: " + playerGold.ToString();
+
         string temp = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
 
         if (temp == "craftHP" || temp == "craftstamina")
@@ -221,12 +222,12 @@ public class ShopController : MonoBehaviour
 
     public void switchPurchaseTab()
     {
+        buyButton.gameObject.SetActive(true);
         if (sellActive)
         {
             sellItemTab.transform.GetComponent<Image>().color = purchaseTab.transform.GetComponent<Image>().color;
             sellCanvas.gameObject.SetActive(false);
             purchaseTab.transform.GetComponent<Image>().color = Color.white;
-            buyButton.gameObject.SetActive(true);
             buyButton.text = "Buy Item";
             sellActive = false;
         }
