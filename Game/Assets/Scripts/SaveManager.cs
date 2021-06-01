@@ -15,8 +15,7 @@ public class SaveManager : MonoBehaviour
     private int redF2;
     private int greenF1;
     private int greenF2;
-    private int redPotion;
-    private int greenPotion;
+
     
     public int RedF1
     {
@@ -54,16 +53,6 @@ public class SaveManager : MonoBehaviour
         set => goldCount = value;
     }
 
-    public int redPotion
-    {
-        get => redPotion;
-        set => redPotion = value;
-    }
-    public int greenPotion
-    {
-        get => greenPotion;
-        set => greenPotion = value;
-    }
     public float x, y;
 
     public static SaveManager instance {get; private set; }
@@ -97,8 +86,7 @@ public class SaveManager : MonoBehaviour
             redF2 = data.redF2;
             greenF1 = data.greenF1;
             greenF2 = data.greenF2;
-            redPotion = data.redPotion;
-            greenPotion = data.greenPotion;
+        
             file.Close();
         }
     }
@@ -118,8 +106,7 @@ public class SaveManager : MonoBehaviour
         data.redF2 = redF2;
         data.greenF1 = greenF1;
         data.greenF2 = greenF2;
-        data.redPotion = redPotion;
-        data.greenPotion = greenPotion;
+
         bf.Serialize(file, data);
         file.Close();
     }
