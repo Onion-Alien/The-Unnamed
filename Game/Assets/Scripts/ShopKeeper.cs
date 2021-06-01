@@ -149,7 +149,7 @@ public class ShopKeeper : MonoBehaviour
     public void toggleShop()
     {
 
-        if (!shopActive)
+        if (!shopActive && playerInProx)
         {
             merchantText.SetActive(false);
             shopCanvas.SetActive(true);

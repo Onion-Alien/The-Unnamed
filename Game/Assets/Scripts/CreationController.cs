@@ -33,7 +33,7 @@ public class CreationController : MonoBehaviour
         if (name.Length > 0)
         {
             userName = name;
-            SaveManager.instance.saveLevel("Bailey WIP");
+            SaveManager.instance.saveLevel("Daisy");
             SaveManager.instance.saveName(userName);
             SaveManager.instance.savePlayerPosition(0.0f, 0.0f);
             SaveManager.instance.Save();

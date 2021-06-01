@@ -20,8 +20,8 @@ public class QuitMenu : MonoBehaviour
 
     public void activateCanvas()
     {
-        button.SetActive(false);
         canvas.SetActive(true);
+        button.SetActive(false);
     }
 
     public void exitToMain()

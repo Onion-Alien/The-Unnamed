@@ -6,14 +6,14 @@ using System.Collections.Generic;
 public class ShopController : MonoBehaviour
 {
     public ParticleSystem buttonGlow;
-    public GameObject sellCanvas;
+    public GameObject sellCanvas, craftCanvas;
     public static GameObject selectedButton;
     public GameObject staminaRing, healthRing;
-    public GameObject purchaseTab, sellItemTab, buyButtonObj;
+    public GameObject purchaseTab, sellItemTab, buyButtonObj, craftTab, craftStamina, craftHP;
     public Text goldText, buyButton;
     private int playerGold, itemCost;
     private string itemName, boughtItem;
-    private bool buttonSelected, sellActive;
+    private bool buttonSelected, sellActive, craftActive;
     public GameObject player;
     private Rigidbody2D playerRB;
     private Color originalButtonColor, modifiedColor;
@@ -26,12 +26,14 @@ public class ShopController : MonoBehaviour
         gameObject.SetActive(false);
         modifiedColor = Color.white;
         sellCanvas.gameObject.SetActive(false);
+        craftCanvas.gameObject.SetActive(false);
         modifiedColor.a = 0.5f;
         playerRB = player.GetComponent<Rigidbody2D>();
         disableParticles();
         pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombat>();
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
+        HPCraftCheck();
+        stamCraftCheck();
         //originalButtonColor = buyButtonObj.colors.normalColor;
         //buttonGlow.enableEmission = false;
         //playerGold = SaveManager.instance.getPlayerGold();
@@ -48,11 +50,18 @@ public class ShopController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HPCraftCheck();
+        stamCraftCheck();
         playerRB.constraints = RigidbodyConstraints2D.FreezePosition;
         goldText.text = "Your Gold: " + playerGold.ToString();
 
         string temp = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
-        
+
+        if (temp == "craftHP" || temp == "craftstamina")
+        {
+            craft();
+        }
+
         if (temp != "Return" && temp != "Purchase" && buttonSelected)
         {
             buyButton.text = "Buy Item";
@@ -87,8 +96,8 @@ public class ShopController : MonoBehaviour
                     itemName = "UpgradeDamage";
                     if (boughtItem == "UpgradeDamage")
                     {
-                        pc.dmgLight =+ 3;
-                        pc.dmgHeavy =+ 3;
+                        pc.dmgLight = +3;
+                        pc.dmgHeavy = +3;
                     }
                     break;
                 case ("UpgradeAttackSpeed"):
@@ -149,7 +158,7 @@ public class ShopController : MonoBehaviour
             disableParticles();
         }
 
-        if(boughtItem != "")
+        if (boughtItem != "")
         {
             boughtItem = "";
             resetVariables();
@@ -187,6 +196,9 @@ public class ShopController : MonoBehaviour
 
     public void switchSellTab()
     {
+        buyButton.gameObject.SetActive(true);
+        buyButton.text = "Sell Item";
+
         if (!sellActive)
         {
             buyButtonObj.gameObject.SetActive(true);
@@ -195,11 +207,17 @@ public class ShopController : MonoBehaviour
             purchaseTab.transform.GetComponent<Image>().color = sellItemTab.transform.GetComponent<Image>().color;
             sellItemTab.transform.GetComponent<Image>().color = Color.white;
             sellCanvas.gameObject.SetActive(true);
-            buyButton.text = "Sell Item";
             sellActive = true;
 
             resetVariables();
         }
+        if (craftActive)
+        {
+            craftTab.transform.GetComponent<Image>().color = purchaseTab.transform.GetComponent<Image>().color;
+            craftCanvas.gameObject.SetActive(false);
+            craftActive = false;
+        }
+
     }
 
     public void switchPurchaseTab()
@@ -212,6 +230,39 @@ public class ShopController : MonoBehaviour
             purchaseTab.transform.GetComponent<Image>().color = Color.white;
             buyButton.text = "Buy Item";
             sellActive = false;
+        }
+        else if (craftActive)
+        {
+            craftTab.transform.GetComponent<Image>().color = purchaseTab.transform.GetComponent<Image>().color;
+            craftCanvas.gameObject.SetActive(false);
+            purchaseTab.transform.GetComponent<Image>().color = Color.white;
+            buyButton.text = "Buy Item";
+            craftActive = false;
+        }
+
+    }
+
+    public void switchCraftTab()
+    {
+        craftTab.transform.GetComponent<Image>().color = Color.white;
+        if (!craftActive)
+        {
+            craftCanvas.gameObject.SetActive(true);
+            buyButton.text = "Crafting Menu";
+            buyButton.gameObject.SetActive(false);
+
+            craftActive = true;
+
+            if (sellActive)
+            {
+                sellCanvas.gameObject.SetActive(false);
+                sellActive = false;
+                sellItemTab.transform.GetComponent<Image>().color = purchaseTab.transform.GetComponent<Image>().color;
+            }
+            else
+            {
+                purchaseTab.transform.GetComponent<Image>().color = sellItemTab.transform.GetComponent<Image>().color;
+            }
         }
     }
 
@@ -244,5 +295,49 @@ public class ShopController : MonoBehaviour
         buttonSelected = false;
         itemCost = 0;
         boughtItem = "";
+        craftStamina.gameObject.SetActive(true);
+        craftHP.gameObject.SetActive(true);
     }
+
+    public void craft()
+    {
+
+        //if (FragmentCount.fc.redF1 >= 2 && FragmentCount.fc.redF2 >= 2)
+        //{
+        //    FragmentCount.fc.redF1 -= 2;
+        //    FragmentCount.fc.redF2 -= 2;
+        //    FragmentCount.fc.redPotion++;
+        //    FragmentCount.fc.updateText();
+
+        //}
+        //else if (FragmentCount.fc.GreenF1 >= 2 && FragmentCount.fc.GreenF2 >= 2)
+        //{
+
+        //    FragmentCount.fc.GreenF1 -= 2;
+        //    FragmentCount.fc.GreenF2 -= 2;
+        //    FragmentCount.fc.greenPotion++;
+        //    FragmentCount.fc.updateText();
+
+        //}
+
+
+    }
+
+    public void HPCraftCheck()
+    {
+        if (FragmentCount.fc.redF1 < 2 || FragmentCount.fc.redF2 < 2)
+        {
+            craftHP.gameObject.SetActive(false);
+        }
+
+    }
+
+    public void stamCraftCheck()
+    {
+        //if (FragmentCount.fc.GreenF1 < 2 || FragmentCount.fc.GreenF2 < 2)
+        //{
+        //    craftStamina.gameObject.SetActive(false);
+        //}
+    }
+
 }
