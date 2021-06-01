@@ -32,7 +32,8 @@ public class ShopController : MonoBehaviour
         disableParticles();
         pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombat>();
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
+        HPCraftCheck();
+        stamCraftCheck();
         //originalButtonColor = buyButtonObj.colors.normalColor;
         //buttonGlow.enableEmission = false;
         //playerGold = SaveManager.instance.getPlayerGold();
@@ -49,6 +50,8 @@ public class ShopController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HPCraftCheck();
+        stamCraftCheck();
         playerRB.constraints = RigidbodyConstraints2D.FreezePosition;
         goldText.text = "Your Gold: " + playerGold.ToString();
         string temp = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
@@ -291,36 +294,50 @@ public class ShopController : MonoBehaviour
         buttonSelected = false;
         itemCost = 0;
         boughtItem = "";
+        craftStamina.gameObject.SetActive(true);
+        craftHP.gameObject.SetActive(true);
     }
 
     public void craft()
     {
-        Debug.Log("craft called!");
+        Debug.Log(FragmentCount.fc.redPotion.ToString());
 
-        //if (FragmentCount.fc.redF1 >= 2 && FragmentCount.fc.redF2 >= 2)
-        //{
-        //    FragmentCount.fc.redF1 -= 2;
-        //    FragmentCount.fc.redF2 -= 2;
-        //    FragmentCount.fc.redPotion++;
+        if (FragmentCount.fc.redF1 >= 2 && FragmentCount.fc.redF2 >= 2)
+        {
+            FragmentCount.fc.redF1 -= 2;
+            FragmentCount.fc.redF2 -= 2;
+            FragmentCount.fc.redPotion++;
+            FragmentCount.fc.updateText();
+
+        }
+        else if (FragmentCount.fc.GreenF1 >= 2 && FragmentCount.fc.GreenF2 >= 2)
+        {
+
+            FragmentCount.fc.GreenF1 -= 2;
+            FragmentCount.fc.GreenF2 -= 2;
+            FragmentCount.fc.greenPotion++;
+            FragmentCount.fc.updateText();
+
+        }
 
 
-        //}
-        //else if (FragmentCount.fc.greenF1 >= 2 && FragmentCount.fc.greenF2 >= 2)
-        //{
-
-        //    FragmentCount.fc.greenF1 -= 2;
-        //    FragmentCount.fc.greenF2 -= 2;
-        //    FragmentCount.fc.greenPotion++;
-
-
-        //}
-        //else if (FragmentCount.fc.redF1 < 2  FragmentCount.fc.redF2 < 2)
-        //{
-        //    craftHP.gameObject.SetActive(false);
-        //}
-        //else if (FragmentCount.fc.greenF1 < 2  FragmentCount.fc.greenF2 < 2)
-        //{
-        //    craftStamina.gameObject.SetActive(false);
-        //}
     }
+
+    public void HPCraftCheck()
+    {
+        if (FragmentCount.fc.redF1 < 2 || FragmentCount.fc.redF2 < 2)
+        {
+            craftHP.gameObject.SetActive(false);
+        }
+        
+    }
+
+    public void stamCraftCheck()
+    {
+        if (FragmentCount.fc.GreenF1 < 2 || FragmentCount.fc.GreenF2 < 2)
+        {
+            craftStamina.gameObject.SetActive(false);
+        }
+    }
+
 }
