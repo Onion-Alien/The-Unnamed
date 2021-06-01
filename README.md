@@ -20,7 +20,9 @@ Traverse through unexplored and mysterious worlds full of danger, surprises and 
 * **Shop**
 	* The shop sells various items, such as potions and damage buffs to enhance your fighting ability!
 * **Powerful Bosses**
-    * Fight against powerful bosses to gain access to new worlds!
+	* Fight against powerful bosses to gain access to new worlds!
+* **Powerups**
+  * Multiple powerups scattered throughout the levels, to power up your hero!
 
 ### Installation
 
