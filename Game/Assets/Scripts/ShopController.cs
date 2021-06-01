@@ -309,11 +309,11 @@ public class ShopController : MonoBehaviour
             FragmentCount.fc.updateText();
 
         }
-        else if (FragmentCount.fc.GreenF1 >= 2 && FragmentCount.fc.GreenF2 >= 2)
+        else if (FragmentCount.fc.greenF1 >= 2 && FragmentCount.fc.greenF2 >= 2)
         {
 
-            FragmentCount.fc.GreenF1 -= 2;
-            FragmentCount.fc.GreenF2 -= 2;
+            FragmentCount.fc.greenF1 -= 2;
+            FragmentCount.fc.greenF2 -= 2;
             FragmentCount.fc.greenPotion++;
             FragmentCount.fc.updateText();
 
@@ -333,7 +333,7 @@ public class ShopController : MonoBehaviour
 
     public void stamCraftCheck()
     {
-        if (FragmentCount.fc.GreenF1 < 2 || FragmentCount.fc.GreenF2 < 2)
+        if (FragmentCount.fc.greenF1 < 2 || FragmentCount.fc.greenF2 < 2)
         {
             craftStamina.gameObject.SetActive(false);
         }
