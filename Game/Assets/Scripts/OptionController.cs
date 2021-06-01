@@ -197,8 +197,6 @@ public class OptionController : MonoBehaviour
     public void applySettings()
     {
         setResolution(resolution);
-
-        //rest of settings
     }
 
     public void enableCanvas(GameObject accessor)

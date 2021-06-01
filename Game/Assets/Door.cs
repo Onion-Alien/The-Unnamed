@@ -9,7 +9,10 @@ public class Door : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D other)
     {
-        player.transform.position = new Vector3(132.0f, 160.0f, 0.0f);
+        if (other.name != "Skeleton (12)" && other.name != "Skeleton (11)")
+        {
+            player.transform.position = new Vector3(132.0f, 160.0f, 0.0f);
+        }
     }
 }
 

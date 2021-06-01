@@ -148,20 +148,23 @@ public class ShopKeeper : MonoBehaviour
     //Toggles the shop window canvas
     public void toggleShop()
     {
+        if (playerInProx)
+        {
 
-        if (!shopActive)
-        {
-            merchantText.SetActive(false);
-            shopCanvas.SetActive(true);
-            shopActive = true;
-        }
-        else
-        {
-            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            shopCanvas.SetActive(false);
-            merchantText.SetActive(true);
-            shopActive = false;
-            StartCoroutine(exitMessage());
+            if (!shopActive)
+            {
+                merchantText.SetActive(false);
+                shopCanvas.SetActive(true);
+                shopActive = true;
+            }
+            else
+            {
+                player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                shopCanvas.SetActive(false);
+                merchantText.SetActive(true);
+                shopActive = false;
+                StartCoroutine(exitMessage());
+            }
         }
     }
 
