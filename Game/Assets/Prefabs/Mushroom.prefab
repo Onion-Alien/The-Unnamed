@@ -735,7 +735,7 @@ Transform:
   m_GameObject: {fileID: 6715464582715568947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -368.42, y: 27.9919, z: 0}
-  m_LocalScale: {x: 1.0347, y: 1.4029094, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5013522451746135248}
   - {fileID: 6749872339345962954}
@@ -874,6 +874,7 @@ MonoBehaviour:
   animator: {fileID: 6715464582715568944}
   coin: {fileID: 669576269203003657}
   maxHealth: 100
+  currentHealth: 0
   healthBar: {fileID: 6655831767583673818}
   f1: {fileID: 5697021077939856144}
   f2: {fileID: 3589760467451132843}
@@ -899,7 +900,7 @@ MonoBehaviour:
   attackRange: 1.3
   attackMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 128
   attackPoint: {fileID: 5013522451746135248}
 --- !u!70 &4792034057726227648
 CapsuleCollider2D:

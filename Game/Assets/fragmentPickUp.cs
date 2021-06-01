@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class fragmentPickUp : MonoBehaviour
@@ -11,32 +9,21 @@ public class fragmentPickUp : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D c)
     {
-       
-        if (c.gameObject.name == "Player")
-
+        if (c.gameObject.CompareTag("Player"))
         {
-            
-            FragmentCount.fc.addFragment(1,g);
+            FragmentCount.addFragment(1, g);
             Destroy(gameObject);
-
         }
-        
-       
     }
 
     private void Start()
     {
-        
-        
         whatIsGround = LayerMask.GetMask("Ground", "ignoreGround");
-      
     }
 
     public bool IsGrounded()
     {
-       
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-       
     }
 
     private void OnDrawGizmos()

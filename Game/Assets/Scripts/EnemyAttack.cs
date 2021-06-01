@@ -19,14 +19,16 @@ public class EnemyAttack : MonoBehaviour
 	public void Attack()
 	{
 		//conduct the attack and reduce player's HP once the player reaches the attack point
-		Collider2D colInfo = Physics2D.OverlapCircle(attackPoint.position, attackRange, attackMask);
-		if(colInfo != null)
-        {
-			colInfo.GetComponent<PlayerController>().TakeDamage(attackDamage, true);
-        }
+		Collider2D[] colInfo = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, attackMask);
+		foreach (Collider2D x in colInfo)
+		{
+			PlayerController pc = x.GetComponent<PlayerController>();
+			if (pc != null)
+			{
+				pc.TakeDamage(attackDamage, true);
+			}
+		}
 	}
-	
-
 }
 
 

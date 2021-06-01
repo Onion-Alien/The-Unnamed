@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 140521347}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: GroundCheck (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 669576268240276892}
   - component: {fileID: 669576268240276895}
   - component: {fileID: 714371836}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,6 +195,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24348cc28ee4d4d9b84f9087397cfa3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  current: 0
   groundCheckRadius: 0.18
   groundCheck: {fileID: 140521347}

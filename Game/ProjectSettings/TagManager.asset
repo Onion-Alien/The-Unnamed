@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Ground
   - Checkpoint
+  - Powerup
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Walls
   - Movable
   - ignoreGround
-  - 
+  - Pickup
   - 
   - 
   - 

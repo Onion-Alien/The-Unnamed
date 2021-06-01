@@ -11,8 +11,8 @@ public class FragmentCount : MonoBehaviour
     public Text gf2;
     public int redF1 = 0;
     public int redF2 = 0;
-    public int GreenF1 = 0;
-    public int GreenF2 = 0;
+    public int greenF1 = 0;
+    public int greenF2 = 0;
 
     public static FragmentCount fc;
 
@@ -26,32 +26,28 @@ public class FragmentCount : MonoBehaviour
     {
         rf1.text = "Red Fragment 1:  " + redF1.ToString();
         rf2.text = "Red Fragment 2:  " + redF2.ToString();
-        gf1.text = "Green Fragment 1:  " + GreenF1.ToString();
-        gf2.text = "Green Fragment 2:  " + GreenF2.ToString();
+        gf1.text = "Green Fragment 1:  " + greenF1.ToString();
+        gf2.text = "Green Fragment 2:  " + greenF2.ToString();
     }
 
     // Update is called once per frame
-    public void addFragment(int drop,GameObject item)
+    public static void addFragment(int drop,GameObject item)
     {
         if(item.name.Contains("RedFragment1"))
         {
-            redF1 += drop;
-            rf1.text = "Red Fragment 1:  " + redF1.ToString();
+            SaveManager.instance.RedF1++;
         }
         else if(item.name.Contains("RedFragment2"))
         {
-            redF2 += drop;
-            rf2.text = "Red Fragment 2:  " + redF2.ToString();
+            SaveManager.instance.RedF2++;
         }
         else if(item.name.Contains("GreenFragment1"))
         {
-            GreenF1 += drop;
-            gf1.text = "Green Fragment 1:  " + GreenF1.ToString();
+            SaveManager.instance.GreenF1++;
         }
         else if (item.name.Contains("GreenFragment2"))
         {
-            GreenF2 += drop;
-            gf2.text = "Green Fragment 2:  " + GreenF2.ToString();
+            SaveManager.instance.GreenF2++;
         }
 
     }

@@ -375,7 +375,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138364455083868966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -96.392, y: 43.472, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0900689, y: 0.08690949, z: 1}
   m_Children:
   - {fileID: 3721658919380771538}
@@ -527,7 +527,7 @@ Transform:
   m_GameObject: {fileID: 2853018899296680754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -368.39, y: 27.365, z: 0}
-  m_LocalScale: {x: 1.1432, y: 1.5157698, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6966669326813519334}
   - {fileID: 7667556771858380683}
@@ -662,6 +662,7 @@ MonoBehaviour:
   animator: {fileID: 2853018899296680758}
   coin: {fileID: 7911630415059488806}
   maxHealth: 100
+  currentHealth: 0
   healthBar: {fileID: 1398400052}
   f1: {fileID: 7603758587159701305, guid: d1b40958190bb4e5e84bc794e89bd989, type: 3}
   f2: {fileID: 3317185029966772908, guid: e54fc5e2b22ee4d85abf94616edbfe3a, type: 3}
@@ -687,7 +688,7 @@ MonoBehaviour:
   attackRange: 1.5
   attackMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 128
   attackPoint: {fileID: 6966669326813519334}
 --- !u!70 &1162954333986510070
 CapsuleCollider2D:
@@ -823,7 +824,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7165923514446650269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -94, y: 43.52, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0900689, y: 0.08690949, z: 1}
   m_Children:
   - {fileID: 7242089331334214203}
@@ -1110,17 +1111,17 @@ PrefabInstance:
     - target: {fileID: 669576268240276899, guid: e0d1e2b2bcdde40fd87d18f86cf018ac,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -61.78
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 669576268240276899, guid: e0d1e2b2bcdde40fd87d18f86cf018ac,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 64.43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 669576268240276899, guid: e0d1e2b2bcdde40fd87d18f86cf018ac,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.030299393
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 669576268240276899, guid: e0d1e2b2bcdde40fd87d18f86cf018ac,
         type: 3}

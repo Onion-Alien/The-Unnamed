@@ -43,7 +43,7 @@ public class Moving_Crate : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player" && platform)
+        if (collision.gameObject.CompareTag("Player") && platform)
         {
             collision.collider.transform.SetParent(transform);
         }
@@ -51,7 +51,7 @@ public class Moving_Crate : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player" && platform)
+        if (collision.gameObject.CompareTag("Player") && platform)
         {
             collision.collider.transform.SetParent(null);
         }
