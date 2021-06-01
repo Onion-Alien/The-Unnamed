@@ -260,7 +260,7 @@ public class WardenAI : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            player.GetComponent<PlayerController>().TakeDamage(Random.Range(20, 40), false);
+            player.GetComponent<PlayerController>().TakeDamage(Random.Range(30, 40), false);
 
             //Player hit animation
         }
