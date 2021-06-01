@@ -53,6 +53,7 @@ public class ShopController : MonoBehaviour
         HPCraftCheck();
         stamCraftCheck();
         playerRB.constraints = RigidbodyConstraints2D.FreezePosition;
+        playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
         goldText.text = "Your Gold: " + playerGold.ToString();
 
         string temp = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;

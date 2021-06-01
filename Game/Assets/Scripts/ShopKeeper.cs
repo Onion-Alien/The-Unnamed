@@ -158,6 +158,7 @@ public class ShopKeeper : MonoBehaviour
         else
         {
             player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
             shopCanvas.SetActive(false);
             merchantText.SetActive(true);
             shopActive = false;

@@ -71,7 +71,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (canInteract)
         {
-            Collider2D[] portals = Physics2D.OverlapCircleAll(transform.position, 20f);
+            Collider2D[] portals = Physics2D.OverlapCircleAll(transform.position, 5f);
             foreach (var x in portals)
             {
                 Portal portal = x.GetComponent<Portal>();
