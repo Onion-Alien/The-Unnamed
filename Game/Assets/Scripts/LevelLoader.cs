@@ -63,7 +63,7 @@ public class LevelLoader : MonoBehaviour
         SceneManager.LoadScene(index);
     }
 
-    IEnumerator LoadNextLevelString(string level)
+    public IEnumerator LoadNextLevelString(string level)
     {
         animator.SetTrigger("Start");
 
