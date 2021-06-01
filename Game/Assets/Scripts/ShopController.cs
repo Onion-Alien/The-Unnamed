@@ -300,7 +300,6 @@ public class ShopController : MonoBehaviour
 
     public void craft()
     {
-        Debug.Log(FragmentCount.fc.redPotion.ToString());
 
         if (FragmentCount.fc.redF1 >= 2 && FragmentCount.fc.redF2 >= 2)
         {
