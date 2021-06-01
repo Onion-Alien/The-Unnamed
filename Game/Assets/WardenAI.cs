@@ -62,37 +62,56 @@ public class WardenAI : MonoBehaviour
 
     private void Update()
     {
-        if (isInvis)
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        if (anim.GetBool("isDead") == true)
         {
-            Color temp = gameObject.GetComponent<SpriteRenderer>().color;
-            temp.a = invisValue;
-            gameObject.GetComponent<SpriteRenderer>().color = temp;
-            if(invisValue > 0.05f)
-            {
-                invisValue -= 0.005f;
-            }
-            else
-            {
-                namePlate.SetActive(false);
-                fire.SetActive(false);
-                healthbarObj.SetActive(false);
-            }
+            isDead = true;
+            isRunning = false;
+            updateAnim();
+            arenaWalls.SetActive(false);
+            //  gameObject.SetActive(false);
         }
-        else if(invisValue < 1.0f)
+
+        if (!isDead)
         {
-            invisValue += 0.01f;
-            Color temp = gameObject.GetComponent<SpriteRenderer>().color;
-            temp.a = invisValue;
-            gameObject.GetComponent<SpriteRenderer>().color = temp;
-            namePlate.SetActive(true);
-            fire.SetActive(true);
-            healthbarObj.SetActive(true);
+            if (isInvis)
+            {
+                Color temp = gameObject.GetComponent<SpriteRenderer>().color;
+                temp.a = invisValue;
+                gameObject.GetComponent<SpriteRenderer>().color = temp;
+                if (invisValue > 0.05f)
+                {
+                    invisValue -= 0.005f;
+                }
+                else
+                {
+                    namePlate.SetActive(false);
+                    fire.SetActive(false);
+                    healthbarObj.SetActive(false);
+                }
+            }
+            else if (invisValue < 1.0f)
+            {
+                invisValue += 0.01f;
+                Color temp = gameObject.GetComponent<SpriteRenderer>().color;
+                temp.a = invisValue;
+                gameObject.GetComponent<SpriteRenderer>().color = temp;
+                namePlate.SetActive(true);
+                fire.SetActive(true);
+                healthbarObj.SetActive(true);
+            }
         }
     }
 
-    private void runVelocity() 
+    private void die()
     {
-            rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
+        gameObject.SetActive(false);
+    }
+
+    private void runVelocity()
+    {
+        rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
     }
 
     private void checkIfCanAtk()
@@ -122,48 +141,45 @@ public class WardenAI : MonoBehaviour
     {
         updateDirection();
 
-        if (maxHealth == 0)
-            {
-                isDead = true;
-            }
-
-            if (playerDistance < 3.0f && playerDistance > -3.0f)
-            {
+        if (playerDistance < 3.0f && playerDistance > -3.0f)
+        {
             isRunning = false;
-                attackPlayer();
-            }
-            else if (playerDistance < 10.0f && playerDistance > -10.0f)
-            {
+            attackPlayer();
+        }
+        else if (playerDistance < 10.0f && playerDistance > -10.0f)
+        {
             runToPlayer();
-            }
-            else if(fightActive)
-            {
+        }
+        else if (fightActive)
+        {
+
             int random = Random.Range(1, 3);
             isRunning = false;
-            
-                if (random == 2)
+
+            if (random == 2)
+            {
+                goInvis();
+                runToPlayer();
+            }
+            else
+            {
+                if (checkGrounded())
                 {
-                    goInvis();
-                    runToPlayer();
+                    isRunning = false;
+                    Jump();
                 }
                 else
                 {
-                    if (checkGrounded())
-                    {
-                        isRunning = false;
-                        Jump();
-                    }
-                    else
-                    {
-                        StartCoroutine(delayBossUpdate());
-                    }
+                    StartCoroutine(delayBossUpdate());
                 }
             }
+        }
         else
         {
             StartCoroutine(delayBossUpdate());
         }
         updateAnim();
+
     }
 
     public void Jump()
@@ -175,7 +191,7 @@ public class WardenAI : MonoBehaviour
 
     public bool checkGrounded()
     {
-        if(gameObject.transform.position.y < 118.5f)
+        if (gameObject.transform.position.y < 118.5f)
         {
             isGrounded = true;
         }
@@ -196,8 +212,8 @@ public class WardenAI : MonoBehaviour
     public void attackPlayer()
     {
         isInvis = false;
-        
-        if(attackMove != 3)
+
+        if (attackMove != 3)
         {
             attackMove += Random.Range(1, 2);
         }
@@ -247,7 +263,7 @@ public class WardenAI : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            player.GetComponent<PlayerController>().TakeDamage(Random.Range(5, 15), false);
+            player.GetComponent<PlayerController>().TakeDamage(Random.Range(30, 40), false);
 
             //Player hit animation
         }
@@ -279,8 +295,8 @@ public class WardenAI : MonoBehaviour
 
     public void setAttackFalse()
     {
-        attack1 = false; 
-        attack2 = false; 
+        attack1 = false;
+        attack2 = false;
         attack3 = false;
         updateAnim();
     }

@@ -100,11 +100,15 @@ public class EnemyHit : MonoBehaviour
     void Die()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        //animator.SetBool("isDead", true);
+        if (gameObject.name == "Boss")
+        {
+            animator.SetBool("isDead", true);
+        }
         coin.SetActive(true);
         drop(Random.Range(1, 6));
         drop(Random.Range(1, 6));
         Instantiate(coin, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        gameObject.SetActive(false);
         Destroy(gameObject);
     }
 }

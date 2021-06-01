@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         anim.SetBool("isDead", true);
         gameOverScreen.SetActive(true);
-        gameOverScreen.GetComponent<GameOverScreen>().Setup();
+       // gameOverScreen.GetComponent<GameOverScreen>().Setup();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
