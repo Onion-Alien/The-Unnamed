@@ -9,7 +9,7 @@ public class ShopController : MonoBehaviour
     public GameObject sellCanvas;
     public static GameObject selectedButton;
     public GameObject staminaRing, healthRing;
-    public GameObject purchaseTab, sellItemTab, buyButtonObj;
+    public GameObject purchaseTab, sellItemTab, buyButtonObj,craftHP,craftStamina;
     public Text goldText, buyButton;
     private int playerGold, itemCost;
     private string itemName, boughtItem;
@@ -236,6 +236,38 @@ public class ShopController : MonoBehaviour
         }
     }
 
+    public void craft()
+    {
+        
+            if (FragmentCount.fc.redF1 >= 2 && FragmentCount.fc.redF2 >= 2)
+            {
+                FragmentCount.fc.redF1 -= 2;
+                FragmentCount.fc.redF2 -= 2;
+                FragmentCount.fc.redPotion++;
+                SaveManager.instance.redPotion++;
+
+        }
+            else if (FragmentCount.fc.greenF1 >= 2 && FragmentCount.fc.greenF2 >= 2)
+            {
+
+            FragmentCount.fc.greenF1 -= 2;
+            FragmentCount.fc.greenF2 -= 2;
+            FragmentCount.fc.greenPotion++;
+            SaveManager.instance.greenPotion++;
+
+        }
+            else if(FragmentCount.fc.redF1 < 2 || FragmentCount.fc.redF2 < 2)
+            {
+                craftHP.gameObject.SetActive(false);
+            }
+            else if(FragmentCount.fc.greenF1 < 2 || FragmentCount.fc.greenF2 < 2)
+            {
+                craftStamina.gameObject.SetActive(false);
+        }
+
+        
+
+    }
     public void resetVariables()
     {
         selectedButton = null;

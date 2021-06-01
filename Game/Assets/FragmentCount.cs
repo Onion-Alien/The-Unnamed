@@ -9,11 +9,14 @@ public class FragmentCount : MonoBehaviour
     public Text rf2;
     public Text gf1;
     public Text gf2;
+    public Text rp;
+    public Text gp;
     public int redF1 = 0;
     public int redF2 = 0;
     public int greenF1 = 0;
     public int greenF2 = 0;
-
+    public int redPotion = 0;
+    public int greenPotion = 0;
     public static FragmentCount fc;
 
     private void Awake()
@@ -28,6 +31,8 @@ public class FragmentCount : MonoBehaviour
         rf2.text = "Red Fragment 2:  " + redF2.ToString();
         gf1.text = "Green Fragment 1:  " + greenF1.ToString();
         gf2.text = "Green Fragment 2:  " + greenF2.ToString();
+        rp.text = ": " + rp.ToString();
+        gp.text = ": " + gp.ToString();
     }
 
     // Update is called once per frame
@@ -36,22 +41,27 @@ public class FragmentCount : MonoBehaviour
         if(item.name.Contains("RedFragment1"))
         {
             SaveManager.instance.RedF1++;
+            fc.redF1++;
         }
         else if(item.name.Contains("RedFragment2"))
         {
             SaveManager.instance.RedF2++;
+            fc.redF2++;
         }
         else if(item.name.Contains("GreenFragment1"))
         {
             SaveManager.instance.GreenF1++;
+            fc.greenF1++;
         }
         else if (item.name.Contains("GreenFragment2"))
         {
             SaveManager.instance.GreenF2++;
+            fc.greenF2++;
         }
 
     }
 
+    
   
 
 
