@@ -13,6 +13,7 @@ public class CoinPickUp : MonoBehaviour
     private LayerMask whatIsGround;
     public int r1;
     public int r2;
+
     void OnCollisionEnter2D(Collision2D c)
     {
         if(c.gameObject.name == "Player")

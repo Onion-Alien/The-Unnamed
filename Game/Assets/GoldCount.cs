@@ -19,7 +19,7 @@ public class GoldCount : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gCount.text = "Gold: " + gold.ToString();
+        
     }
 
     // Update is called once per frame
@@ -27,5 +27,11 @@ public class GoldCount : MonoBehaviour
     {
         gold += drop;
         gCount.text = "Gold: " + gold.ToString();
+    }
+
+    public int increaseGold(int drop)
+    {
+        gold += drop;
+        return this.gold;
     }
 }

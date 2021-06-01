@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class EnemyCount : MonoBehaviour
 {
     public Text count;
-    GameObject[] enemies;
+    public GameObject[] enemies;
+    
 
 
     
@@ -17,9 +18,13 @@ public class EnemyCount : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+     void Update()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        count.text = "Enemies Left: " + enemies.Length.ToString();
+        count.text = "Enemies Left: " + enemies.Length.ToString();  
     }
+
+ 
+
+
 }

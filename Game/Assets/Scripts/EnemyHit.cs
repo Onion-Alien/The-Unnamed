@@ -14,7 +14,7 @@ public class EnemyHit : MonoBehaviour
     public Animator animator;
     public GameObject coin;
     public int maxHealth = 100;
-    int currentHealth;
+    public int currentHealth;
     public HealthBar healthBar;
     private Rigidbody2D rb;
     public GameObject f1;
@@ -25,7 +25,7 @@ public class EnemyHit : MonoBehaviour
     public GameObject f6;
     public GameObject showDamage;
 
-    void drop(int i)
+    public void drop(int i)
     {
         switch (i)
         {
@@ -58,6 +58,8 @@ public class EnemyHit : MonoBehaviour
         }
 
     }
+
+    
     void Start()
     {
         currentHealth = maxHealth;
