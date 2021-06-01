@@ -26,7 +26,7 @@ Traverse through unexplored and mysterious worlds full of danger, surprises and 
 
 ### Installation
 
-
+To install, first clone and open the project with unity, then go into file > build and build the file.
 
 ### Credits
 
