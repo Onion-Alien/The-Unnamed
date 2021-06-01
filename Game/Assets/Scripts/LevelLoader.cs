@@ -11,10 +11,10 @@ public class LevelLoader : MonoBehaviour
 
     public void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex > 0)
-        {
-            playerSpawn();
-        }
+        //if (SceneManager.GetActiveScene().buildIndex > 0)
+        //{
+        //    playerSpawn();
+        //}
     }
 
     public void playerRespawn()
